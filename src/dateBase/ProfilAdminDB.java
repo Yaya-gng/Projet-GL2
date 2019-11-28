@@ -49,7 +49,7 @@ public class ProfilAdminDB extends BD{
 			  pr1.setString(6,password);
 			  
 			  pr1.execute();
-			  System.out.println("Modification effectuée avec succée");
+			  System.out.println("Modification effectue avec succee");
 			  
 			
 		}catch(SQLException e) {
