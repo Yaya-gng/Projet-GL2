@@ -69,7 +69,7 @@ public class Inscription {
 	
 	public void Return(ActionEvent event) {
 		try {
-			Parent root = FXMLLoader.load(Main.class.getResource("Main.fxml"));
+			Parent root = FXMLLoader.load(Main.class.getResource("login.fxml"));
 			Scene scene = new Scene(root);
 			Stage s = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			s.setScene(scene);
@@ -124,7 +124,7 @@ public class Inscription {
 		al.showAndWait();
 		
 		try {
-			Parent root = FXMLLoader.load(Main.class.getResource("Main.fxml"));
+			Parent root = FXMLLoader.load(Main.class.getResource("login.fxml"));
 			Scene scene = new Scene(root);
 			Stage s = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			s.setScene(scene);
