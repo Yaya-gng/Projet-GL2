@@ -26,8 +26,10 @@ public class User extends BD {
 					{
 					
 					pc.execute();
-					PreparedStatement p = con.prepareStatement( "Insert into Connecter(id) values(?)");
+					PreparedStatement p = con.prepareStatement( "Insert into Connecter(id,nom,prenom) values(?,?,?)");
 					p.setInt(1, re.getInt("numUser"));
+					p.setString(2,re.getString("nom"));
+					p.setString(3,re.getString("prenom"));
 					p.execute();
 					  return 0;
 					}
