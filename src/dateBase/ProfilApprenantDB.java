@@ -13,15 +13,16 @@ import Model.Apprenant;
 public class ProfilApprenantDB extends BD{
 	
 	
-public static ArrayList<Apprenant> display(int id) {
+public static ArrayList<Apprenant> display(int matricule) {
 	ArrayList<Apprenant> app = new ArrayList<>();
 	try( Connection con = connect();
-			PreparedStatement pr = con.prepareStatement("Select * from instructeur where id=?");
+			PreparedStatement pr = con.prepareStatement("Select * from apprenant where matricule=?");
 			){
-		   pr.setInt(1,id);
+			System.out.println("rzetrezt");
+		   pr.setInt(1,matricule);
 		   ResultSet r = pr.executeQuery();
 		while(r.next()) {
-			app.add(new Apprenant(r.getInt("matricule"),r.getString("nom"),r.getString("prenom"), r.getDate("dateNaiss"), r.getString("adresse"),r.getInt("telephone"), r.getString("password"), r.getString("section"), r.getString("niveau"), r.getString("specialite")));
+			app.add(new Apprenant(r.getInt("matricule"),r.getString("nom"),r.getString("prenom"), r.getDate("dateNaiss"), r.getString("adresse"), r.getString("password"), r.getInt("section"), r.getInt("niveau"), r.getString("specialite")));
 			
 			System.out.println("Affichage reussie");
 			return app;

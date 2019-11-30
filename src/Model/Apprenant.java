@@ -4,11 +4,11 @@ import java.sql.Date;
 
 public class Apprenant extends User implements GestionResInsApp{
 
-	private int matricule;
-	private String section,niveau,filiere,specialite;
+	private int matricule,section,niveau;
+	private String filiere,specialite;
 	
-	public Apprenant(int matricule,String nom, String prenom, Date date, String adresse,int tel,String password ,String s,String niv,String sp) {
-		super(nom, prenom, date, adresse,tel,password);
+	public Apprenant(int matricule,String nom, String prenom, Date date, String adresse,String password ,int s,int niv,String sp) {
+		super(nom, prenom, date, adresse,0,password);
 		
 		this.matricule = matricule;
 		section = s;
@@ -25,19 +25,19 @@ public class Apprenant extends User implements GestionResInsApp{
 		return matricule;
 	}
 	
-	public String getSection() {
+	 public int getSection() {
 		return section;
 	}
 	
-	public void setSection(String s) {
+	public void setSection(int s) {
 		section = s;
 	}
 	
-	public String getNiv() {
+	public int getNiv() {
 		return niveau;
 	}
 	
-	public void setNiv(String n) {
+	public void setNiv(int n) {
 		niveau = n;
 	}
 	

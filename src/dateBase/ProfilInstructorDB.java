@@ -35,7 +35,7 @@ public static ArrayList<Instructeur> display(int id) {
 		return null;
 	}
 
-	public static void modify(int id,String nom, String prenom, String dateN, String adresse,String grade, String specialite, String password) {
+	public static void modify(int id, String nom, String prenom, String dateN, String adresse, String grade, String specialite, String password) {
 		
 		try( Connection con = connect();
 				PreparedStatement pr1 = con.prepareStatement("Update instructeur set nom=?,prenom=?, dateNaiss=?, adresse=?, grade=?, specialite=?, password=? where id=? ");
