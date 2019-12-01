@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -37,13 +38,15 @@ public class AccuielController implements Initializable {
     @FXML private Label l1,l2,l3,l4,l5,grade,spec,niv,section;
     @FXML
     private Button log, rm, sm, bm, wm;
-
+    @FXML
+    private ListView listefor;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        l5.setText(String.valueOf(Connecter.getIdConnected()));
-        l1.setText(Connecter.getNameConnected());
-        l2.setText(Connecter.getLastNameConnected());
-
+      //  l5.setText(String.valueOf(Connecter.getIdConnected()));
+       // l1.setText(Connecter.getNameConnected());
+       // l2.setText(Connecter.getLastNameConnected());
+        listefor.getItems().addAll("for1", "for2", "for3", "for4", "for5", "for6", "for7", "for8");
+/*
         if(Integer.parseInt(l5.getText()) == 1 ) {
             admin.toFront();
             prof.setVisible(false);
@@ -60,7 +63,7 @@ public class AccuielController implements Initializable {
             app.toFront();
             admin.setVisible(false);
             prof.setVisible(false);
-        }
+        }*/
     }
 
     @FXML
