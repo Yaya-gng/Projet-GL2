@@ -35,29 +35,19 @@ public class Cours extends BD{
 	}
 	
 		
-	public static ArrayList<Cour> afficherCours(int matricule) {
+	public static ArrayList<Cour> afficherCours(String nomF, int id) {
 		ArrayList<Cour> cours = new ArrayList<>();
 		try( 
 				Connection con = connect();
-				PreparedStatement pr = con.prepareStatement("select numC,module,titre,contenu from coursF where numC in(select numC from accee where matricule=?) ");
+				PreparedStatement pr = con.prepareStatement("select module,titre,contenu,numF from coursF where numF=(Select numF from formation where nomF=?)");
 				){
 			
-			pr.setInt(1,matricule);
-			
+			pr.setString(1,nomF);
 			ResultSet rs = pr.executeQuery();
-			
-			PreparedStatement pr1 = con.prepareStatement("select * from formation where numF in(select numF from coursF where numC=?)");
-			pr1.setInt(1,rs.getInt("numC"));
-			
-			ResultSet r = pr1.executeQuery();
-			
-			while(r.next()){
 				while(rs.next()) {
-				cours.add(new Cour(rs.getInt("numC"), r.getInt("numF"), rs.getString("module"), rs.getString("titre"), rs.getString("contenu"), r.getString("nomF"), r.getDate("dateC"), r.getInt("id")));
-				}
+				cours.add(new Cour(rs.getInt("numC"), rs.getInt("numF"), rs.getString("module"), rs.getString("titre"), rs.getString("contenu"),nomF, id));
 					}
-			if(cours.isEmpty() == true) return cours;
-			else return null;
+			return cours;
 			
 		}catch(SQLException e) {
 			System.out.println(e.getMessage());

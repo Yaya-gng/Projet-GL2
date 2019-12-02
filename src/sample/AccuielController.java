@@ -12,6 +12,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -23,58 +25,58 @@ import javafx.event.ActionEvent;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AccuielController implements Initializable {
     @FXML
-    private Pane black, red, profil, admin, prof,formationAd,app;
+    private Pane profil, admin, prof,formationAd,app;
     @FXML
     private Parent avatar1;
-    @FXML TextField t1,t2,t3,t4,t5,t6,gra,special,nve,sec;
-    @FXML Button modify, confirme,disco;
-    @FXML private Label l1,l2,l3,l4,l5,grade,spec,niv,section;
+    @FXML TextField t1,t2,t3,t4,t5,t6,gra,special,nve,sec,nomFormation;
+    @FXML Button modify, confirme,disco, ressourceInst, ajouterFormInst, supprimerFormInst;
+    @FXML private Label id, nom, prenom, grade,spec,niv,section;
     @FXML
     private Button log, rm, sm, bm, wm;
     @FXML
-    private ListView listefor;
+    private ListView listFormation;
+    @FXML TableView tableCour;
+
+    @FXML ImageView im;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-      //  l5.setText(String.valueOf(Connecter.getIdConnected()));
-       // l1.setText(Connecter.getNameConnected());
-       // l2.setText(Connecter.getLastNameConnected());
-        listefor.getItems().addAll("for1", "for2", "for3", "for4", "for5", "for6", "for7", "for8");
+       id.setText(String.valueOf(Connecter.getIdConnected()));
+       nom.setText(Connecter.getNameConnected());
+       prenom.setText(Connecter.getLastNameConnected());
 /*
         if(Integer.parseInt(l5.getText()) == 1 ) {
             admin.toFront();
-            prof.setVisible(false);
-            app.setVisible(false);
         }
 
         if(Integer.parseInt(l5.getText()) >1 && Integer.parseInt(l5.getText()) < 100) {
             prof.toFront();
-            admin.setVisible(false);
-            app.setVisible(false);
+
         }
 
         if(Integer.parseInt(l5.getText()) >100 && Integer.parseInt(l5.getText()) < 1000){
             app.toFront();
-            admin.setVisible(false);
-            prof.setVisible(false);
         }*/
     }
 
     @FXML
     void affect(ActionEvent event) {
-            red.toFront();
+
     }
 
     @FXML
-    public void click() {
+    public void afficheProfil() {
         profil.toFront();
-       if(Integer.parseInt(l5.getText()) == 1) {
+       if(Integer.parseInt(id.getText()) == 1) {
            ArrayList<Administrateur> ad = ProfilAdminDB.display();
 
            t1.setText(String.valueOf(ad.get(0).getId()));
@@ -95,9 +97,9 @@ public class AccuielController implements Initializable {
 
        }
 
-       if(Integer.parseInt(l5.getText()) > 1 && Integer.parseInt(l5.getText()) < 100){
+       if(Integer.parseInt(id.getText()) > 1 && Integer.parseInt(id.getText()) < 100){
 
-           ArrayList<Instructeur> ad = ProfilInstructorDB.display(Integer.parseInt(l5.getText()));
+           ArrayList<Instructeur> ad = ProfilInstructorDB.display(Integer.parseInt(id.getText()));
 
            t1.setText(String.valueOf(ad.get(0).getId()));
            t2.setText(ad.get(0).getNom());
@@ -113,9 +115,9 @@ public class AccuielController implements Initializable {
            sec.setVisible(false);
 
        }
-      if(Integer.parseInt(l5.getText()) > 100 && Integer.parseInt(l5.getText()) < 1000) {
+      if(Integer.parseInt(id.getText()) > 100 && Integer.parseInt(id.getText()) < 1000) {
           System.out.println("zarezra");
-           ArrayList<Apprenant> ad = ProfilApprenantDB.display(Integer.parseInt(l5.getText()));
+           ArrayList<Apprenant> ad = ProfilApprenantDB.display(Integer.parseInt(id.getText()));
            t1.setText(String.valueOf(ad.get(0).getMatricule()));
            t2.setText(ad.get(0).getNom());
            t3.setText(ad.get(0).getPrenom());
@@ -140,13 +142,13 @@ public class AccuielController implements Initializable {
         t6.setDisable(false);
         confirme.setDisable(false);
 
-        if(Integer.parseInt(l5.getText()) >1 && Integer.parseInt(l5.getText()) <100){
+        if(Integer.parseInt(id.getText()) >1 && Integer.parseInt(id.getText()) <100){
             t1.setDisable(false);
             gra.setDisable(false);
             special.setDisable(false);
         }
 
-        if(Integer.parseInt(l5.getText()) >100 && Integer.parseInt(l5.getText()) <1000){
+        if(Integer.parseInt(id.getText()) >100 && Integer.parseInt(id.getText()) <1000){
             t1.setVisible(false);
             nve.setDisable(false);
             special.setDisable(false);
@@ -156,10 +158,10 @@ public class AccuielController implements Initializable {
     }
 
     @FXML void confirmeModification(){
-        if(Integer.parseInt(l5.getText()) == 1)
+        if(Integer.parseInt(id.getText()) == 1)
             ProfilAdminDB.modify(Integer.parseInt(t1.getText()),t2.getText(),t3.getText(),"t4.getDate()", t5.getText(), t6.getText());
 
-        else if(Integer.parseInt(l5.getText()) > 1 && Integer.parseInt(l5.getText()) < 2000) {
+        else if(Integer.parseInt(id.getText()) > 1 && Integer.parseInt(id.getText()) < 2000) {
             ProfilInstructorDB.modify(Integer.parseInt(t1.getText()), t2.getText(), t3.getText(), "t4.getDate()", t5.getText(), t6.getText(),gra.getText(), special.getText());
             grade.setDisable(true);
             gra.setDisable(true);
@@ -204,5 +206,50 @@ public class AccuielController implements Initializable {
             System.out.println(e.getMessage());
         }
     }
+
+    @FXML public void RessourceInst(ActionEvent event){
+        ArrayList<String> frm = Formations.afficherFormation();
+
+
+        listFormation.getItems().addAll(frm);
+
+
+    }
+
+    @FXML public void setAjouterFormInst(ActionEvent event){
+        if(nomFormation.getText().isEmpty() == false){
+            listFormation.getItems().add(nomFormation.getText());
+            Formations.ajouterFormation(nomFormation.getText(), Integer.parseInt(id.getText()));
+            nomFormation.setText(null);
+        }
+
+    }
+
+    @FXML public void setSupprimerFormInst(ActionEvent event){
+        Object item = listFormation.getSelectionModel().getSelectedItem();
+
+            listFormation.getItems().remove(item);
+            String s = (String)item;
+            Formations.supprimerFormation(s);
+        }
+
+        @FXML public void afficherCours(ActionEvent event){
+            Object item = listFormation.getSelectionModel().getSelectedItem();
+            String i = (String)item;
+
+            tableCour.getItems().addAll(Cours.afficherCours(i,Integer.parseInt(id.getText())));
+
+
+
+
+
+
+
+
+
+
+
+        }
+
 
 }

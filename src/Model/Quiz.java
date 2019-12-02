@@ -4,8 +4,8 @@ import java.sql.Date;
 
 public class Quiz extends Formation{
 	
-	public Quiz(int numF, String nomF, Date dateC, int id) {
-		super(numF, nomF, dateC, id);
+	public Quiz(int numF, String nomF, int id) {
+		super(numF, nomF, id);
 		
 	}
 

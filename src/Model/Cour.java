@@ -7,8 +7,8 @@ public class Cour extends Formation{
 	private int numC, numF;
 	private String module,titre,contenu;
 		
-	public Cour(int numC, int numF, String module, String titre, String contenu,String nomF, Date dateC, int id) {
-		super(numF,nomF,dateC,id);
+	public Cour(int numC, int numF, String module, String titre, String contenu,String nomF, int id) {
+		super(numF,nomF,id);
 		this.numC = numC;
 		this.numF = numF;
 		this.module = module;

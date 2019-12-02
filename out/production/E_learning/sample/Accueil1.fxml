@@ -4,12 +4,16 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AccuielController">
    <children>
@@ -34,7 +38,7 @@
                                 <items>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #2E3238;">
                                        <children>
-                                          <ImageView fitHeight="125.0" fitWidth="125.0" layoutX="22.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fx:id="im" fitHeight="125.0" fitWidth="125.0" layoutX="22.0" layoutY="14.0" onMouseClicked="#afficheProfil" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@elon-musk-une-785x589.jpg" />
                                              </image>
@@ -44,30 +48,31 @@
                                                 <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
                                                    <children>
                                                       <Label text="Nom : " textFill="WHITE" />
-                                                      <Label text="Label" textFill="WHITE" />
+                                                      <Label fx:id="nom" prefHeight="17.0" prefWidth="79.0" textFill="WHITE" />
                                                    </children>
                                                 </HBox>
                                                 <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
                                                    <children>
                                                       <Label text="Prenom : " textFill="WHITE" />
-                                                      <Label text="Label" textFill="WHITE" />
+                                                      <Label fx:id="prenom" prefHeight="17.0" prefWidth="82.0" textFill="WHITE" />
                                                    </children>
                                                 </HBox>
                                              </children>
                                           </VBox>
+                                          <Label fx:id="id" disable="true" layoutX="22.0" layoutY="194.0" prefHeight="17.0" prefWidth="113.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                        <children>
                                           <Pane prefHeight="212.66666666666666" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                          <Pane prefHeight="255.33333333333334" prefWidth="200.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <Pane fx:id="prof" prefHeight="255.33333333333334" prefWidth="200.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <VBox alignment="TOP_CENTER" layoutX="35.0" layoutY="39.0" prefHeight="135.0" prefWidth="100.0" spacing="10.0">
+                                                <VBox alignment="TOP_CENTER" layoutX="3.0" layoutY="41.0" prefHeight="144.0" prefWidth="163.0" spacing="10.0">
                                                    <children>
-                                                      <Button mnemonicParsing="false" text="Button" />
-                                                      <Button mnemonicParsing="false" text="Button" />
-                                                      <Button mnemonicParsing="false" text="Button" />
-                                                      <Button mnemonicParsing="false" text="Button" />
+                                                      <Button fx:id="ressourceInst" mnemonicParsing="false" onAction="#RessourceInst" prefHeight="25.0" prefWidth="147.0" text="Ressources" />
+                                                      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Sondages" />
+                                                      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Blogs" />
+                                                      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Wikis" />
                                                    </children>
                                                 </VBox>
                                              </children>
@@ -80,39 +85,86 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
+                              <Pane fx:id="profil" prefHeight="433.0" prefWidth="519.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label layoutX="62.0" layoutY="29.0" text="Your Profil :" textFill="WHITE">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="29.0" layoutY="78.0" text="Matricule :" textFill="WHITE" />
+                                    <Label layoutX="28.0" layoutY="123.0" text="Name :" textFill="WHITE" />
+                                    <Label layoutX="26.0" layoutY="166.0" text="Last Name :" textFill="WHITE" />
+                                    <Label layoutX="25.0" layoutY="208.0" text="Date of birth :" textFill="WHITE" />
+                                    <Label layoutX="22.0" layoutY="253.0" text="Address :" textFill="WHITE" />
+                                    <Label layoutX="29.0" layoutY="294.0" text="Password :" textFill="WHITE" />
+                                    <Label fx:id="grade" layoutX="292.0" layoutY="78.0" text="Grade :" textFill="WHITE" />
+                                    <Label fx:id="spec" layoutX="292.0" layoutY="123.0" text="Specialite :" textFill="WHITE" />
+                                    <Label fx:id="niv" layoutX="292.0" layoutY="166.0" text="Level :" textFill="WHITE" />
+                                    <Label fx:id="section" layoutX="292.0" layoutY="208.0" text="Section" textFill="WHITE" />
+                                    <TextField fx:id="t1" disable="true" layoutX="111.0" layoutY="74.0" />
+                                    <TextField fx:id="t2" disable="true" layoutX="111.0" layoutY="119.0" />
+                                    <TextField fx:id="t3" disable="true" layoutX="111.0" layoutY="162.0" />
+                                    <TextField fx:id="t4" disable="true" layoutX="111.0" layoutY="204.0" />
+                                    <TextField fx:id="t5" disable="true" layoutX="111.0" layoutY="249.0" />
+                                    <TextField fx:id="t6" disable="true" layoutX="111.0" layoutY="290.0" />
+                                    <TextField fx:id="gra" disable="true" layoutX="347.0" layoutY="74.0" />
+                                    <TextField fx:id="special" disable="true" layoutX="347.0" layoutY="119.0" />
+                                    <TextField fx:id="nve" disable="true" layoutX="347.0" layoutY="162.0" />
+                                    <TextField fx:id="sec" disable="true" layoutX="347.0" layoutY="204.0" />
+                                    <Button fx:id="modify" layoutX="185.0" layoutY="388.0" mnemonicParsing="false" onAction="#modifierProfil" prefHeight="25.0" prefWidth="73.0" text="Modify" />
+                                    <Button fx:id="confirme" disable="true" layoutX="382.0" layoutY="388.0" mnemonicParsing="false" onAction="#confirmeModification" prefHeight="25.0" prefWidth="77.0" text="Confirme" />
+                                 </children>
+                              </Pane>
                               <Pane fx:id="formationIns" layoutX="152.0" layoutY="85.0" prefHeight="433.3333333333333" prefWidth="519.3333333333334" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
                                     <VBox prefHeight="433.0" prefWidth="519.0">
                                        <children>
                                           <HBox prefHeight="108.4" prefWidth="519.0">
                                              <children>
-                                                <ListView fx:id="listefor" prefHeight="108.0" prefWidth="335.0" />
-                                                <VBox alignment="CENTER" prefHeight="108.0" prefWidth="195.0" spacing="10.0">
-                                                   <children>
-                                                      <Button mnemonicParsing="false" text="Button" />
-                                                      <Button mnemonicParsing="false" text="Button" />
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </HBox>
-                                          <HBox prefHeight="108.4" prefWidth="519.0">
-                                             <children>
-                                                <ListView prefHeight="108.0" prefWidth="334.0" />
+                                                <ListView fx:id="listFormation" onMouseClicked="#afficherCours" prefHeight="108.0" prefWidth="334.0" />
                                                 <VBox alignment="CENTER" prefHeight="108.0" prefWidth="193.0" spacing="10.0">
                                                    <children>
-                                                      <Button mnemonicParsing="false" text="Button" />
-                                                      <Button mnemonicParsing="false" text="Button" />
+                                                      <TextField fx:id="nomFormation" prefHeight="25.0" prefWidth="100.0" promptText="Ajouter formation" />
+                                                      <Button fx:id="ajouterFormInst" mnemonicParsing="false" onAction="#setAjouterFormInst" prefHeight="25.0" prefWidth="73.0" text="Ajouter" />
+                                                      <Button fx:id="supprimerFormInts" mnemonicParsing="false" onAction="#setSupprimerFormInst" prefWidth="73.0" text="Supprimer" />
                                                    </children>
                                                 </VBox>
                                              </children>
                                           </HBox>
                                           <HBox prefHeight="108.4" prefWidth="519.0">
                                              <children>
-                                                <ListView prefHeight="109.0" prefWidth="330.0" />
-                                                <VBox alignment="CENTER" prefHeight="109.0" prefWidth="187.0" spacing="10.0">
+                                                <TableView fx:id="tableCour" prefHeight="200.0" prefWidth="334.0">
+                                                  <columns>
+                                                    <TableColumn prefWidth="88.0" text="Module" />
+                                                    <TableColumn prefWidth="82.0" text="Titre" />
+                                                      <TableColumn prefWidth="159.0" text="Lien" />
+                                                  </columns>
+                                                </TableView>
+                                                <VBox alignment="CENTER" prefHeight="108.0" prefWidth="193.0" spacing="10.0">
                                                    <children>
-                                                      <Button mnemonicParsing="false" text="Button" />
-                                                      <Button mnemonicParsing="false" text="Button" />
+                                                      <Button disable="true" mnemonicParsing="false" prefWidth="73.0" text="Ajouter" />
+                                                      <Button disable="true" mnemonicParsing="false" prefWidth="73.0" text="Supprimer" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="108.4" prefWidth="519.0">
+                                             <children>
+                                                <TableView prefHeight="108.0" prefWidth="334.0">
+                                                  <columns>
+                                                    <TableColumn prefWidth="75.0" text="Matricule" />
+                                                    <TableColumn prefWidth="75.0" text="Nom" />
+                                                      <TableColumn prefWidth="75.0" text="Prenom" />
+                                                      <TableColumn prefWidth="75.0" text="Specialite" />
+                                                      <TableColumn prefWidth="75.0" text="Niveau" />
+                                                      <TableColumn prefWidth="75.0" text="Section" />
+                                                  </columns>
+                                                </TableView>
+                                                <VBox alignment="CENTER" prefHeight="108.0" prefWidth="193.0" spacing="10.0">
+                                                   <children>
+                                                      <Button disable="true" mnemonicParsing="false" prefWidth="73.0" text="Ajouter" />
+                                                      <Button disable="true" mnemonicParsing="false" prefWidth="73.0" text="Supprimer" />
                                                    </children>
                                                 </VBox>
                                              </children>
@@ -122,8 +174,8 @@
                                                 <ListView prefHeight="109.0" prefWidth="330.0" />
                                                 <VBox alignment="CENTER" prefHeight="109.0" prefWidth="191.0" spacing="10.0">
                                                    <children>
-                                                      <Button mnemonicParsing="false" text="Button" />
-                                                      <Button mnemonicParsing="false" text="Button" />
+                                                      <Button disable="true" mnemonicParsing="false" prefWidth="73.0" text="Ajouter" />
+                                                      <Button disable="true" mnemonicParsing="false" prefWidth="73.0" text="Supprimer" />
                                                    </children>
                                                 </VBox>
                                              </children>

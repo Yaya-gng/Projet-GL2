@@ -1,29 +1,68 @@
 package dateBase;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class Formations extends BD {
 
+	public static ArrayList<String> afficherFormation(){
+		ArrayList<String> frm = new ArrayList<>();
+
+		try(
+				Connection con = connect();
+
+				PreparedStatement pr = con.prepareStatement("select nomF from formation");
+		) {
+			ResultSet r = pr.executeQuery();
+			while(r.next()){
+				frm.add(r.getString("nomF"));
+			}
+			System.out.println("Affichage des formation reussi");
+			return frm;
+
+		}catch(SQLException e){
+			System.out.println(e.getMessage());
+		}
+			return null;
+	}
+
+	public static void supprimerFormation(String nomF){
+		try(
+				Connection con = connect();
+                PreparedStatement p = con.prepareStatement("select numF from formation where nomF=?");
+				PreparedStatement pr = con.prepareStatement("delete from formation where nomF=?");
+		) {
+		    p.setString(1,nomF);
+		    ResultSet r = p.executeQuery();
+			if(r.next()) {
+                PreparedStatement pr1 = con.prepareStatement("delete from coursF where numF=?");
+                pr1.setInt(1, r.getInt("numF"));
+                pr1.execute();
+            }
+            pr.setString(1,nomF);
+            pr.execute();
+
+			System.out.println("Suppression");
+
+		}catch(SQLException e){
+			System.out.println(e.getMessage());
+		}
+	}
 	
-	public static void creerFormation(String nomF, Date dateC, int id) {
+	public static void ajouterFormation(String nomF, int id) {
 		
 		try(
 				Connection con = connect();
 				
-				PreparedStatement pr = con.prepareStatement("insert into formation(nomF,dateC,id)values(?,?,?)");
+				PreparedStatement pr = con.prepareStatement("insert into formation(nomF,id)values(?,?)");
 				){
 			
 			pr.setString(1,nomF);
-			pr.setDate(2,dateC);
-			pr.setInt(3,id);
+			pr.setInt(2,id);
 			
 			pr.execute();
 			
-				System.out.println("Creation de la formation avec succé");
+				System.out.println("Creation de la formation avec succée");
 			
 		}catch(SQLException e) {
 			System.out.println(e.getMessage());
