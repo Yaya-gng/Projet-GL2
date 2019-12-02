@@ -15,13 +15,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AccuielController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="626.0" prefWidth="782.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AccuielController">
    <children>
       <SplitPane dividerPositions="0.2" orientation="VERTICAL" prefHeight="550.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
             <Pane prefHeight="199.0" prefWidth="698.0">
                <children>
-                  <ImageView fitHeight="224.0" fitWidth="714.0" layoutX="-8.0" layoutY="-43.0">
+                  <ImageView fitHeight="243.0" fitWidth="790.0" layoutX="-8.0" layoutY="-43.0">
                      <image>
                         <Image url="@social-learning-infographic-header.jpg" />
                      </image>
@@ -38,7 +38,7 @@
                                 <items>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #2E3238;">
                                        <children>
-                                          <ImageView fx:id="im" fitHeight="125.0" fitWidth="125.0" layoutX="22.0" layoutY="14.0" onMouseClicked="#afficheProfil" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fx:id="im" fitHeight="99.0" fitWidth="149.0" layoutX="22.0" layoutY="14.0" onMouseClicked="#afficheProfil" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@elon-musk-une-785x589.jpg" />
                                              </image>
@@ -59,15 +59,15 @@
                                                 </HBox>
                                              </children>
                                           </VBox>
-                                          <Label fx:id="id" disable="true" layoutX="22.0" layoutY="194.0" prefHeight="17.0" prefWidth="113.0" />
+                                          <Label fx:id="id" disable="true" layoutX="22.0" layoutY="202.0" prefHeight="17.0" prefWidth="113.0" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                        <children>
                                           <Pane prefHeight="212.66666666666666" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                          <Pane fx:id="prof" prefHeight="255.33333333333334" prefWidth="200.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <Pane fx:id="prof" prefHeight="243.0" prefWidth="190.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <VBox alignment="TOP_CENTER" layoutX="3.0" layoutY="41.0" prefHeight="144.0" prefWidth="163.0" spacing="10.0">
+                                                <VBox alignment="TOP_CENTER" layoutX="3.0" layoutY="41.0" prefHeight="157.0" prefWidth="179.0" spacing="10.0">
                                                    <children>
                                                       <Button fx:id="ressourceInst" mnemonicParsing="false" onAction="#RessourceInst" prefHeight="25.0" prefWidth="147.0" text="Ressources" />
                                                       <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Sondages" />
@@ -85,7 +85,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Pane fx:id="profil" prefHeight="433.0" prefWidth="519.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Pane fx:id="profil" prefHeight="494.0" prefWidth="580.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
                                     <Label layoutX="62.0" layoutY="29.0" text="Your Profil :" textFill="WHITE">
                                        <font>
@@ -116,14 +116,14 @@
                                     <Button fx:id="confirme" disable="true" layoutX="382.0" layoutY="388.0" mnemonicParsing="false" onAction="#confirmeModification" prefHeight="25.0" prefWidth="77.0" text="Confirme" />
                                  </children>
                               </Pane>
-                              <Pane fx:id="formationIns" layoutX="152.0" layoutY="85.0" prefHeight="433.3333333333333" prefWidth="519.3333333333334" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Pane fx:id="formationIns" layoutX="152.0" layoutY="85.0" prefHeight="494.0" prefWidth="580.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <VBox prefHeight="433.0" prefWidth="519.0">
+                                    <VBox prefHeight="496.0" prefWidth="580.0" spacing="20.0">
                                        <children>
                                           <HBox prefHeight="108.4" prefWidth="519.0">
                                              <children>
-                                                <ListView fx:id="listFormation" onMouseClicked="#afficherCours" prefHeight="108.0" prefWidth="334.0" />
-                                                <VBox alignment="CENTER" prefHeight="108.0" prefWidth="193.0" spacing="10.0">
+                                                <ListView fx:id="listFormation" prefHeight="105.0" prefWidth="400.0" />
+                                                <VBox alignment="CENTER" prefHeight="109.0" prefWidth="179.0" spacing="10.0">
                                                    <children>
                                                       <TextField fx:id="nomFormation" prefHeight="25.0" prefWidth="100.0" promptText="Ajouter formation" />
                                                       <Button fx:id="ajouterFormInst" mnemonicParsing="false" onAction="#setAjouterFormInst" prefHeight="25.0" prefWidth="73.0" text="Ajouter" />
@@ -134,16 +134,16 @@
                                           </HBox>
                                           <HBox prefHeight="108.4" prefWidth="519.0">
                                              <children>
-                                                <TableView fx:id="tableCour" prefHeight="200.0" prefWidth="334.0">
+                                                <TableView fx:id="tableCours" prefHeight="109.0" prefWidth="400.0">
                                                   <columns>
-                                                    <TableColumn prefWidth="88.0" text="Module" />
-                                                    <TableColumn prefWidth="82.0" text="Titre" />
-                                                      <TableColumn prefWidth="159.0" text="Lien" />
+                                                    <TableColumn fx:id="c1" prefWidth="110.0" text="Module" />
+                                                    <TableColumn fx:id="c2" prefWidth="110.0" text="Titre" />
                                                   </columns>
                                                 </TableView>
-                                                <VBox alignment="CENTER" prefHeight="108.0" prefWidth="193.0" spacing="10.0">
+                                                <VBox alignment="CENTER" prefHeight="109.0" prefWidth="179.0" spacing="10.0">
                                                    <children>
-                                                      <Button disable="true" mnemonicParsing="false" prefWidth="73.0" text="Ajouter" />
+                                                      <Button fx:id="afficherCours" disable="true" mnemonicParsing="false" onAction="#AfficherCours" prefWidth="73.0" text="Afficher" />
+                                                      <Button disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Ajouter" />
                                                       <Button disable="true" mnemonicParsing="false" prefWidth="73.0" text="Supprimer" />
                                                    </children>
                                                 </VBox>
@@ -151,7 +151,7 @@
                                           </HBox>
                                           <HBox prefHeight="108.4" prefWidth="519.0">
                                              <children>
-                                                <TableView prefHeight="108.0" prefWidth="334.0">
+                                                <TableView prefHeight="108.0" prefWidth="400.0">
                                                   <columns>
                                                     <TableColumn prefWidth="75.0" text="Matricule" />
                                                     <TableColumn prefWidth="75.0" text="Nom" />
@@ -161,7 +161,7 @@
                                                       <TableColumn prefWidth="75.0" text="Section" />
                                                   </columns>
                                                 </TableView>
-                                                <VBox alignment="CENTER" prefHeight="108.0" prefWidth="193.0" spacing="10.0">
+                                                <VBox alignment="CENTER" prefHeight="108.0" prefWidth="179.0" spacing="10.0">
                                                    <children>
                                                       <Button disable="true" mnemonicParsing="false" prefWidth="73.0" text="Ajouter" />
                                                       <Button disable="true" mnemonicParsing="false" prefWidth="73.0" text="Supprimer" />
@@ -171,8 +171,8 @@
                                           </HBox>
                                           <HBox prefHeight="108.4" prefWidth="519.0">
                                              <children>
-                                                <ListView prefHeight="109.0" prefWidth="330.0" />
-                                                <VBox alignment="CENTER" prefHeight="109.0" prefWidth="191.0" spacing="10.0">
+                                                <ListView prefHeight="109.0" prefWidth="400.0" />
+                                                <VBox alignment="CENTER" prefHeight="109.0" prefWidth="179.0" spacing="10.0">
                                                    <children>
                                                       <Button disable="true" mnemonicParsing="false" prefWidth="73.0" text="Ajouter" />
                                                       <Button disable="true" mnemonicParsing="false" prefWidth="73.0" text="Supprimer" />

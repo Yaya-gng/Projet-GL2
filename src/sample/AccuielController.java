@@ -1,6 +1,7 @@
 package sample;
 import Model.Administrateur;
 import Model.Apprenant;
+import Model.Cour;
 import Model.Instructeur;
 import dateBase.*;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -24,6 +26,7 @@ import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.text.Normalizer;
 import java.util.ArrayList;
@@ -38,13 +41,14 @@ public class AccuielController implements Initializable {
     @FXML
     private Parent avatar1;
     @FXML TextField t1,t2,t3,t4,t5,t6,gra,special,nve,sec,nomFormation;
-    @FXML Button modify, confirme,disco, ressourceInst, ajouterFormInst, supprimerFormInst;
+    @FXML Button modify, confirme,disco, ressourceInst, ajouterFormInst, supprimerFormInst, afficherCours;
     @FXML private Label id, nom, prenom, grade,spec,niv,section;
     @FXML
     private Button log, rm, sm, bm, wm;
     @FXML
     private ListView listFormation;
-    @FXML TableView tableCour;
+   @FXML private TableView<Cour> tableCours;
+   @FXML private TableColumn<Cour, String> c1,c2;
 
     @FXML ImageView im;
 
@@ -66,6 +70,8 @@ public class AccuielController implements Initializable {
         if(Integer.parseInt(l5.getText()) >100 && Integer.parseInt(l5.getText()) < 1000){
             app.toFront();
         }*/
+
+        c1.setCellValueFactory(new PropertyValueFactory<>("titre"));
     }
 
     @FXML
@@ -212,6 +218,7 @@ public class AccuielController implements Initializable {
 
 
         listFormation.getItems().addAll(frm);
+        if(listFormation.getItems().isEmpty() == false) afficherCours.setDisable(false);
 
 
     }
@@ -233,20 +240,14 @@ public class AccuielController implements Initializable {
             Formations.supprimerFormation(s);
         }
 
-        @FXML public void afficherCours(ActionEvent event){
+        @FXML public void AfficherCours(ActionEvent event){
             Object item = listFormation.getSelectionModel().getSelectedItem();
-            String i = (String)item;
+            String s = (String)item;
+            ArrayList<Cour> cour = Cours.afficherCours(s,Integer.parseInt(id.getText()));
 
-            tableCour.getItems().addAll(Cours.afficherCours(i,Integer.parseInt(id.getText())));
-
-
-
-
-
-
-
-
-
+            for(int i=0; i<cour.size();i++) {
+                tableCours.getItems().add(cour.get(i));
+            }
 
 
         }
