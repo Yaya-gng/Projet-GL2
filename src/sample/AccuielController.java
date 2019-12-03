@@ -25,6 +25,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.net.URL;
@@ -37,18 +38,20 @@ import java.util.ResourceBundle;
 
 public class AccuielController implements Initializable {
     @FXML
-    private Pane profil, admin, prof,formationAd,app;
+    private Pane profil, admin, prof,formationIns,app,allStudents;
     @FXML
     private Parent avatar1;
     @FXML TextField t1,t2,t3,t4,t5,t6,gra,special,nve,sec,nomFormation;
-    @FXML Button modify, confirme,disco, ressourceInst, ajouterFormInst, supprimerFormInst, afficherCours;
+    @FXML Button modify, confirme,disco, ressourceInst, ajouterFormInst, supprimerFormInst, afficherCours, tle, ajouterEtudiant, supprimerEtudiant;
     @FXML private Label id, nom, prenom, grade,spec,niv,section;
     @FXML
     private Button log, rm, sm, bm, wm;
     @FXML
     private ListView listFormation;
    @FXML private TableView<Cour> tableCours;
+   @FXML private TableView<AllApprenant> tableAllStu,tableStuFor;
    @FXML private TableColumn<Cour, String> c1,c2;
+   @FXML private TableColumn<AllApprenant,String> nomC, preC, specC,nomC1, preC1, specC1;
 
     @FXML ImageView im;
 
@@ -72,6 +75,13 @@ public class AccuielController implements Initializable {
         }*/
 
         c1.setCellValueFactory(new PropertyValueFactory<>("titre"));
+
+        nomC.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        preC.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        specC.setCellValueFactory(new PropertyValueFactory<>("specialite"));
+        nomC1.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        preC1.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        specC1.setCellValueFactory(new PropertyValueFactory<>("specialite"));
     }
 
     @FXML
@@ -214,8 +224,12 @@ public class AccuielController implements Initializable {
     }
 
     @FXML public void RessourceInst(ActionEvent event){
-        ArrayList<String> frm = Formations.afficherFormation();
+        formationIns.toFront();
 
+        tle.setDisable(false);
+
+        ArrayList<String> frm = Formations.afficherFormation();
+        listFormation.getItems().clear();
 
         listFormation.getItems().addAll(frm);
         if(listFormation.getItems().isEmpty() == false) afficherCours.setDisable(false);
@@ -241,6 +255,7 @@ public class AccuielController implements Initializable {
         }
 
         @FXML public void AfficherCours(ActionEvent event){
+
             Object item = listFormation.getSelectionModel().getSelectedItem();
             String s = (String)item;
             ArrayList<Cour> cour = Cours.afficherCours(s,Integer.parseInt(id.getText()));
@@ -251,6 +266,27 @@ public class AccuielController implements Initializable {
 
 
         }
+        @FXML public void setAllStudents(ActionEvent event) {
 
+            allStudents.toFront();
+            tableAllStu.getItems().clear();
+            ArrayList<AllApprenant> app = AllLearners.diplayAll();
+            for (int i = 0; i < app.size(); i++)
+                tableAllStu.getItems().add(app.get(i));
+
+            if (tableAllStu.getItems().isEmpty() == false) {
+                ajouterEtudiant.setDisable(false);
+                supprimerEtudiant.setDisable(false);
+            }
+        }
+
+        @FXML public void setAjouterEtudiant(ActionEvent event){
+        allStudents.toBack();
+        Object item = tableAllStu.getSelectionModel().getSelectedItem();
+        AllApprenant a = (AllApprenant)item;
+        System.out.println(a.toString());
+        boolean ha=tableStuFor.getItems().add(a);
+            System.out.println(ha);
+        }
 
 }

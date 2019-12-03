@@ -122,10 +122,14 @@
                                        <children>
                                           <HBox prefHeight="108.4" prefWidth="519.0">
                                              <children>
-                                                <ListView fx:id="listFormation" prefHeight="105.0" prefWidth="400.0" />
-                                                <VBox alignment="CENTER" prefHeight="109.0" prefWidth="179.0" spacing="10.0">
+                                                <VBox prefHeight="109.0" prefWidth="400.0" spacing="2.0">
                                                    <children>
                                                       <TextField fx:id="nomFormation" prefHeight="25.0" prefWidth="100.0" promptText="Ajouter formation" />
+                                                      <ListView fx:id="listFormation" prefHeight="108.0" prefWidth="400.0" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="CENTER" prefHeight="109.0" prefWidth="179.0" spacing="10.0">
+                                                   <children>
                                                       <Button fx:id="ajouterFormInst" mnemonicParsing="false" onAction="#setAjouterFormInst" prefHeight="25.0" prefWidth="73.0" text="Ajouter" />
                                                       <Button fx:id="supprimerFormInts" mnemonicParsing="false" onAction="#setSupprimerFormInst" prefWidth="73.0" text="Supprimer" />
                                                    </children>
@@ -151,20 +155,18 @@
                                           </HBox>
                                           <HBox prefHeight="108.4" prefWidth="519.0">
                                              <children>
-                                                <TableView prefHeight="108.0" prefWidth="400.0">
+                                                <TableView fx:id="tableStuFor" prefHeight="108.0" prefWidth="400.0">
                                                   <columns>
-                                                    <TableColumn prefWidth="75.0" text="Matricule" />
-                                                    <TableColumn prefWidth="75.0" text="Nom" />
-                                                      <TableColumn prefWidth="75.0" text="Prenom" />
-                                                      <TableColumn prefWidth="75.0" text="Specialite" />
-                                                      <TableColumn prefWidth="75.0" text="Niveau" />
-                                                      <TableColumn prefWidth="75.0" text="Section" />
+                                                    <TableColumn fx:id="nomC" prefWidth="135.99997460842133" text="Nom" />
+                                                      <TableColumn fx:id="preC" prefWidth="134.66664123535156" text="Prenom" />
+                                                      <TableColumn fx:id="specC" prefWidth="127.33343505859375" text="Specialite" />
                                                   </columns>
                                                 </TableView>
                                                 <VBox alignment="CENTER" prefHeight="108.0" prefWidth="179.0" spacing="10.0">
                                                    <children>
-                                                      <Button disable="true" mnemonicParsing="false" prefWidth="73.0" text="Ajouter" />
-                                                      <Button disable="true" mnemonicParsing="false" prefWidth="73.0" text="Supprimer" />
+                                                      <Button fx:id="tle" disable="true" mnemonicParsing="false" onAction="#setAllStudents" text="Tout les etudiants" />
+                                                      <Button fx:id="ajouterEtudiant" disable="true" mnemonicParsing="false" onAction="#setAjouterEtudiant" prefWidth="73.0" text="Ajouter" />
+                                                      <Button fx:id="supprimerEtudiant" disable="true" mnemonicParsing="false" prefWidth="73.0" text="Supprimer" />
                                                    </children>
                                                 </VBox>
                                              </children>
@@ -182,6 +184,17 @@
                                           </HBox>
                                        </children>
                                     </VBox>
+                                    <Pane fx:id="allStudents" layoutY="255.0" prefHeight="109.0" prefWidth="400.0" style="-fx-background-color: white;">
+                                       <children>
+                                          <TableView fx:id="tableAllStu" prefHeight="109.0" prefWidth="400.0">
+                                            <columns>
+                                              <TableColumn fx:id="nomC1" prefWidth="140.66666162014008" text="Nom" />
+                                              <TableColumn fx:id="preC1" prefWidth="121.33335876464844" text="Prenom" />
+                                                <TableColumn fx:id="specC1" prefWidth="136.66665649414062" text="Specialite" />
+                                            </columns>
+                                          </TableView>
+                                       </children>
+                                    </Pane>
                                  </children>
                               </Pane>
                            </children>
