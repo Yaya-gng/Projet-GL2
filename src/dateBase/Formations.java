@@ -5,14 +5,15 @@ import java.util.ArrayList;
 
 public class Formations extends BD {
 
-	public static ArrayList<String> afficherFormation(){
+	public static ArrayList<String> afficherFormation(int id){
 		ArrayList<String> frm = new ArrayList<>();
 
 		try(
 				Connection con = connect();
 
-				PreparedStatement pr = con.prepareStatement("select nomF from formation");
+				PreparedStatement pr = con.prepareStatement("select nomF from formation where id=?");
 		) {
+			pr.setInt(1,id);
 			ResultSet r = pr.executeQuery();
 			while(r.next()){
 				frm.add(r.getString("nomF"));

@@ -4,6 +4,8 @@ import Model.Apprenant;
 import Model.Cour;
 import Model.Instructeur;
 import dateBase.*;
+import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,15 +21,20 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
+import javafx.util.Callback;
 
 import javax.swing.*;
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.text.Normalizer;
 import java.util.ArrayList;
@@ -37,6 +44,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AccuielController implements Initializable {
+
     @FXML
     private Pane profil, admin, prof,formationIns,app,allStudents;
     @FXML
@@ -74,7 +82,7 @@ public class AccuielController implements Initializable {
             app.toFront();
         }*/
 
-        c1.setCellValueFactory(new PropertyValueFactory<>("titre"));
+       // c1.setCellValueFactory(new PropertyValueFactory<>("titre"));
 
         nomC.setCellValueFactory(new PropertyValueFactory<>("nom"));
         preC.setCellValueFactory(new PropertyValueFactory<>("prenom"));
@@ -228,7 +236,7 @@ public class AccuielController implements Initializable {
 
         tle.setDisable(false);
 
-        ArrayList<String> frm = Formations.afficherFormation();
+        ArrayList<String> frm = Formations.afficherFormation(Integer.parseInt(id.getText()));
         listFormation.getItems().clear();
 
         listFormation.getItems().addAll(frm);
@@ -239,9 +247,11 @@ public class AccuielController implements Initializable {
 
     @FXML public void setAjouterFormInst(ActionEvent event){
         if(nomFormation.getText().isEmpty() == false){
-            listFormation.getItems().add(nomFormation.getText());
-            Formations.ajouterFormation(nomFormation.getText(), Integer.parseInt(id.getText()));
-            nomFormation.setText(null);
+                listFormation.getItems().add(nomFormation.getText());
+                Formations.ajouterFormation(nomFormation.getText(), Integer.parseInt(id.getText()));
+                nomFormation.setText(null);
+
+
         }
 
     }
@@ -289,4 +299,28 @@ public class AccuielController implements Initializable {
             System.out.println(ha);
         }
 
+       @FXML public void ajouterCour(ActionEvent event) throws IOException {
+            FileChooser fc = new FileChooser();
+            fc.setTitle("Open text file");
+            fc.setInitialDirectory(new File(System.getProperty("user.home")));
+            fc.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("Text Files ","*.txt"),
+                    new FileChooser.ExtensionFilter("All Files ","*.*")
+
+
+            );System.out.println("hna");
+            File f = fc.showOpenDialog(stage);
+
+            if(f != null)
+                System.out.println("Choosen file "+f);
+           Desktop.getDesktop().open(f);
+
+        }
+
+    private Stage stage;
+
+    public void init(Stage stage) {
+       this.stage = stage;
+
+    }
 }

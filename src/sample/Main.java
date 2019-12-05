@@ -10,18 +10,18 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage){
+        try {
+            Parent loginRoot = FXMLLoader.load(getClass().getResource("login.fxml"));
+            Scene login =new Scene (loginRoot);
+            primaryStage.setTitle("Social Learning");
+            primaryStage.setScene(login);
+            primaryStage.show();
+        }catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
 
-        Parent loginRoot = FXMLLoader.load(getClass().getResource("login.fxml"));
-        Scene login =new Scene (loginRoot);
-
-
-        primaryStage.setTitle("Social Learning");
-        primaryStage.setScene(login);
-        primaryStage.show();
     }
-
-
     public static void main(String[] args) {
         launch(args);
     }

@@ -59,7 +59,7 @@
                                                 </HBox>
                                              </children>
                                           </VBox>
-                                          <Label fx:id="id" disable="true" layoutX="22.0" layoutY="202.0" prefHeight="17.0" prefWidth="113.0" />
+                                          <Label fx:id="id" layoutX="22.0" layoutY="202.0" prefHeight="17.0" prefWidth="113.0" textFill="WHITE" />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -138,17 +138,17 @@
                                           </HBox>
                                           <HBox prefHeight="108.4" prefWidth="519.0">
                                              <children>
-                                                <TableView fx:id="tableCours" prefHeight="109.0" prefWidth="400.0">
-                                                  <columns>
-                                                    <TableColumn fx:id="c1" prefWidth="110.0" text="Module" />
-                                                    <TableColumn fx:id="c2" prefWidth="110.0" text="Titre" />
-                                                  </columns>
-                                                </TableView>
+                                                <VBox prefHeight="109.0" prefWidth="400.0" spacing="2.0">
+                                                   <children>
+                                                      <TextField promptText="Ajouter titre du cours" />
+                                                      <ListView prefHeight="82.0" prefWidth="400.0" />
+                                                   </children>
+                                                </VBox>
                                                 <VBox alignment="CENTER" prefHeight="109.0" prefWidth="179.0" spacing="10.0">
                                                    <children>
-                                                      <Button fx:id="afficherCours" disable="true" mnemonicParsing="false" onAction="#AfficherCours" prefWidth="73.0" text="Afficher" />
+                                                      <Button disable="true" mnemonicParsing="false" prefWidth="73.0" text="Afficher" />
                                                       <Button disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Ajouter" />
-                                                      <Button disable="true" mnemonicParsing="false" prefWidth="73.0" text="Supprimer" />
+                                                      <Button mnemonicParsing="false" onAction="#ajouterCour" prefWidth="73.0" text="Supprimer" />
                                                    </children>
                                                 </VBox>
                                              </children>
