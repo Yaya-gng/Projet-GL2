@@ -5,6 +5,24 @@ import java.util.ArrayList;
 
 public class Formations extends BD {
 
+	public static int getNumF(String nomF) {
+		try (
+				Connection con = connect();
+
+				PreparedStatement pr = con.prepareStatement("select numF from formation where nomF=?");
+		) {
+			pr.setString(1, nomF);
+			ResultSet r = pr.executeQuery();
+
+			if (r.next()) return r.getInt("numF");
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return -1;
+	}
+
+
 	public static ArrayList<String> afficherFormation(int id){
 		ArrayList<String> frm = new ArrayList<>();
 

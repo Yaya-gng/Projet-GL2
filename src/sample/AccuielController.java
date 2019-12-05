@@ -49,13 +49,13 @@ public class AccuielController implements Initializable {
     private Pane profil, admin, prof,formationIns,app,allStudents;
     @FXML
     private Parent avatar1;
-    @FXML TextField t1,t2,t3,t4,t5,t6,gra,special,nve,sec,nomFormation;
-    @FXML Button modify, confirme,disco, ressourceInst, ajouterFormInst, supprimerFormInst, afficherCours, tle, ajouterEtudiant, supprimerEtudiant;
-    @FXML private Label id, nom, prenom, grade,spec,niv,section;
+    @FXML TextField t1,t2,t3,t4,t5,t6,gra,special,nve,sec,nomFormation, titreCour;
+    @FXML Button modify, confirme,disco, ressourceInst, ajouterFormInst, supprimerFormInst, afficherCours, tle, ajouterEtudiant, supprimerEtudiant, openFile, addFile;
+    @FXML private Label id, nom, prenom, grade,spec,niv,section, numF;
     @FXML
     private Button log, rm, sm, bm, wm;
     @FXML
-    private ListView listFormation;
+    private ListView listFormation, listCours;
    @FXML private TableView<Cour> tableCours;
    @FXML private TableView<AllApprenant> tableAllStu,tableStuFor;
    @FXML private TableColumn<Cour, String> c1,c2;
@@ -233,14 +233,16 @@ public class AccuielController implements Initializable {
 
     @FXML public void RessourceInst(ActionEvent event){
         formationIns.toFront();
-
-        tle.setDisable(false);
-
         ArrayList<String> frm = Formations.afficherFormation(Integer.parseInt(id.getText()));
         listFormation.getItems().clear();
 
         listFormation.getItems().addAll(frm);
-        if(listFormation.getItems().isEmpty() == false) afficherCours.setDisable(false);
+        if(listFormation.getItems().isEmpty() == false) {
+            afficherCours.setDisable(false);
+            tle.setDisable(false);
+            openFile.setDisable(false);
+            addFile.setDisable(false);
+        }
 
 
     }
@@ -249,11 +251,8 @@ public class AccuielController implements Initializable {
         if(nomFormation.getText().isEmpty() == false){
                 listFormation.getItems().add(nomFormation.getText());
                 Formations.ajouterFormation(nomFormation.getText(), Integer.parseInt(id.getText()));
-                nomFormation.setText(null);
-
-
+                nomFormation.clear();
         }
-
     }
 
     @FXML public void setSupprimerFormInst(ActionEvent event){
@@ -262,20 +261,29 @@ public class AccuielController implements Initializable {
             listFormation.getItems().remove(item);
             String s = (String)item;
             Formations.supprimerFormation(s);
-        }
+    }
 
-        @FXML public void AfficherCours(ActionEvent event){
+        @FXML public void AfficherTout(ActionEvent event){
 
+            listCours.getItems().clear();
             Object item = listFormation.getSelectionModel().getSelectedItem();
             String s = (String)item;
-            ArrayList<Cour> cour = Cours.afficherCours(s,Integer.parseInt(id.getText()));
+            numF.setText(String.valueOf(Formations.getNumF(s)));
+
+            ArrayList<String> cour = Cours.afficherCours(s,Integer.parseInt(id.getText()));
 
             for(int i=0; i<cour.size();i++) {
-                tableCours.getItems().add(cour.get(i));
+                listCours.getItems().add(cour.get(i));
             }
+            Object item = tableAllStu.getSelectionModel().getSelectedItem();
+            AllApprenant a = (AllApprenant) item;
+            System.out.println(a.toString());
+            tableStuFor.getItems().add(a);
 
+            Accee.setAccee(AllLearners.getMatricule());
 
-        }
+       }
+
         @FXML public void setAllStudents(ActionEvent event) {
 
             allStudents.toFront();
@@ -291,36 +299,56 @@ public class AccuielController implements Initializable {
         }
 
         @FXML public void setAjouterEtudiant(ActionEvent event){
-        allStudents.toBack();
-        Object item = tableAllStu.getSelectionModel().getSelectedItem();
-        AllApprenant a = (AllApprenant)item;
-        System.out.println(a.toString());
-        boolean ha=tableStuFor.getItems().add(a);
-            System.out.println(ha);
+        if(listFormation.getSelectionModel().getSelectedItems().isEmpty() == false) {
+            allStudents.toBack();
+
+
         }
 
-       @FXML public void ajouterCour(ActionEvent event) throws IOException {
-            FileChooser fc = new FileChooser();
-            fc.setTitle("Open text file");
-            fc.setInitialDirectory(new File(System.getProperty("user.home")));
-            fc.getExtensionFilters().addAll(
-                    new FileChooser.ExtensionFilter("Text Files ","*.txt"),
-                    new FileChooser.ExtensionFilter("All Files ","*.*")
+        }
+    ////////////////////////////////////////////////////////////////////////////////////
+       @FXML public void ajouterCour(ActionEvent event) {
+            if(titreCour.getText().isEmpty() == false) {
+                FileChooser fc = new FileChooser();
+                fc.setTitle("Open text file");
+                fc.setInitialDirectory(new File(System.getProperty("user.home")));
+                fc.getExtensionFilters().addAll(
+                        new FileChooser.ExtensionFilter("Text Files ", "*.pdf"),
+                        new FileChooser.ExtensionFilter("All Files ", "*.*")
+                );
+                File f = fc.showOpenDialog(stage);
+
+                if (f != null) System.out.println("Choosen file " + f);
+                Object o = listFormation.getSelectionModel().getSelectedItem();
+                String s = (String)o;
+                Cours.creerCour(titreCour.getText(),f.toString(),Formations.getNumF(s));
+                titreCour.clear();
+                AfficherCours(event);
 
 
-            );System.out.println("hna");
-            File f = fc.showOpenDialog(stage);
-
-            if(f != null)
-                System.out.println("Choosen file "+f);
-           Desktop.getDesktop().open(f);
+            }
 
         }
+        ///////////////////////////////////////////////
 
     private Stage stage;
 
     public void init(Stage stage) {
        this.stage = stage;
+
+    }
+
+    @FXML public void ouvrirCour(ActionEvent event){
+        try {
+            Object item = listCours.getSelectionModel().getSelectedItem();
+            String s = (String) item;
+
+            String path = Cours.getPath(s);
+            File f = new File(path);
+            Desktop.getDesktop().open(f);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
 
     }
 }

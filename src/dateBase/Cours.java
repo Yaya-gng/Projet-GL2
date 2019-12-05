@@ -13,17 +13,16 @@ import Model.Cour;
 
 public class Cours extends BD{
 
-	public static void creerCour(String module, String titre, String contenu,int numF) {
+	public static void creerCour(String titre, String path,int numF) {
 		try(
 		Connection con = connect();
 
-		PreparedStatement pr = con.prepareStatement("insert into courF(titre,contenu,numF)values(?,?,?,?)");
+		PreparedStatement pr = con.prepareStatement("insert into coursF(titre,path,numF)values(?,?,?)");
 		){
 
-	pr.setString(1,module);
-	pr.setString(2,titre);
-	pr.setString(3,contenu);
-	pr.setInt(4,numF);
+	pr.setString(1,titre);
+	pr.setString(2,path);
+	pr.setInt(3,numF);
 
 	pr.execute();
 
@@ -35,8 +34,8 @@ public class Cours extends BD{
 	}
 
 
-	public static ArrayList<Cour> afficherCours(String nomF, int id) {
-		ArrayList<Cour> cours = new ArrayList<>();
+	public static ArrayList<String> afficherCours(String nomF, int id) {
+		ArrayList<String> cours = new ArrayList<>();
 		try(
 				Connection con = connect();
 				PreparedStatement pr = con.prepareStatement("select titre from coursF where numF=(Select numF from formation where nomF=?)");
@@ -45,11 +44,31 @@ public class Cours extends BD{
 			pr.setString(1,nomF);
 			ResultSet rs = pr.executeQuery();
 				while(rs.next()) {
-				cours.add(new Cour(rs.getString("titre")));
+				cours.add((rs.getString("titre")));
 					}
 			return cours;
 
 		}catch(SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+
+
+	public static String getPath(String titre){
+		try(
+				Connection con = connect();
+				PreparedStatement pr = con.prepareStatement("select path from coursF where titre=?");
+				){
+			pr.setString(1,titre);
+			ResultSet r = pr.executeQuery();
+
+			if(r.next()){
+				return r.getString("path");
+			}
+			else return null;
+
+		}catch (SQLException e){
 			System.out.println(e.getMessage());
 		}
 		return null;

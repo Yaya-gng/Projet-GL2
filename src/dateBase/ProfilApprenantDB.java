@@ -66,21 +66,20 @@ public static void modify(int id,String nom, String prenom, String string, Strin
 
 
 
-public static void Inscrire(int mat,String nom, String prenom, String date, String adresse, int tel, String password,String specialite, String niveau, String section) {
+public static void Inscrire(int mat,String nom, String prenom, Date date, String adresse,String specialite, String niveau, int section, String password) {
 	
 	try(Connection con = connect();
-	PreparedStatement pr = con.prepareStatement("Insert into apprenant(matricule,nom,prenom,dateNaiss,adresse,section,niveau,specialite,telephone,password)values(?,?,?,?,?,?,?,?,?,?)");)
+	PreparedStatement pr = con.prepareStatement("Insert into apprenant(matricule,nom,prenom,dateNaiss,adresse,section,niveau,specialite,password)values(?,?,?,?,?,?,?,?,?)");)
 	{
 	pr.setInt(1,mat);
 	pr.setString(2,nom);
 	pr.setString(3,prenom);
-	pr.setString(4,date);
+	pr.setDate(4,date);
 	pr.setString(5,adresse);
-	pr.setString(6,section);
+	pr.setInt(6,section);
 	pr.setString(7,niveau);
 	pr.setString(8,specialite);
-	pr.setInt(9, tel);	
-	pr.setString(10, password);;
+	pr.setString(9, password);;
 	
 	pr.execute();
 	System.out.println("Inscription d'un apprenant");
