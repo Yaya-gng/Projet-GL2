@@ -1,8 +1,6 @@
 package sample;
-import Model.Administrateur;
-import Model.Apprenant;
-import Model.Cour;
-import Model.Instructeur;
+import Model.*;
+import Model.Quizs;
 import dateBase.*;
 import javafx.application.Application;
 import javafx.application.HostServices;
@@ -42,6 +40,7 @@ import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.lang.String;
 
 public class AccuielController implements Initializable {
 
@@ -50,16 +49,16 @@ public class AccuielController implements Initializable {
     @FXML
     private Parent avatar1;
     @FXML TextField t1,t2,t3,t4,t5,t6,gra,special,nve,sec,nomFormation, titreCour;
-    @FXML Button modify, confirme,disco, ressourceInst, ajouterFormInst, supprimerFormInst, afficherCours, tle, ajouterEtudiant, supprimerEtudiant, openFile, addFile;
+    @FXML Button modify, confirme,disco, ressourceInst, ajouterFormInst, supprimerFormInst, afficherTout, tle, ajouterEtudiant, supprimerEtudiant, openFile, addFile;
     @FXML private Label id, nom, prenom, grade,spec,niv,section, numF;
     @FXML
     private Button log, rm, sm, bm, wm;
     @FXML
-    private ListView listFormation, listCours;
+    private ListView listFormation, listCours, listQuiz;
    @FXML private TableView<Cour> tableCours;
    @FXML private TableView<AllApprenant> tableAllStu,tableStuFor;
    @FXML private TableColumn<Cour, String> c1,c2;
-   @FXML private TableColumn<AllApprenant,String> nomC, preC, specC,nomC1, preC1, specC1;
+   @FXML private TableColumn<AllApprenant,String> nomC, preC, specC,nomC1, prenomC1, specC1, mat1;
 
     @FXML ImageView im;
 
@@ -82,14 +81,15 @@ public class AccuielController implements Initializable {
             app.toFront();
         }*/
 
-       // c1.setCellValueFactory(new PropertyValueFactory<>("titre"));
+
 
         nomC.setCellValueFactory(new PropertyValueFactory<>("nom"));
         preC.setCellValueFactory(new PropertyValueFactory<>("prenom"));
         specC.setCellValueFactory(new PropertyValueFactory<>("specialite"));
         nomC1.setCellValueFactory(new PropertyValueFactory<>("nom"));
-        preC1.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        prenomC1.setCellValueFactory(new PropertyValueFactory<>("prenom"));
         specC1.setCellValueFactory(new PropertyValueFactory<>("specialite"));
+        mat1.setCellValueFactory(new PropertyValueFactory<>("matricule"));
     }
 
     @FXML
@@ -235,10 +235,14 @@ public class AccuielController implements Initializable {
         formationIns.toFront();
         ArrayList<String> frm = Formations.afficherFormation(Integer.parseInt(id.getText()));
         listFormation.getItems().clear();
+        listCours.getItems().clear();
+        listQuiz.getItems().clear();
+        tableStuFor.getItems().clear();
+
 
         listFormation.getItems().addAll(frm);
         if(listFormation.getItems().isEmpty() == false) {
-            afficherCours.setDisable(false);
+
             tle.setDisable(false);
             openFile.setDisable(false);
             addFile.setDisable(false);
@@ -275,12 +279,15 @@ public class AccuielController implements Initializable {
             for(int i=0; i<cour.size();i++) {
                 listCours.getItems().add(cour.get(i));
             }
-            Object item = tableAllStu.getSelectionModel().getSelectedItem();
-            AllApprenant a = (AllApprenant) item;
-            System.out.println(a.toString());
-            tableStuFor.getItems().add(a);
 
-            Accee.setAccee(AllLearners.getMatricule());
+            ArrayList<AllApprenant> alp = Accee.getApprenant(Formations.getNumF(s));
+            for(int i=0; i<alp.size();i++) tableStuFor.getItems().add(alp.get(i));
+
+
+            ArrayList<String> q = Quiz.getQuiz(Formations.getNumF(s));
+            for(int j=0; j<q.size();j++) {
+                listQuiz.getItems().add(q.get(j));
+            }
 
        }
 
@@ -323,7 +330,7 @@ public class AccuielController implements Initializable {
                 String s = (String)o;
                 Cours.creerCour(titreCour.getText(),f.toString(),Formations.getNumF(s));
                 titreCour.clear();
-                AfficherCours(event);
+
 
 
             }

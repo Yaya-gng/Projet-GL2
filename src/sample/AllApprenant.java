@@ -3,11 +3,13 @@ package sample;
 public class AllApprenant {
 
     private String nom, prenom, specialite;
+    private int matricule;
 
-    public AllApprenant(String nom, String prenom, String specialite){
+    public AllApprenant(int matricule,String nom, String prenom, String specialite){
         this.nom = nom;
         this.prenom = prenom;
         this.specialite = specialite;
+        this.matricule = matricule;
     }
 
 
@@ -36,5 +38,13 @@ public class AllApprenant {
     }
     public String toString(){
         return nom+" "+prenom+" "+specialite;
+    }
+
+    public int getMatricule() {
+        return matricule;
+    }
+
+    public void setMatricule(int matricule) {
+        this.matricule = matricule;
     }
 }

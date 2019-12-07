@@ -20,8 +20,8 @@ public class AllLearners extends BD {
                 PreparedStatement pr = connect().prepareStatement("select nom,prenom,specialite from apprenant");
                 ){
             ResultSet r = pr.executeQuery();
-                while(r.next()) app.add(new AllApprenant(r.getString("nom"), r.getString("prenom"), r.getString("specialite")));
-                return app;
+                while(r.next()) app.add(new AllApprenant(r.getInt("matricule"),r.getString("nom"), r.getString("prenom"), r.getString("specialite")));
+            return app;
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }
