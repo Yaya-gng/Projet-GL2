@@ -47,6 +47,22 @@ public class AllLearners extends BD {
         return -1;
     }
 
+    public static void supprimerApprenant(int matricule){
+
+        try(
+                Connection con = connect();
+                PreparedStatement pr = con.prepareStatement("delete from accee where matricule=?");
+                ){
+            pr.setInt(1,matricule);
+            pr.execute();
+
+            System.out.println("Suppression apprenant effectué");
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
 
 
 

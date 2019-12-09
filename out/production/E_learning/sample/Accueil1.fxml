@@ -160,9 +160,9 @@
                                                 </VBox>
                                                 <VBox alignment="CENTER" prefHeight="109.0" prefWidth="179.0" spacing="5.0">
                                                    <children>
-                                                      <Button fx:id="openFile" disable="true" mnemonicParsing="false" onAction="#ouvrirCour" prefWidth="73.0" text="Ouvrir" />
                                                       <Button fx:id="addFile" disable="true" mnemonicParsing="false" onAction="#ajouterCour" prefHeight="25.0" prefWidth="73.0" text="Ajouter" />
-                                                      <Button disable="true" mnemonicParsing="false" prefWidth="73.0" text="Supprimer" />
+                                                      <Button fx:id="openFile" disable="true" mnemonicParsing="false" onAction="#ouvrirCour" prefWidth="73.0" text="Ouvrir" />
+                                                      <Button fx:id="supprimerCour" disable="true" mnemonicParsing="false" onAction="#setSupprimerCour" prefWidth="73.0" text="Supprimer" />
                                                    </children>
                                                 </VBox>
                                              </children>
@@ -187,17 +187,63 @@
                                           </HBox>
                                           <HBox prefHeight="108.4" prefWidth="519.0">
                                              <children>
-                                                <ListView fx:id="listQuiz" prefHeight="109.0" prefWidth="400.0" />
+                                                <VBox prefHeight="200.0" prefWidth="400.0" spacing="2.0">
+                                                   <children>
+                                                      <TextField fx:id="addQuiz" promptText="Ajouter Quiz" />
+                                                      <ListView fx:id="listQuiz" prefHeight="102.0" prefWidth="400.0" />
+                                                   </children>
+                                                </VBox>
                                                 <VBox alignment="CENTER" prefHeight="109.0" prefWidth="179.0" spacing="10.0">
                                                    <children>
-                                                      <Button disable="true" mnemonicParsing="false" prefWidth="73.0" text="Ajouter" />
-                                                      <Button disable="true" mnemonicParsing="false" prefWidth="73.0" text="Supprimer" />
+                                                      <Button fx:id="ajouterQuiz" disable="true" mnemonicParsing="false" prefWidth="73.0" text="Ajouter" />
+                                                      <Button fx:id="creerQuiz" disable="true" mnemonicParsing="false" prefWidth="73.0" text="Créer" />
+                                                      <Button fx:id="OuvrireQuiz" disable="true" mnemonicParsing="false" prefWidth="73.0" text="Ouvrire" />
+                                                      <Button fx:id="supprimerQuiz" disable="true" mnemonicParsing="false" prefWidth="73.0" text="Supprimer" />
                                                    </children>
                                                 </VBox>
                                              </children>
                                           </HBox>
                                        </children>
                                     </VBox>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="Quizz" prefHeight="494.0" prefWidth="580.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label fx:id="descriptionQuiz" layoutX="85.0" layoutY="26.0" prefHeight="25.0" prefWidth="435.0" textFill="WHITE" />
+                                    <HBox layoutX="22.0" layoutY="65.0" prefHeight="371.0" prefWidth="536.0">
+                                       <children>
+                                          <VBox prefHeight="200.0" prefWidth="100.0" spacing="22.0">
+                                             <children>
+                                                <Label text="Question 1 :" textFill="WHITE" />
+                                                <Label text="Reponse 1 :" textFill="WHITE" />
+                                                <Label text="Question 2 :" textFill="WHITE" />
+                                                <Label text="Reponse 2 :" textFill="WHITE" />
+                                                <Label text="Question 3 :" textFill="WHITE" />
+                                                <Label text="Reponse 3 :" textFill="WHITE" />
+                                                <Label text="Question 4 :" textFill="WHITE" />
+                                                <Label text="Reponse 4 :" textFill="WHITE" />
+                                                <Label text="Question 5 :" textFill="WHITE" />
+                                                <Label text="Reponse 5 :" textFill="WHITE" />
+                                             </children>
+                                          </VBox>
+                                          <VBox prefHeight="371.0" prefWidth="448.0" spacing="14.0">
+                                             <children>
+                                                <TextField />
+                                                <TextField />
+                                                <TextField />
+                                                <TextField />
+                                                <TextField />
+                                                <TextField />
+                                                <TextField />
+                                                <TextField />
+                                                <TextField />
+                                                <TextField />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <Button layoutX="479.0" layoutY="455.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0" text="Confirme" />
+                                    <Button layoutX="264.0" layoutY="455.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="82.0" text="Retour" />
                                  </children>
                               </Pane>
                            </children>

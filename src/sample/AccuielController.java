@@ -48,11 +48,11 @@ public class AccuielController implements Initializable {
     private Pane profil, admin, prof,formationIns,app,allStudents;
     @FXML
     private Parent avatar1;
-    @FXML TextField t1,t2,t3,t4,t5,t6,gra,special,nve,sec,nomFormation, titreCour;
-    @FXML Button modify, confirme,disco, ressourceInst, ajouterFormInst, supprimerFormInst, afficherTout, tle, ajouterEtudiant, supprimerEtudiant, openFile, addFile;
+    @FXML TextField t1,t2,t3,t4,t5,t6,gra,special,nve,sec,nomFormation, titreCour, addQuiz;
+    @FXML Button modify, confirme,disco, ressourceInst, ajouterFormInst, supprimerFormInst, afficherTout, tle, ajouterEtudiant, supprimerEtudiant, supprimerCour, openFile, addFile, ajouterQuiz, supprimerQuiz;
     @FXML private Label id, nom, prenom, grade,spec,niv,section, numF;
     @FXML
-    private Button log, rm, sm, bm, wm;
+    private Button creerQuiz, ouvrireQuiz;
     @FXML
     private ListView listFormation, listCours, listQuiz;
    @FXML private TableView<Cour> tableCours;
@@ -264,12 +264,16 @@ public class AccuielController implements Initializable {
 
             listFormation.getItems().remove(item);
             String s = (String)item;
-            Formations.supprimerFormation(s);
+            Formations.supprimerFormation(Formations.getNumF(s));
     }
 
         @FXML public void AfficherTout(ActionEvent event){
-
+            tableStuFor.getItems().clear();
             listCours.getItems().clear();
+            listCours.getItems().clear();
+            ajouterQuiz.setVisible(true);
+            creerQuiz.setVisible(true);
+            ouvrireQuiz.setVisible(true);
             Object item = listFormation.getSelectionModel().getSelectedItem();
             String s = (String)item;
             numF.setText(String.valueOf(Formations.getNumF(s)));
@@ -305,12 +309,25 @@ public class AccuielController implements Initializable {
             }
         }
 
-        @FXML public void setAjouterEtudiant(ActionEvent event){
-        if(listFormation.getSelectionModel().getSelectedItems().isEmpty() == false) {
-            allStudents.toBack();
+        @FXML public void setAjouterEtudiant(ActionEvent event) {
+            if (listFormation.getSelectionModel().getSelectedItems().isEmpty() == false) {
+                allStudents.toBack();
 
 
+            }
         }
+
+        @FXML public void setSupprimerApp(ActionEvent event){
+
+            Object o = tableStuFor.getSelectionModel().getSelectedItem();
+            if(o != null){
+                AllApprenant item = (AllApprenant) o;
+                tableStuFor.getItems().remove(o);
+                AllLearners.supprimerApprenant(item.getMatricule());
+                System.out.println("Suppression dans la table");
+
+            }
+
 
         }
     ////////////////////////////////////////////////////////////////////////////////////
@@ -336,6 +353,17 @@ public class AccuielController implements Initializable {
             }
 
         }
+
+        @FXML public void setSupprimerCour(ActionEvent event){
+
+        Object o = listCours.getSelectionModel().getSelectedItem();
+        if(o != null){
+            String item = (String)o;
+            Cours.supprimerCour(item);
+            System.out.println("Cour supprimer");
+        }
+
+        }
         ///////////////////////////////////////////////
 
     private Stage stage;
@@ -358,4 +386,40 @@ public class AccuielController implements Initializable {
         }
 
     }
+    @FXML public void setAjouterQuiz(ActionEvent event){
+        if(addQuiz.getText().isEmpty() == false){
+            listQuiz.getItems().add(addQuiz.getText());
+            Object o = listFormation.getSelectionModel().getSelectedItem();
+            String s = (String)o;
+            Quiz.ajouterQuiz(addQuiz.getText(),Formations.getNumF(s));
+            System.out.println("Ajout de quiz table");
+        }
+        else System.out.println("Champ d'ajout du cour vide");
+            }
+
+    @FXML public void setSupprimerQuiz(ActionEvent event){
+        Object o = listQuiz.getSelectionModel().getSelectedItem();
+        if(o != null){
+            listQuiz.getItems().remove(o);
+            Object ob = listFormation.getSelectionModel().getSelectedItem();
+            String s = (String)ob;
+            Object n = listQuiz.getSelectionModel().getSelectedItem();
+            String s1 = (String)n;
+            Quiz.supprimerQuiz(s1,Formations.getNumF(s));
+            System.out.println("Suppression quiz table");
+
+        }
+
+    }
+
+    @FXML public void setCreerQuiz(ActionEvent event){
+        Object o = listQuiz.getSelectionModel().getSelectedItem();
+        if(o != null){
+            String s = (String)o;
+
+
+        }
+
+    }
+
 }

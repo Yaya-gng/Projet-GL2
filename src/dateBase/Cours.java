@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Model.Cour;
-
+import com.sun.source.tree.ConditionalExpressionTree;
 
 
 public class Cours extends BD{
@@ -72,5 +72,23 @@ public class Cours extends BD{
 			System.out.println(e.getMessage());
 		}
 		return null;
+	}
+
+	public static void supprimerCour(String titre){
+		try(
+				Connection con = connect();
+				PreparedStatement pr = con.prepareStatement("delete from coursF where titre=?");
+				){
+			pr.setString(1,titre);
+			pr.execute();
+
+			System.out.println("Suppression du cour effectué");
+
+		}catch (SQLException e){
+			System.out.println(e.getMessage());
+		}
+
+
+
 	}
 }
