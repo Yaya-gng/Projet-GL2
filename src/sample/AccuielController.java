@@ -45,16 +45,21 @@ import java.lang.String;
 public class AccuielController implements Initializable {
 
     @FXML
-    private Pane profil, admin, prof,formationIns,app,allStudents;
+    private Pane profil, admin, prof,formationIns,app,allStudents, quiz, courQ;
     @FXML
     private Parent avatar1;
     @FXML TextField t1,t2,t3,t4,t5,t6,gra,special,nve,sec,nomFormation, titreCour, addQuiz;
     @FXML Button modify, confirme,disco, ressourceInst, ajouterFormInst, supprimerFormInst, afficherTout, tle, ajouterEtudiant, supprimerEtudiant, supprimerCour, openFile, addFile, ajouterQuiz, supprimerQuiz;
-    @FXML private Label id, nom, prenom, grade,spec,niv,section, numF;
+    @FXML private Label id, nom, prenom, grade,spec,niv,section, numF,id_quiz,id_form;
     @FXML
-    private Button creerQuiz, ouvrireQuiz;
+    private Button modifierQuiz;
+    @FXML private  TextField ques1, rep1, ch1q1, ch2q1, ch3q1, ch4q1;
+    @FXML private  TextField ques2, rep2, ch1q2, ch2q2, ch3q2, ch4q2;
+    @FXML private  TextField ques3, rep3, ch1q3, ch2q3, ch3q3, ch4q3;
+    @FXML private  TextField ques4, rep4, ch1q4, ch2q4, ch3q4, ch4q4;
+
     @FXML
-    private ListView listFormation, listCours, listQuiz;
+    private ListView listFormation, listCours, listQuiz, listCoursQ;
    @FXML private TableView<Cour> tableCours;
    @FXML private TableView<AllApprenant> tableAllStu,tableStuFor;
    @FXML private TableColumn<Cour, String> c1,c2;
@@ -271,12 +276,11 @@ public class AccuielController implements Initializable {
             tableStuFor.getItems().clear();
             listCours.getItems().clear();
             listCours.getItems().clear();
-            ajouterQuiz.setVisible(true);
-            creerQuiz.setVisible(true);
-            ouvrireQuiz.setVisible(true);
+            ajouterQuiz.setDisable(false);
+            modifierQuiz.setDisable(false);
             Object item = listFormation.getSelectionModel().getSelectedItem();
             String s = (String)item;
-            numF.setText(String.valueOf(Formations.getNumF(s)));
+
 
             ArrayList<String> cour = Cours.afficherCours(s,Integer.parseInt(id.getText()));
 
@@ -387,15 +391,56 @@ public class AccuielController implements Initializable {
 
     }
     @FXML public void setAjouterQuiz(ActionEvent event){
-        if(addQuiz.getText().isEmpty() == false){
-            listQuiz.getItems().add(addQuiz.getText());
             Object o = listFormation.getSelectionModel().getSelectedItem();
+            if(o != null){
             String s = (String)o;
-            Quiz.ajouterQuiz(addQuiz.getText(),Formations.getNumF(s));
-            System.out.println("Ajout de quiz table");
-        }
-        else System.out.println("Champ d'ajout du cour vide");
+               if(addQuiz.getText().isEmpty() == false){
+                   listQuiz.getItems().add(addQuiz.getText());
+                   Quiz.ajouterQuiz(addQuiz.getText(),Formations.getNumF(s));
+
+                   id_form.setText(String.valueOf(Formations.getNumF(s)));
+                   id_quiz.setText(String.valueOf(Quiz.getIdQuiz(addQuiz.getText())));
+                   quiz.toFront();
+
+               }
             }
+    }
+    boolean choixIn(String rep, String c1, String c2, String c3, String c4){
+        boolean b = false;
+        if(rep.equals(c1)) return true;
+        if(rep.equals(c2)) return true;
+        if(rep.equals(c3)) return true;
+        if(rep.equals(c4)) return true;
+        return b;
+    }
+
+    @FXML public void confirmeQuiz(ActionEvent event){
+
+        if(ques1.getText().isEmpty() == false && ques2.getText().isEmpty() == false && ques3.getText().isEmpty() == false && ques4.getText().isEmpty() == false && rep1.getText().isEmpty() == false && rep2.getText().isEmpty() == false && rep3.getText().isEmpty() == false && rep4.getText().isEmpty() == false && ch1q1.getText().isEmpty() == false && ch1q2.getText().isEmpty() == false && ch1q3.getText().isEmpty() == false && ch1q4.getText().isEmpty() == false && ch2q1.getText().isEmpty() == false && ch2q2.getText().isEmpty() == false && ch2q3.getText().isEmpty() == false && ch2q4.getText().isEmpty() == false && ch3q1.getText().isEmpty() == false && ch3q2.getText().isEmpty() == false && ch3q3.getText().isEmpty() == false && ch3q4.getText().isEmpty() == false && ch4q1.getText().isEmpty() == false && ch4q2.getText().isEmpty() == false && ch4q3.getText().isEmpty() == false && ch4q4.getText().isEmpty() == false ){
+        if(choixIn(rep1.getText(),ch1q1.getText(),ch2q1.getText(),ch3q1.getText(),ch4q1.getText())&& choixIn(rep2.getText(),ch1q2.getText(),ch2q2.getText(),ch3q2.getText(),ch4q2.getText())&& choixIn(rep3.getText(),ch1q3.getText(),ch2q3.getText(),ch3q3.getText(),ch4q3.getText())&& choixIn(rep4.getText(),ch1q4.getText(),ch2q4.getText(),ch3q4.getText(),ch4q4.getText()))  {
+            Question.setQuestion(Integer.parseInt(id_quiz.getText()), ques1.getText(), rep1.getText(), ch1q1.getText(), ch2q1.getText(), ch3q1.getText(), ch4q1.getText());
+            Question.setQuestion(Integer.parseInt(id_quiz.getText()), ques2.getText(), rep2.getText(), ch1q2.getText(), ch2q2.getText(), ch3q2.getText(), ch4q2.getText());
+            Question.setQuestion(Integer.parseInt(id_quiz.getText()), ques3.getText(), rep3.getText(), ch1q3.getText(), ch2q3.getText(), ch3q3.getText(), ch4q3.getText());
+            Question.setQuestion(Integer.parseInt(id_quiz.getText()), ques4.getText(), rep4.getText(), ch1q4.getText(), ch2q4.getText(), ch3q4.getText(), ch4q4.getText());
+                System.out.println("Quiz cree");
+        }
+        else {
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setTitle("Informaton Dialog");
+            a.setHeaderText("Look, an information Dialog");
+            a.setContentText("La reponse n'existe pas dans les choix");
+            a.showAndWait();
+        }
+
+        }
+        else {
+            Alert b = new Alert(Alert.AlertType.INFORMATION);
+            b.setTitle("Informaton Dialog");
+            b.setHeaderText("Look, an information Dialog");
+            b.setContentText("Remplissez tous les champs");
+            b.showAndWait();
+        }
+    }
 
     @FXML public void setSupprimerQuiz(ActionEvent event){
         Object o = listQuiz.getSelectionModel().getSelectedItem();
@@ -412,13 +457,8 @@ public class AccuielController implements Initializable {
 
     }
 
-    @FXML public void setCreerQuiz(ActionEvent event){
-        Object o = listQuiz.getSelectionModel().getSelectedItem();
-        if(o != null){
-            String s = (String)o;
 
-
-        }
+    @FXML public void ouvrirCourQ(ActionEvent event){
 
     }
 

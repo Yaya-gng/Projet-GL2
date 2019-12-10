@@ -13,7 +13,7 @@ public class User extends BD {
 			Connection con = connect();
 			
 			PreparedStatement ps,pc;
-			ps = con.prepareStatement("Select * from user where nom=? and password=?");
+			ps = con.prepareStatement("Select * from user where Nom=? and password=?");
 			ps.setString(1, username);
 		    ps.setString(2, password);
 			ResultSet re = ps.executeQuery();

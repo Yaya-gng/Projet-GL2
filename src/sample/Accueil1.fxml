@@ -28,7 +28,8 @@
                         <Image url="@social-learning-infographic-header.jpg" />
                      </image>
                   </ImageView>
-                  <Label fx:id="numF" disable="true" layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="56.0" />
+                  <Label fx:id="id_form" layoutX="28.0" layoutY="52.0" visible="false" />
+                  <Label fx:id="id_quiz" layoutX="28.0" layoutY="70.0" visible="false" />
                </children>
             </Pane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -67,6 +68,13 @@
                                     </AnchorPane>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                        <children>
+                                          <Pane fx:id="courQ" prefHeight="212.66666666666666" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <ListView fx:id="listCoursQ" layoutY="40.0" prefHeight="99.0" prefWidth="190.0" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="6.0" prefHeight="17.0" prefWidth="163.0" text="Cours" />
+                                                <Button layoutX="69.0" layoutY="167.0" mnemonicParsing="false" onAction="#ouvrirCourQ" text="Ouvrir" />
+                                             </children>
+                                          </Pane>
                                           <Pane fx:id="prof" prefHeight="243.0" prefWidth="190.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
                                                 <VBox alignment="TOP_CENTER" layoutX="3.0" layoutY="41.0" prefHeight="157.0" prefWidth="179.0" spacing="10.0">
@@ -79,11 +87,6 @@
                                                 </VBox>
                                              </children>
                                           </Pane>
-                                          <Pane prefHeight="212.66666666666666" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <children>
-                                                <ListView layoutY="32.0" prefHeight="157.0" prefWidth="190.0" />
-                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="6.0" prefHeight="17.0" prefWidth="163.0" text="Label" />
-                                             </children></Pane>
                                        </children>
                                     </AnchorPane>
                                 </items>
@@ -92,6 +95,211 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
+                              <Pane fx:id="profil" prefHeight="494.0" prefWidth="580.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label layoutX="62.0" layoutY="29.0" text="Your Profil :" textFill="WHITE">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="29.0" layoutY="78.0" text="Matricule :" textFill="WHITE" />
+                                    <Label layoutX="28.0" layoutY="123.0" text="Name :" textFill="WHITE" />
+                                    <Label layoutX="26.0" layoutY="166.0" text="Last Name :" textFill="WHITE" />
+                                    <Label layoutX="25.0" layoutY="208.0" text="Date of birth :" textFill="WHITE" />
+                                    <Label layoutX="22.0" layoutY="253.0" text="Address :" textFill="WHITE" />
+                                    <Label layoutX="29.0" layoutY="294.0" text="Password :" textFill="WHITE" />
+                                    <Label fx:id="grade" layoutX="292.0" layoutY="78.0" text="Grade :" textFill="WHITE" />
+                                    <Label fx:id="spec" layoutX="292.0" layoutY="123.0" text="Specialite :" textFill="WHITE" />
+                                    <Label fx:id="niv" layoutX="292.0" layoutY="166.0" text="Level :" textFill="WHITE" />
+                                    <Label fx:id="section" layoutX="292.0" layoutY="208.0" text="Section" textFill="WHITE" />
+                                    <TextField fx:id="t1" disable="true" layoutX="111.0" layoutY="74.0" />
+                                    <TextField fx:id="t2" disable="true" layoutX="111.0" layoutY="119.0" />
+                                    <TextField fx:id="t3" disable="true" layoutX="111.0" layoutY="162.0" />
+                                    <TextField fx:id="t4" disable="true" layoutX="111.0" layoutY="204.0" />
+                                    <TextField fx:id="t5" disable="true" layoutX="111.0" layoutY="249.0" />
+                                    <TextField fx:id="t6" disable="true" layoutX="111.0" layoutY="290.0" />
+                                    <TextField fx:id="gra" disable="true" layoutX="347.0" layoutY="74.0" />
+                                    <TextField fx:id="special" disable="true" layoutX="347.0" layoutY="119.0" />
+                                    <TextField fx:id="nve" disable="true" layoutX="347.0" layoutY="162.0" />
+                                    <TextField fx:id="sec" disable="true" layoutX="347.0" layoutY="204.0" />
+                                    <Button fx:id="modify" layoutX="185.0" layoutY="388.0" mnemonicParsing="false" onAction="#modifierProfil" prefHeight="25.0" prefWidth="73.0" text="Modify" />
+                                    <Button fx:id="confirme" disable="true" layoutX="382.0" layoutY="388.0" mnemonicParsing="false" onAction="#confirmeModification" prefHeight="25.0" prefWidth="77.0" text="Confirme" />
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="quiz" prefHeight="494.0" prefWidth="580.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <VBox prefHeight="496.0" prefWidth="580.0">
+                                       <children>
+                                          <HBox prefHeight="423.0" prefWidth="115.0">
+                                             <children>
+                                                <VBox prefHeight="200.0" prefWidth="290.0">
+                                                   <children>
+                                                      <VBox prefHeight="230.0" prefWidth="290.0" spacing="10.0">
+                                                         <children>
+                                                            <TextField fx:id="ques1" promptText="Question 1" />
+                                                            <TextField fx:id="rep1" prefHeight="25.0" prefWidth="268.0" promptText="Reponse" />
+                                                            <HBox prefHeight="100.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <VBox prefHeight="100.0" prefWidth="23.0" spacing="18.0">
+                                                                     <children>
+                                                                        <CheckBox mnemonicParsing="false" visible="false" />
+                                                                        <CheckBox mnemonicParsing="false" visible="false" />
+                                                                        <CheckBox mnemonicParsing="false" visible="false" />
+                                                                        <CheckBox mnemonicParsing="false" visible="false" />
+                                                                     </children>
+                                                                     <padding>
+                                                                        <Insets top="3.0" />
+                                                                     </padding>
+                                                                  </VBox>
+                                                                  <VBox prefHeight="130.0" prefWidth="227.0" spacing="10.0">
+                                                                     <children>
+                                                                        <TextField fx:id="ch1q1" promptText="Choix 1" />
+                                                                        <TextField fx:id="ch2q1" promptText="Choix 2" />
+                                                                        <TextField fx:id="ch3q1" promptText="Choix 3" />
+                                                                        <TextField fx:id="ch4q1" promptText="Choix 4" />
+                                                                     </children>
+                                                                     <HBox.margin>
+                                                                        <Insets />
+                                                                     </HBox.margin>
+                                                                  </VBox>
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets left="20.0" right="20.0" top="20.0" />
+                                                         </padding>
+                                                         <opaqueInsets>
+                                                            <Insets />
+                                                         </opaqueInsets>
+                                                      </VBox>
+                                                      <VBox prefHeight="225.0" prefWidth="290.0" spacing="10.0">
+                                                         <children>
+                                                            <TextField fx:id="ques2" promptText="Question 2" />
+                                                            <TextField fx:id="rep2" promptText="Reponse" />
+                                                            <HBox prefHeight="100.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <VBox prefHeight="200.0" prefWidth="23.0" spacing="18.0">
+                                                                     <children>
+                                                                        <CheckBox mnemonicParsing="false" visible="false" />
+                                                                        <CheckBox mnemonicParsing="false" visible="false" />
+                                                                        <CheckBox mnemonicParsing="false" visible="false" />
+                                                                        <CheckBox mnemonicParsing="false" visible="false" />
+                                                                     </children>
+                                                                     <padding>
+                                                                        <Insets top="3.0" />
+                                                                     </padding>
+                                                                  </VBox>
+                                                                  <VBox prefHeight="130.0" prefWidth="227.0" spacing="10.0">
+                                                                     <children>
+                                                                        <TextField fx:id="ch1q2" promptText="Choix 1" />
+                                                                        <TextField fx:id="ch2q2" promptText="Choix 2" />
+                                                                        <TextField fx:id="ch3q2" promptText="Choix 3" />
+                                                                        <TextField fx:id="ch4q2" promptText="Choix 4" />
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets left="20.0" right="20.0" top="20.0" />
+                                                         </padding>
+                                                      </VBox>
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="469.0" prefWidth="290.0">
+                                                   <children>
+                                                      <VBox prefHeight="230.0" prefWidth="290.0" spacing="10.0">
+                                                         <children>
+                                                            <TextField fx:id="ques3" promptText="Question 3" />
+                                                            <TextField fx:id="rep3" promptText="Reponse" />
+                                                            <HBox prefHeight="100.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <VBox prefHeight="200.0" prefWidth="23.0" spacing="18.0" visible="false">
+                                                                     <padding>
+                                                                        <Insets top="3.0" />
+                                                                     </padding>
+                                                                     <children>
+                                                                        <CheckBox mnemonicParsing="false" visible="false">
+                                                                           <VBox.margin>
+                                                                              <Insets />
+                                                                           </VBox.margin>
+                                                                        </CheckBox>
+                                                                        <CheckBox mnemonicParsing="false" visible="false" />
+                                                                        <CheckBox mnemonicParsing="false" visible="false" />
+                                                                        <CheckBox mnemonicParsing="false" />
+                                                                     </children>
+                                                                  </VBox>
+                                                                  <VBox prefHeight="130.0" prefWidth="227.0" spacing="10.0">
+                                                                     <children>
+                                                                        <TextField fx:id="ch1q3" promptText="Choix 1" />
+                                                                        <TextField fx:id="ch2q3" promptText="Choix 2" />
+                                                                        <TextField fx:id="ch3q3" promptText="Choix 3" />
+                                                                        <TextField fx:id="ch4q3" promptText="Choix 4" />
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets left="20.0" right="20.0" top="20.0" />
+                                                         </padding>
+                                                      </VBox>
+                                                      <VBox prefHeight="225.0" prefWidth="290.0" spacing="10.0">
+                                                         <children>
+                                                            <TextField fx:id="ques4" promptText="Question 4" />
+                                                            <TextField fx:id="rep4" promptText="Reponse" />
+                                                            <HBox prefHeight="227.0" prefWidth="290.0">
+                                                               <children>
+                                                                  <VBox prefHeight="200.0" prefWidth="23.0" spacing="18.0">
+                                                                     <children>
+                                                                        <CheckBox mnemonicParsing="false" visible="false" />
+                                                                        <CheckBox mnemonicParsing="false" visible="false" />
+                                                                        <CheckBox mnemonicParsing="false" visible="false" />
+                                                                        <CheckBox mnemonicParsing="false" visible="false" />
+                                                                     </children>
+                                                                     <padding>
+                                                                        <Insets top="3.0" />
+                                                                     </padding>
+                                                                  </VBox>
+                                                                  <VBox prefHeight="197.0" prefWidth="227.0" spacing="10.0">
+                                                                     <children>
+                                                                        <TextField fx:id="ch1q4" promptText="Choix 1" />
+                                                                        <TextField fx:id="ch2q4" promptText="Choix 2" />
+                                                                        <TextField fx:id="ch3q4" promptText="Choix 3" />
+                                                                        <TextField fx:id="ch4q4" promptText="Choix 4" />
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets left="20.0" right="20.0" top="20.0" />
+                                                         </padding>
+                                                      </VBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="160.0">
+                                             <children>
+                                                <Button fx:id="retourF" disable="true" mnemonicParsing="false" text="Retour" />
+                                                <Button fx:id="validerQ" mnemonicParsing="false" onAction="#confirmeQuiz" text="confirmer " />
+                                                <HBox alignment="CENTER_RIGHT" prefHeight="52.0" prefWidth="83.0">
+                                                   <children>
+                                                      <Label text="Note : " />
+                                                      <TextField prefHeight="25.0" prefWidth="25.0" />
+                                                      <Label alignment="CENTER" text="/20" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </Pane>
                               <Pane fx:id="formationIns" layoutX="152.0" layoutY="85.0" prefHeight="494.0" prefWidth="580.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
                                     <VBox prefHeight="496.0" prefWidth="580.0" spacing="20.0">
@@ -152,13 +360,14 @@
                                              <children>
                                                 <VBox prefHeight="200.0" prefWidth="400.0" spacing="2.0">
                                                    <children>
-                                                      <ListView fx:id="listQuiz" prefHeight="109.0" prefWidth="400.0" />
+                                                      <TextField fx:id="addQuiz" promptText="Ajouter titre du quiz" />
+                                                      <ListView fx:id="listQuiz" prefHeight="82.0" prefWidth="400.0" />
                                                    </children>
                                                 </VBox>
                                                 <VBox alignment="CENTER" prefHeight="112.0" prefWidth="180.0" spacing="10.0">
                                                    <children>
-                                                      <Button fx:id="ajouterQuiz" disable="true" mnemonicParsing="false" prefWidth="73.0" text="Ajouter" />
-                                                      <Button fx:id="OuvrireQuiz" disable="true" mnemonicParsing="false" prefWidth="73.0" text="Ouvrire" />
+                                                      <Button fx:id="ajouterQuiz" disable="true" mnemonicParsing="false" onAction="#setAjouterQuiz" prefWidth="73.0" text="Ajouter" />
+                                                      <Button fx:id="modifierQuiz" disable="true" mnemonicParsing="false" prefWidth="73.0" text="Modifier" />
                                                       <Button fx:id="supprimerQuiz" disable="true" mnemonicParsing="false" prefWidth="73.0" text="Supprimer" />
                                                    </children>
                                                 </VBox>
@@ -178,108 +387,6 @@
                                           </TableView>
                                        </children>
                                     </Pane>
-                                 </children>
-                              </Pane>
-                              <Pane fx:id="profil" prefHeight="494.0" prefWidth="580.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <children>
-                                    <Label layoutX="62.0" layoutY="29.0" text="Your Profil :" textFill="WHITE">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="29.0" layoutY="78.0" text="Matricule :" textFill="WHITE" />
-                                    <Label layoutX="28.0" layoutY="123.0" text="Name :" textFill="WHITE" />
-                                    <Label layoutX="26.0" layoutY="166.0" text="Last Name :" textFill="WHITE" />
-                                    <Label layoutX="25.0" layoutY="208.0" text="Date of birth :" textFill="WHITE" />
-                                    <Label layoutX="22.0" layoutY="253.0" text="Address :" textFill="WHITE" />
-                                    <Label layoutX="29.0" layoutY="294.0" text="Password :" textFill="WHITE" />
-                                    <Label fx:id="grade" layoutX="292.0" layoutY="78.0" text="Grade :" textFill="WHITE" />
-                                    <Label fx:id="spec" layoutX="292.0" layoutY="123.0" text="Specialite :" textFill="WHITE" />
-                                    <Label fx:id="niv" layoutX="292.0" layoutY="166.0" text="Level :" textFill="WHITE" />
-                                    <Label fx:id="section" layoutX="292.0" layoutY="208.0" text="Section" textFill="WHITE" />
-                                    <TextField fx:id="t1" disable="true" layoutX="111.0" layoutY="74.0" />
-                                    <TextField fx:id="t2" disable="true" layoutX="111.0" layoutY="119.0" />
-                                    <TextField fx:id="t3" disable="true" layoutX="111.0" layoutY="162.0" />
-                                    <TextField fx:id="t4" disable="true" layoutX="111.0" layoutY="204.0" />
-                                    <TextField fx:id="t5" disable="true" layoutX="111.0" layoutY="249.0" />
-                                    <TextField fx:id="t6" disable="true" layoutX="111.0" layoutY="290.0" />
-                                    <TextField fx:id="gra" disable="true" layoutX="347.0" layoutY="74.0" />
-                                    <TextField fx:id="special" disable="true" layoutX="347.0" layoutY="119.0" />
-                                    <TextField fx:id="nve" disable="true" layoutX="347.0" layoutY="162.0" />
-                                    <TextField fx:id="sec" disable="true" layoutX="347.0" layoutY="204.0" />
-                                    <Button fx:id="modify" layoutX="185.0" layoutY="388.0" mnemonicParsing="false" onAction="#modifierProfil" prefHeight="25.0" prefWidth="73.0" text="Modify" />
-                                    <Button fx:id="confirme" disable="true" layoutX="382.0" layoutY="388.0" mnemonicParsing="false" onAction="#confirmeModification" prefHeight="25.0" prefWidth="77.0" text="Confirme" />
-                                 </children>
-                              </Pane>
-                              <Pane prefHeight="494.0" prefWidth="580.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <children>
-                                    <HBox layoutX="-2.0" layoutY="-8.0" prefHeight="510.0" prefWidth="580.0">
-                                       <children>
-                                          <VBox prefHeight="200.0" prefWidth="290.0">
-                                             <children>
-                                                <VBox prefHeight="247.0" prefWidth="259.0" spacing="10.0">
-                                                   <children>
-                                                      <TextField promptText="Question 1" />
-                                                      <TextField prefHeight="25.0" prefWidth="268.0" promptText="Reponse" />
-                                                      <HBox prefHeight="100.0" prefWidth="200.0">
-                                                         <children>
-                                                            <VBox prefHeight="100.0" prefWidth="23.0" spacing="18.0">
-                                                               <children>
-                                                                  <CheckBox mnemonicParsing="false" />
-                                                                  <CheckBox mnemonicParsing="false" />
-                                                                  <CheckBox mnemonicParsing="false" />
-                                                                  <CheckBox mnemonicParsing="false" />
-                                                               </children>
-                                                               <padding>
-                                                                  <Insets top="3.0" />
-                                                               </padding>
-                                                            </VBox>
-                                                            <VBox prefHeight="130.0" prefWidth="227.0" spacing="10.0">
-                                                               <children>
-                                                                  <TextField promptText="Choix 1" />
-                                                                  <TextField promptText="Choix 2" />
-                                                                  <TextField promptText="Choix 3" />
-                                                                  <TextField promptText="Choix 4" />
-                                                               </children>
-                                                               <HBox.margin>
-                                                                  <Insets />
-                                                               </HBox.margin>
-                                                            </VBox>
-                                                         </children>
-                                                      </HBox>
-                                                   </children>
-                                                   <padding>
-                                                      <Insets left="20.0" right="20.0" top="40.0" />
-                                                   </padding>
-                                                   <opaqueInsets>
-                                                      <Insets />
-                                                   </opaqueInsets>
-                                                </VBox>
-                                                <VBox prefHeight="247.0" prefWidth="100.0" spacing="10.0">
-                                                   <children>
-                                                      <TextField />
-                                                      <TextField />
-                                                      <HBox prefHeight="157.0" prefWidth="250.0">
-                                                         <children>
-                                                            <VBox prefHeight="100.0" prefWidth="23.0" />
-                                                            <VBox prefHeight="137.0" prefWidth="292.0" />
-                                                         </children>
-                                                      </HBox>
-                                                   </children>
-                                                   <padding>
-                                                      <Insets left="20.0" right="20.0" top="40.0" />
-                                                   </padding>
-                                                </VBox>
-                                             </children>
-                                          </VBox>
-                                          <VBox prefHeight="200.0" prefWidth="290.0">
-                                             <children>
-                                                <VBox prefHeight="247.0" prefWidth="100.0" />
-                                                <VBox prefHeight="247.0" prefWidth="100.0" />
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
                                  </children>
                               </Pane>
                            </children>

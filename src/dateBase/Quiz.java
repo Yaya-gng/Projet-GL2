@@ -33,6 +33,23 @@ public class Quiz extends BD {
 
     }
 
+    public static int getIdQuiz(String q){
+        try(
+                Connection con = connect();
+                PreparedStatement pr = con.prepareStatement("select idQuiz from Quiz where nomQ=?");
+        ){
+        pr.setString(1,q);
+        ResultSet r = pr.executeQuery();
+        if(r.next()){
+            return r.getInt("idQuiz");
+        }
+
+        }catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return -1;
+    }
+
     public static void ajouterQuiz(String nomQ,int numF){
         try(
                 Connection con = connect();
@@ -41,7 +58,7 @@ public class Quiz extends BD {
             pr.setString(1,nomQ);
             pr.setInt(2,numF);
             pr.execute();
-            System.out.println("Ajouter du quiz effectué");
+            System.out.println("Ajout du quiz effectué");
 
         }catch (SQLException e){
             System.out.println(e.getMessage());
