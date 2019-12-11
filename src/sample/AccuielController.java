@@ -267,6 +267,9 @@ public class AccuielController implements Initializable {
             listFormation.getItems().remove(item);
             String s = (String)item;
             Formations.supprimerFormation(Formations.getNumF(s));
+            listCours.getItems().clear();
+            tableStuFor.getItems().clear();
+            listQuiz.getItems().clear();
     }
 
         @FXML public void AfficherTout(ActionEvent event){
@@ -281,7 +284,7 @@ public class AccuielController implements Initializable {
 
             tle.setDisable(false);
             ajouterEtudiant.setDisable(false);
-            supprimerEtudiant.setDefaultButton(false);
+            supprimerEtudiant.setDisable (false);
 
             ajouterQuiz.setDisable(false);
             modifierQuiz.setDisable(false);
