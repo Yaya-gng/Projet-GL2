@@ -33,6 +33,7 @@ public class Quiz extends BD {
 
     }
 
+
     public static int getIdQuiz(String q){
         try(
                 Connection con = connect();
@@ -65,15 +66,18 @@ public class Quiz extends BD {
         }
     }
 
-    public static void supprimerQuiz(String nomQ,int numF){
+    public static void supprimerQuiz(int idQuiz){
         try(
                 Connection con = connect();
-                PreparedStatement pr = con.prepareStatement("delete from Quiz where nomQ=? and numF=?");
+                PreparedStatement p = con.prepareStatement("delete from Question where idQuiz=?");
+                PreparedStatement pr = con.prepareStatement("delete from Quiz where idQuiz=?");
         ){
-            pr.setString(1,nomQ);
-            pr.setInt(2,numF);
+
+            p.setInt(1,idQuiz);
             pr.execute();
-            System.out.println("Suppression du quiz effectué");
+            pr.setInt(1,idQuiz);
+            pr.execute();
+            System.out.println("Suppression du quiz et ses questions effectué");
 
         }catch (SQLException e){
             System.out.println(e.getMessage());

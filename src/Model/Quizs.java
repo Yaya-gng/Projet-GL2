@@ -2,7 +2,7 @@ package Model;
 
 public class Quizs {
 	private int idQuiz, numF;
-	private String nomQ;
+	private String nomQ ;
 
 	public Quizs(int idQuiz, String nomQ, int numF) {
 		setNumF(numF);

@@ -63,7 +63,7 @@ public class AccuielController implements Initializable {
    @FXML private TableView<Cour> tableCours;
    @FXML private TableView<AllApprenant> tableAllStu,tableStuFor;
    @FXML private TableColumn<Cour, String> c1,c2;
-   @FXML private TableColumn<AllApprenant,String> nomC, preC, specC,nomC1, prenomC1, specC1, mat1;
+   @FXML private TableColumn<AllApprenant,String> nomC, preC, specC,mat,nomC1, prenomC1, specC1, mat1;
 
     @FXML ImageView im;
 
@@ -91,6 +91,8 @@ public class AccuielController implements Initializable {
         nomC.setCellValueFactory(new PropertyValueFactory<>("nom"));
         preC.setCellValueFactory(new PropertyValueFactory<>("prenom"));
         specC.setCellValueFactory(new PropertyValueFactory<>("specialite"));
+        mat.setCellValueFactory(new PropertyValueFactory<>("matricule"));
+
         nomC1.setCellValueFactory(new PropertyValueFactory<>("nom"));
         prenomC1.setCellValueFactory(new PropertyValueFactory<>("prenom"));
         specC1.setCellValueFactory(new PropertyValueFactory<>("specialite"));
@@ -239,20 +241,15 @@ public class AccuielController implements Initializable {
     @FXML public void RessourceInst(ActionEvent event){
         formationIns.toFront();
         ArrayList<String> frm = Formations.afficherFormation(Integer.parseInt(id.getText()));
+        ajouterFormInst.setDisable(false);
+        supprimerFormInst.setDisable(false);
+        afficherTout.setDisable(false);
         listFormation.getItems().clear();
         listCours.getItems().clear();
         listQuiz.getItems().clear();
         tableStuFor.getItems().clear();
 
-
         listFormation.getItems().addAll(frm);
-        if(listFormation.getItems().isEmpty() == false) {
-
-            tle.setDisable(false);
-            openFile.setDisable(false);
-            addFile.setDisable(false);
-        }
-
 
     }
 
@@ -276,11 +273,23 @@ public class AccuielController implements Initializable {
             tableStuFor.getItems().clear();
             listCours.getItems().clear();
             listCours.getItems().clear();
+
+
+            openFile.setDisable(false);
+            addFile.setDisable(false);
+            supprimerCour.setDisable(false);
+
+            tle.setDisable(false);
+            ajouterEtudiant.setDisable(false);
+            supprimerEtudiant.setDefaultButton(false);
+
             ajouterQuiz.setDisable(false);
             modifierQuiz.setDisable(false);
+            supprimerQuiz.setDisable(false);
+
             Object item = listFormation.getSelectionModel().getSelectedItem();
             String s = (String)item;
-
+            id_form.setText(String.valueOf(Formations.getNumF(s)));
 
             ArrayList<String> cour = Cours.afficherCours(s,Integer.parseInt(id.getText()));
 
@@ -314,10 +323,13 @@ public class AccuielController implements Initializable {
         }
 
         @FXML public void setAjouterEtudiant(ActionEvent event) {
-            if (listFormation.getSelectionModel().getSelectedItems().isEmpty() == false) {
+                Object o = tableAllStu.getSelectionModel().getSelectedItem();
+
+            if (o != null) {
+                AllApprenant a = (AllApprenant)o;
                 allStudents.toBack();
-
-
+                Accee.setAccee(a.getMatricule(),Integer.parseInt(id_form.getText()));
+                tableStuFor.getItems().add(a);
             }
         }
 
@@ -327,7 +339,7 @@ public class AccuielController implements Initializable {
             if(o != null){
                 AllApprenant item = (AllApprenant) o;
                 tableStuFor.getItems().remove(o);
-                AllLearners.supprimerApprenant(item.getMatricule());
+                Accee.supprimerApprenant(item.getMatricule());
                 System.out.println("Suppression dans la table");
 
             }
@@ -349,11 +361,8 @@ public class AccuielController implements Initializable {
                 if (f != null) System.out.println("Choosen file " + f);
                 Object o = listFormation.getSelectionModel().getSelectedItem();
                 String s = (String)o;
-                Cours.creerCour(titreCour.getText(),f.toString(),Formations.getNumF(s));
+                Cours.creerCour(titreCour.getText(),f.toString(),Integer.parseInt(id_form.getText()));
                 titreCour.clear();
-
-
-
             }
 
         }
@@ -396,9 +405,8 @@ public class AccuielController implements Initializable {
             String s = (String)o;
                if(addQuiz.getText().isEmpty() == false){
                    listQuiz.getItems().add(addQuiz.getText());
-                   Quiz.ajouterQuiz(addQuiz.getText(),Formations.getNumF(s));
+                   Quiz.ajouterQuiz(addQuiz.getText(),Integer.parseInt(id_form.getText()));
 
-                   id_form.setText(String.valueOf(Formations.getNumF(s)));
                    id_quiz.setText(String.valueOf(Quiz.getIdQuiz(addQuiz.getText())));
                    quiz.toFront();
 
@@ -445,18 +453,49 @@ public class AccuielController implements Initializable {
     @FXML public void setSupprimerQuiz(ActionEvent event){
         Object o = listQuiz.getSelectionModel().getSelectedItem();
         if(o != null){
+            String s1 = (String)o;
+            id_quiz.setText(String.valueOf(Quiz.getIdQuiz(s1)));
             listQuiz.getItems().remove(o);
-            Object ob = listFormation.getSelectionModel().getSelectedItem();
-            String s = (String)ob;
-            Object n = listQuiz.getSelectionModel().getSelectedItem();
-            String s1 = (String)n;
-            Quiz.supprimerQuiz(s1,Formations.getNumF(s));
+            Quiz.supprimerQuiz(Integer.parseInt(id_quiz.getText()));
             System.out.println("Suppression quiz table");
 
         }
-
     }
 
+    @FXML public void setModifierQuiz(ActionEvent event){
+        Object o = listQuiz.getSelectionModel().getSelectedItem();
+        if(o != null){
+                String s = (String)o;
+                id_quiz.setText(String.valueOf(Quiz.getIdQuiz(s)));
+                ArrayList<Questions> q = Question.getQestQuiz(Integer.parseInt(id_quiz.getText()));
+                quiz.toFront();
+                ques1.setText(q.get(0).getQ());
+                rep1.setText(q.get(0).getR());
+                ch1q1.setText(q.get(0).getC1());
+                ch2q1.setText(q.get(0).getC2());
+                ch3q1.setText(q.get(0).getC3());
+                ch4q1.setText(q.get(0).getC4());
+            ques2.setText(q.get(1).getQ());
+            rep2.setText(q.get(1).getR());
+            ch1q2.setText(q.get(1).getC1());
+            ch2q2.setText(q.get(1).getC2());
+            ch3q2.setText(q.get(1).getC3());
+            ch4q2.setText(q.get(1).getC4());
+                                ques3.setText(q.get(2).getQ());
+                                rep3.setText(q.get(2).getR());
+                                ch1q3.setText(q.get(2).getC1());
+                                ch2q3.setText(q.get(2).getC2());
+                                ch3q3.setText(q.get(2).getC3());
+                                ch4q3.setText(q.get(2).getC4());
+                                    ques4.setText(q.get(3).getQ());
+                                    rep4.setText(q.get(3).getR());
+                                    ch1q4.setText(q.get(3).getC1());
+                                    ch2q4.setText(q.get(3).getC2());
+                                    ch3q4.setText(q.get(3).getC3());
+                                    ch4q4.setText(q.get(3).getC4());
+        }
+
+    }
 
     @FXML public void ouvrirCourQ(ActionEvent event){
 

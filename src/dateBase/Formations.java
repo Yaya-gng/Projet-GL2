@@ -49,11 +49,11 @@ public class Formations extends BD {
 		try(
 				Connection con = connect();
 				PreparedStatement pr = con.prepareStatement("delete from coursF where numF=?");
-				PreparedStatement pr1 = con.prepareStatement("delete from formation where numF=?");
-				PreparedStatement pr2 = con.prepareStatement("delete from accee where numF=?");
-				PreparedStatement pr4 = con.prepareStatement("select idQuiz from Quiz where numF=?");
+				PreparedStatement pr1 = con.prepareStatement("delete from accee where numF=?");
+				PreparedStatement pr2 = con.prepareStatement("select idQuiz from Quiz where numF=?");
 				PreparedStatement pr3 = con.prepareStatement("delete from Question where idQuiz=?");
-				PreparedStatement pr5 = con.prepareStatement("delete from Quiz where numF=?");
+				PreparedStatement pr4 = con.prepareStatement("delete from Quiz where numF=?");
+				PreparedStatement pr5 = con.prepareStatement("delete from formation where numF=?");
 		) {
 		    pr.setInt(1,numF);
 		    pr.execute();
@@ -62,16 +62,16 @@ public class Formations extends BD {
             pr1.execute();
 
             pr2.setInt(1,numF);
-            pr2.execute();
-
-            pr4.setInt(1,numF);
-            ResultSet r = pr4.executeQuery();
+            ResultSet r = pr2.executeQuery();
             if(r.next()) {
 				pr3.setInt(1, r.getInt("idQuiz"));
 				pr3.execute();
 			}
 
-            pr5.setInt(1,numF);
+            pr4.setInt(1,numF);
+            pr4.execute();
+
+            pr5.setInt(1, numF);
             pr5.execute();
 
 			System.out.println("Suppression de la formation");
