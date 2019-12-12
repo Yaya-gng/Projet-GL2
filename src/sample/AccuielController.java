@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ListView;
@@ -43,7 +44,8 @@ import java.util.ResourceBundle;
 import java.lang.String;
 
 public class AccuielController implements Initializable {
-
+    @FXML
+    private PieChart statistics;
     @FXML
     private Pane profil, admin, prof,formationIns,app,allStudents, quiz, courQ;
     @FXML
