@@ -34,14 +34,14 @@ public class Cours extends BD{
 	}
 
 
-	public static ArrayList<String> afficherCours(String nomF, int id) {
+	public static ArrayList<String> afficherCours(int numF) {
 		ArrayList<String> cours = new ArrayList<>();
 		try(
 				Connection con = connect();
-				PreparedStatement pr = con.prepareStatement("select titre from coursF where numF=(Select numF from formation where nomF=?)");
+				PreparedStatement pr = con.prepareStatement("select titre from coursF where numF=?");
 				){
 
-			pr.setString(1,nomF);
+			pr.setInt(1,numF);
 			ResultSet rs = pr.executeQuery();
 				while(rs.next()) {
 				cours.add((rs.getString("titre")));

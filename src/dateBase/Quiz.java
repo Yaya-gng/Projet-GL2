@@ -42,6 +42,7 @@ public class Quiz extends BD {
         pr.setString(1,q);
         ResultSet r = pr.executeQuery();
         if(r.next()){
+            System.out.println("IdQuiz retourné");
             return r.getInt("idQuiz");
         }
 
@@ -72,9 +73,9 @@ public class Quiz extends BD {
                 PreparedStatement p = con.prepareStatement("delete from Question where idQuiz=?");
                 PreparedStatement pr = con.prepareStatement("delete from Quiz where idQuiz=?");
         ){
-
             p.setInt(1,idQuiz);
-            pr.execute();
+            p.execute();
+
             pr.setInt(1,idQuiz);
             pr.execute();
             System.out.println("Suppression du quiz et ses questions effectué");
@@ -82,6 +83,23 @@ public class Quiz extends BD {
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
+    }
+
+    public static void setReponseApp(int idQuiz, int matricule, int note){
+        try(
+                Connection con = connect();
+                PreparedStatement pr = con.prepareStatement("insert into suivi(idQuiz,matricule,note) values(?,?,?)");
+        ){
+            pr.setInt(1,idQuiz);
+            pr.setInt(2,matricule);
+            pr.setInt(3,note);
+            pr.execute();
+            System.out.println("Insertion de la note de l'étudiant faite");
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+
     }
 
 	

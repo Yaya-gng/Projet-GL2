@@ -53,10 +53,6 @@
             <fx:define>
             <ToggleGroup fx:id="toggleGroup" />
             </fx:define>
-            <RadioButton fx:id="r1" layoutX="168.0" layoutY="136.0" mnemonicParsing="false" onAction="#r1" text="Instructor">
-               <toggleGroup>
-                  <ToggleGroup fx:id="toggleGroup" />
-               </toggleGroup></RadioButton>
             <RadioButton fx:id="r1" layoutX="168.0" layoutY="136.0" mnemonicParsing="false" onAction="#r1" text="Instructor" toggleGroup="$toggleGroup" />
             <RadioButton fx:id="r2" layoutX="294.0" layoutY="136.0" mnemonicParsing="false" onAction="#r2" text="Learner" toggleGroup="$toggleGroup" />
             <Button fx:id="ret" layoutX="525.0" layoutY="591.0" mnemonicParsing="false" onAction="#Return" text="Return" />

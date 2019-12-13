@@ -38,66 +38,40 @@ public class Controller{
 
    @FXML public void Connexion(ActionEvent event) {
 
-        if(t.getText().isEmpty()  || p.getText().isEmpty()) {
-            Alert a = new Alert(Alert.AlertType.INFORMATION);
-            a.setTitle("Informaton Dialog");
-            a.setHeaderText("Look, an information Dialog");
-            a.setContentText("Username or password wrong or empty");
-            a.showAndWait();
+       if (t.getText().isEmpty() || p.getText().isEmpty()) {
+           Alert a = new Alert(Alert.AlertType.INFORMATION);
+           a.setTitle("Informaton Dialog");
+           a.setHeaderText("Look, an information Dialog");
+           a.setContentText("Username or password wrong or empty");
+           a.showAndWait();
+       }
+        else{
+           int c = User.Connect(t.getText(), p.getText());
+           System.out.println(c);
+           if (c >= 0) {
+               try {
 
-        }
+                   Parent root = FXMLLoader.load(getClass().getResource("Accueil1.fxml"));
+                   Scene scene = new Scene(root);
+                   Stage s = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                   s.setScene(scene);
+                   s.show();
+               } catch (Exception e) {
+                   System.out.println(e.getMessage());
+               }
+           }
+
+           else {
+               Alert al = new Alert(Alert.AlertType.INFORMATION);
+               al.setTitle("Informaton Dialog");
+               al.setHeaderText("Look, an information Dialog");
+               al.setContentText("Username or password not found");
+               al.showAndWait();
+           }
+       }
+   }
 
 
-        int a = User.Connect(t.getText(),p.getText());
-        if(a == 0) {
-            try {
-
-                Parent root = FXMLLoader.load(getClass().getResource("Accueil1.fxml"));
-                Scene scene = new Scene(root);
-                Stage s = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                s.setScene(scene);
-                s.show();
-            } catch(Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        else if(a == 1) {
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("Accueil1.fxml"));
-                Scene scene = new Scene(root);
-                Stage s = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                s.setScene(scene);
-                s.show();
-
-            } catch(Exception e) {
-                System.out.println(e.getMessage());
-            }
-
-        }
-
-        else if( a == 2) {
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("Accueil1.fxml"));
-                Scene scene = new Scene(root);
-                Stage s = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                s.setScene(scene);
-                s.show();
-
-            } catch(Exception e) {
-                System.out.println(e.getMessage());
-            }
-            Alert al= new Alert(Alert.AlertType.INFORMATION);
-            al.setTitle("Informaton Dialog");
-            al.setHeaderText("Look, an information Dialog");
-            al.setContentText("Access invalide");
-            al.showAndWait();
-
-        }
-        else {
-
-        }
-
-    }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
