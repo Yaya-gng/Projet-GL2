@@ -85,7 +85,7 @@
                                                 <VBox alignment="TOP_CENTER" layoutX="3.0" layoutY="41.0" prefHeight="157.0" prefWidth="179.0" spacing="10.0">
                                                    <children>
                                                       <Button fx:id="ressourceInst" mnemonicParsing="false" onAction="#RessourceInst" prefHeight="25.0" prefWidth="147.0" text="Mes Formations" />
-                                                      <Button mnemonicParsing="false" onAction="#sondage" prefHeight="25.0" prefWidth="147.0" text="Mes Sondages" />
+                                                      <Button mnemonicParsing="false" onAction="#sondage" prefHeight="25.0" prefWidth="147.0" text="Sondages" />
                                                       <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Mes Blogs" />
                                                       <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Mes Wikis" />
                                                    </children>
@@ -559,7 +559,7 @@
                                                        <Button mnemonicParsing="false" onAction="#afficherSondage" prefHeight="25.0" prefWidth="100.0" text="Afficher resultat" />
                                                        <Button mnemonicParsing="false" onAction="#participerSondage" prefHeight="25.0" prefWidth="100.0" text="Participer" />
                                                        <Button mnemonicParsing="false" onAction="#creeSnd" prefHeight="25.0" prefWidth="99.0" text="Creer" />
-                                                       <Button fx:id="supprimerSondage" mnemonicParsing="false" onAction="#SupprimerSondage" prefHeight="25.0" prefWidth="100.0" text="Supprimer" />
+                                                       <Button fx:id="supprimerSondage" mnemonicParsing="false" onAction="#SupprimerSondage" prefHeight="25.0" prefWidth="100.0" text="Supprimer" visible="false" />
                                                    </children>
                                                    <HBox.margin>
                                                        <Insets />

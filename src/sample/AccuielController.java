@@ -837,7 +837,6 @@ public class AccuielController implements Initializable {
     }
 
 
-
     @FXML public void ouvrirCourQ(ActionEvent event){
         try {
             Object o = listCoursQ.getSelectionModel().getSelectedItem();
@@ -869,8 +868,12 @@ public class AccuielController implements Initializable {
         contenuSondage.setEditable(true);
         choix1.setEditable(true);choix2.setEditable(true);choix3.setEditable(true);choix4.setEditable(true);
         choixBox1.setVisible(false);choixBox2.setVisible(false);choixBox3.setVisible(false);choixBox4.setVisible(false);
+        titreSnd.clear();
+        contenuSondage.clear();
+        choix1.clear();choix2.clear();choix3.clear();choix4.clear();
         creeSondage.setVisible(true);
         creerSnd.setVisible(true);
+        creerSnd.toFront();
     }
 
     @FXML public void setCreeSondage(){
@@ -889,6 +892,7 @@ public class AccuielController implements Initializable {
 
         creerSnd.setVisible(false);
         creeSondage.setVisible(false);
+        resultat.setVisible(false);
     }
 
     @FXML public void participerSondage(){
@@ -896,6 +900,8 @@ public class AccuielController implements Initializable {
         if(o != null){
             confirmerSnd.setVisible(true);
             creeSondage.setVisible(true);
+            creeSondage.toFront();
+            creerSnd.setVisible(false);
             titreSnd.clear();
             contenuSondage.clear();
             choix1.clear();choix2.clear();choix3.clear();choix4.clear();
@@ -929,12 +935,14 @@ public class AccuielController implements Initializable {
             choixBox3.setSelected(false);
             choixBox4.setSelected(false);
         }
+
     }@FXML public void box3(){
         if(choixBox3.isSelected()){
             choixBox2.setSelected(false);
             choixBox1.setSelected(false);
             choixBox4.setSelected(false);
         }
+
     }@FXML public void box4(){
         if(choixBox4.isSelected()){
             choixBox2.setSelected(false);
@@ -1013,6 +1021,7 @@ public class AccuielController implements Initializable {
                      new PieChart.Data(l.get(0).getChoix4(),l.get(0).getNb4()));
 
             statistics.setData(pieChertData);
+            contenuRsltSnd.clear();
             contenuRsltSnd.setText(l.get(0).getContenu());
             nbPart.setText(String.valueOf(l.get(0).getNbPart()));
             resultat.setVisible(true);
