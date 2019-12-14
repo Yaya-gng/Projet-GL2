@@ -6,8 +6,9 @@ public class Sondage {
 	
 	private int numS,idUser;
 	private String titre,contenu, choix1, choix2, choix3, choix4, createur;
+    private int nb1, nb2, nb3, nb4, nbPart;
 
-	public Sondage(int numS, String titre, String contenu, String choix1, String choix3, String choix4, int numUser, String nom) {
+	public Sondage(int numS, String titre, String contenu, String choix1, String choix2, String choix3, String choix4, int numUser, String nom, int nb1, int nb2, int nb3, int nb4, int nbPart) {
 		this.setNumS(numS);
 		this.titre = titre;
 		this.contenu = contenu;
@@ -17,6 +18,11 @@ public class Sondage {
 		this.choix4 = choix4;
 		this.idUser = numUser;
 		this.createur = nom;
+		this.nb1 = nb1;
+		this.nb2 = nb2;
+		this.nb3 = nb3;
+		this.nb4 = nb4;
+		this.nbPart = nbPart;
 	}
 
 	public int getNumS() {
@@ -90,5 +96,45 @@ public class Sondage {
 
 	public void setCreateur(String createur) {
 		this.createur = createur;
+	}
+
+    public int getNb1() {
+        return nb1;
+    }
+
+    public void setNb1(int nb1) {
+        this.nb1 = nb1;
+    }
+
+    public int getNb2() {
+        return nb2;
+    }
+
+    public void setNb2(int nb2) {
+        this.nb2 = nb2;
+    }
+
+    public int getNb3() {
+        return nb3;
+    }
+
+    public void setNb3(int nb3) {
+        this.nb3 = nb3;
+    }
+
+    public int getNb4() {
+        return nb4;
+    }
+
+    public void setNb4(int nb4) {
+        this.nb4 = nb4;
+    }
+
+	public int getNbPart() {
+		return nbPart;
+	}
+
+	public void setNbPart(int nbPart) {
+		this.nbPart = nbPart;
 	}
 }

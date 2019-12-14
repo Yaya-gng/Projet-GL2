@@ -4,6 +4,8 @@ import Model.Quizs;
 import dateBase.*;
 import javafx.application.Application;
 import javafx.application.HostServices;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -73,7 +75,7 @@ public class AccuielController implements Initializable {
     @FXML
     private CheckBox ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8, ch9, ch10, ch11, ch12, ch13, ch14, ch15, ch16;
     @FXML
-    private Label note, sur20;
+    private Label note, sur20, nbPart;
     @FXML
     private TextField noteT;
     @FXML
@@ -87,17 +89,19 @@ public class AccuielController implements Initializable {
     @FXML
     private TableColumn<AllApprenant, String> nomC, preC, specC, mat, nomC1, prenomC1, specC1, mat1;
     @FXML
-    private TextField choix1,choix2,choix3,choix4;
+    private TextField titreSnd,choix1,choix2,choix3,choix4;
     @FXML
     private CheckBox  choixBox1, choixBox3, choixBox2, choixBox4;
     @FXML
-    private TextArea contenuSondage;
+    private TextArea contenuSondage, contenuRsltSnd;
     @FXML
-    private TableView<Sondage> tableSondages;
+    private TableView<listTwoPar> tableSondages;
     @FXML
-    private TableColumn<Sondage, String> titreSondage, createurSondage;
+    private TableColumn<listTwoPar, String> titreSondage, createurSondage;
 
     private ArrayList<String> suivi = new ArrayList<>();
+    @FXML private Button supprimerSondage, mtSondage, confirmerSnd, creerSnd;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -451,7 +455,7 @@ public class AccuielController implements Initializable {
     }
 
     @FXML
-    public void setAjouterQuiz(ActionEvent event) {
+    public void setAjouterQuiz() {
         Object o = listFormation.getSelectionModel().getSelectedItem();
         if (o != null) {
             String s = (String) o;
@@ -723,6 +727,7 @@ public class AccuielController implements Initializable {
     }
 
     @FXML public void setFrmApp(ActionEvent event){
+        formationApp.toFront();
         listeFormApp.getItems().clear();
         listCoursApp.getItems().clear();
         listQuizApp.getItems().clear();
@@ -850,7 +855,9 @@ public class AccuielController implements Initializable {
 
     @FXML public void sondage(ActionEvent event){
         sondage.toFront();
-        ArrayList<String, String> s = SondageBD.afficherSondage();
+        creeSondage.setVisible(false);
+        resultat.setVisible(false);
+        ArrayList<listTwoPar> s = SondageBD.afficherSondage();
 
         for(int i=0; i<s.size(); i++)
             tableSondages.getItems().add(s.get(i));
@@ -858,17 +865,159 @@ public class AccuielController implements Initializable {
     }
 
     @FXML public void creeSnd(){
+        titreSnd.setEditable(true);
+        contenuSondage.setEditable(true);
+        choix1.setEditable(true);choix2.setEditable(true);choix3.setEditable(true);choix4.setEditable(true);
+        choixBox1.setVisible(false);choixBox2.setVisible(false);choixBox3.setVisible(false);choixBox4.setVisible(false);
         creeSondage.setVisible(true);
+        creerSnd.setVisible(true);
     }
 
-    @FXML public void setCreeSondage(ActionEvent event){
+    @FXML public void setCreeSondage(){
+        if (titreSnd.getText().isEmpty()==false && contenuSondage.getText().isEmpty()==false && choix1.getText().isEmpty()== false && choix2.getText().isEmpty()== false && choix3.getText().isEmpty()== false && choix4.getText().isEmpty() == false) {
 
-        SondageBD.creerSondage(, contenuSondage.getText(), choix1.getText(), choix2.getText(), choix3.getText(), choix4.getText(), Integer.parseInt(id.getText()));;
+            SondageBD.creerSondage(titreSnd.getText(), contenuSondage.getText(), choix1.getText(), choix2.getText(), choix3.getText(), choix4.getText(), Integer.parseInt(id.getText()), nom.getText());
+            titreSnd.clear();
+            contenuSondage.clear();
+            choix1.clear(); choix2.clear(); choix3.clear(); choix4.clear();
+            tableSondages.getItems().clear();
+            ArrayList<listTwoPar> s = SondageBD.afficherSondage();
+
+            for(int i=0; i<s.size(); i++)
+                tableSondages.getItems().add(s.get(i));
+        }
+
+        creerSnd.setVisible(false);
+        creeSondage.setVisible(false);
+    }
+
+    @FXML public void participerSondage(){
+        Object o = tableSondages.getSelectionModel().getSelectedItem();
+        if(o != null){
+            confirmerSnd.setVisible(true);
+            creeSondage.setVisible(true);
+            titreSnd.clear();
+            contenuSondage.clear();
+            choix1.clear();choix2.clear();choix3.clear();choix4.clear();
+            listTwoPar l = (listTwoPar)o;
+            ArrayList<Sondage> sd = SondageBD.consulterSondage(l.getTitre());
+            System.out.println(l.getTitre());
+            sondage.setVisible(true);
+            titreSnd.setEditable(false);
+            contenuSondage.setEditable(false);
+            choix1.setEditable(false);choix2.setEditable(false);choix3.setEditable(false);choix4.setEditable(false);
+
+            titreSnd.setText(sd.get(0).getTitre());
+            contenuSondage.setText(sd.get(0).getContenu());
+            choix1.setText(sd.get(0).getChoix1());choix2.setText(sd.get(0).getChoix2());choix3.setText(sd.get(0).getChoix3());choix4.setText(sd.get(0).getChoix4());
+            choixBox1.setVisible(true);choixBox2.setVisible(true);choixBox3.setVisible(true);choixBox4.setVisible(true);
+        }
 
     }
-    @FXML public void afficherSondage(ActionEvent event){
+
+    @FXML public void box1(){
+        if(choixBox1.isSelected()){
+            choixBox2.setSelected(false);
+            choixBox3.setSelected(false);
+            choixBox4.setSelected(false);
+        }
+    }
+
+    @FXML public void box2(){
+        if(choixBox2.isSelected()){
+            choixBox1.setSelected(false);
+            choixBox3.setSelected(false);
+            choixBox4.setSelected(false);
+        }
+    }@FXML public void box3(){
+        if(choixBox3.isSelected()){
+            choixBox2.setSelected(false);
+            choixBox1.setSelected(false);
+            choixBox4.setSelected(false);
+        }
+    }@FXML public void box4(){
+        if(choixBox4.isSelected()){
+            choixBox2.setSelected(false);
+            choixBox3.setSelected(false);
+            choixBox1.setSelected(false);
+        }
+    }
+
+    @FXML public void confirmeParticipation(){
+        String s = titreSnd.getText();
+        if(choixBox1.isSelected()) SondageBD.participer1(s);
+        if(choixBox2.isSelected()) SondageBD.participer2(s);
+        if(choixBox3.isSelected()) SondageBD.participer3(s);
+        if(choixBox4.isSelected()) SondageBD.participer4(s);
+        titreSnd.clear();
+        contenuSondage.clear();
+        choix1.clear();choix2.clear();choix3.clear();choix4.clear();
+
+        choixBox1.setVisible(false);choixBox2.setVisible(false);choixBox3.setVisible(false);choixBox4.setVisible(false);
+        creeSondage.setVisible(false);
+        confirmerSnd.setVisible(false);
+        choixBox1.setSelected(false);choixBox2.setSelected(false);choixBox3.setSelected(false);choixBox4.setSelected(false);
+    }
+
+    @FXML public int MesSondages() {
+        resultat.toBack();
+        resultat.setVisible(false);
+        creerSnd.setVisible(false);
+        System.out.println(mtSondage.getText());
+        if (mtSondage.getText().equals("Mes Sondages")) {
+            ArrayList<listTwoPar> s = SondageBD.getMesSondages(Integer.parseInt(id.getText()));
+            tableSondages.getItems().clear();
+            for (int i = 0; i < s.size(); i++)
+                tableSondages.getItems().add(s.get(i));
+
+            supprimerSondage.setVisible(true);
+            mtSondage.setText("Tous les Sondages");
+            System.out.println("Voici vos Sondages");
+            return 1;
+        }
+        else {
+            ArrayList<listTwoPar> s = SondageBD.afficherSondage();
+            tableSondages.getItems().clear();
+            for (int i = 0; i < s.size(); i++)
+                tableSondages.getItems().add(s.get(i));
+
+            supprimerSondage.setVisible(false);
+            mtSondage.setText("Mes Sondages");
+            System.out.println("Vois tous les sondages");
+            return 1;
+        }
 
 
     }
 
+    @FXML public void SupprimerSondage(){
+        Object o = tableSondages.getSelectionModel().getSelectedItem();
+        if(o != null){
+            listTwoPar s = (listTwoPar) o;
+            tableSondages.getItems().remove(o);
+            SondageBD.supprimerSondage(s.getTitre());
+
+            System.out.println("Suppppp");
+        }
+    }
+
+    @FXML public void afficherSondage(){
+        Object o = tableSondages.getSelectionModel().getSelectedItem();
+        if(o != null){
+            listTwoPar s = (listTwoPar) o;
+            ArrayList<Sondage> l = SondageBD.consulterSondage(s.getTitre());
+
+            ObservableList<PieChart.Data> pieChertData = FXCollections.observableArrayList(new PieChart.Data(l.get(0).getChoix1(),l.get(0).getNb1()),
+                     new PieChart.Data(l.get(0).getChoix2(),l.get(0).getNb2()),
+                     new PieChart.Data(l.get(0).getChoix3(),l.get(0).getNb3()),
+                     new PieChart.Data(l.get(0).getChoix4(),l.get(0).getNb4()));
+
+            statistics.setData(pieChertData);
+            contenuRsltSnd.setText(l.get(0).getContenu());
+            nbPart.setText(String.valueOf(l.get(0).getNbPart()));
+            resultat.setVisible(true);
+            creeSondage.setVisible(false);
+            resultat.toFront();
+        }
+    }
 }

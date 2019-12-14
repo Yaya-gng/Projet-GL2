@@ -117,18 +117,6 @@
                            <children>
                               <Pane fx:id="formationIns" layoutX="152.0" layoutY="85.0" prefHeight="494.0" prefWidth="580.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                     <Pane fx:id="allStudents" layoutY="250.0" prefHeight="120.0" prefWidth="400.0" style="-fx-background-color: white;">
-                                         <children>
-                                             <TableView fx:id="tableAllStu" prefHeight="120.0" prefWidth="400.0">
-                                                 <columns>
-                                                     <TableColumn fx:id="mat1" prefWidth="105.99993646144867" text="Matricule" visible="false" />
-                                                     <TableColumn fx:id="nomC1" prefWidth="133.0" text="Nom" />
-                                                     <TableColumn fx:id="prenomC1" prefWidth="133.0" text="Prenom" />
-                                                     <TableColumn fx:id="specC1" prefWidth="133.0" text="Specialite" />
-                                                 </columns>
-                                             </TableView>
-                                         </children>
-                                     </Pane>
                                     <VBox prefHeight="496.0" prefWidth="580.0" spacing="20.0">
                                        <children>
                                           <HBox prefHeight="108.4" prefWidth="519.0">
@@ -203,6 +191,18 @@
                                           </HBox>
                                        </children>
                                     </VBox>
+                                     <Pane fx:id="allStudents" layoutY="250.0" prefHeight="120.0" prefWidth="400.0" style="-fx-background-color: white;">
+                                         <children>
+                                             <TableView fx:id="tableAllStu" prefHeight="120.0" prefWidth="400.0">
+                                                 <columns>
+                                                     <TableColumn fx:id="mat1" prefWidth="105.99993646144867" text="Matricule" visible="false" />
+                                                     <TableColumn fx:id="nomC1" prefWidth="133.0" text="Nom" />
+                                                     <TableColumn fx:id="prenomC1" prefWidth="133.0" text="Prenom" />
+                                                     <TableColumn fx:id="specC1" prefWidth="133.0" text="Specialite" />
+                                                 </columns>
+                                             </TableView>
+                                         </children>
+                                     </Pane>
                                  </children>
                               </Pane>
                               <Pane fx:id="profil" prefHeight="494.0" prefWidth="580.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -458,24 +458,37 @@
                                    <children>
                                        <AnchorPane layoutY="247.0" prefHeight="250.0" prefWidth="580.0">
                                            <children>
-                                               <Pane fx:id="resultat" prefHeight="250.0" prefWidth="580.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                               <Pane fx:id="resultat" prefHeight="250.0" prefWidth="580.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
-                                                       <PieChart fx:id="statistics" layoutX="134.0" layoutY="2.0" prefHeight="245.0" prefWidth="290.0" style="-fx-background-color: yellow;" />
+                                                       <PieChart fx:id="statistics" layoutX="276.0" layoutY="3.0" prefHeight="245.0" prefWidth="290.0" style="-fx-background-color: #2E3238;" />
+                                                <TextArea fx:id="contenuRsltSnd" layoutX="21.0" layoutY="91.0" prefHeight="69.0" prefWidth="221.0" />
+                                                <Label layoutX="21.0" layoutY="55.0" prefHeight="17.0" prefWidth="147.0" text="Contenu du Sondage :" textFill="WHITE" />
+                                                <Label layoutX="21.0" layoutY="182.0" text="Nombre de participants :" textFill="WHITE" />
+                                                <Label fx:id="nbPart" layoutX="168.0" layoutY="182.0" prefHeight="17.0" prefWidth="73.0" textFill="WHITE" />
                                                    </children>
                                                </Pane>
-                                               <Pane fx:id="creeSondage" prefHeight="250.0" prefWidth="580.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                               <Pane fx:id="creeSondage" prefHeight="250.0" prefWidth="580.0" style="-fx-background-color: #2E3238;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
                                                        <VBox prefHeight="250.0" prefWidth="580.0" spacing="15.0">
                                                            <children>
-                                                      <TextArea fx:id="contenuSondage" prefHeight="76.0" prefWidth="560.0" />
+                                                      <TextField fx:id="titreSnd" prefHeight="25.0" prefWidth="460.0" promptText="Titre du sondage">
+                                                         <VBox.margin>
+                                                            <Insets />
+                                                         </VBox.margin>
+                                                      </TextField>
+                                                      <TextArea fx:id="contenuSondage" prefHeight="23.0" prefWidth="560.0" promptText="Contenu">
+                                                         <VBox.margin>
+                                                            <Insets right="100.0" top="-10.0" />
+                                                         </VBox.margin>
+                                                      </TextArea>
                                                                <HBox prefHeight="139.0" prefWidth="580.0">
                                                                    <children>
                                                                        <VBox prefHeight="188.0" prefWidth="30.0" spacing="13.0">
                                                                            <children>
-                                                                               <CheckBox fx:id="choixBox1" mnemonicParsing="false" />
-                                                                               <CheckBox fx:id="choixBox2" mnemonicParsing="false" />
-                                                                               <CheckBox fx:id="choixBox3" mnemonicParsing="false" />
-                                                                               <CheckBox fx:id="choixBox4" mnemonicParsing="false" />
+                                                                               <CheckBox fx:id="choixBox1" mnemonicParsing="false" onAction="#box1" visible="false" />
+                                                                               <CheckBox fx:id="choixBox2" mnemonicParsing="false" onAction="#box2" visible="false" />
+                                                                               <CheckBox fx:id="choixBox3" mnemonicParsing="false" onAction="#box3" visible="false" />
+                                                                               <CheckBox fx:id="choixBox4" mnemonicParsing="false" onAction="#box4" visible="false" />
                                                                            </children>
                                                                            <padding>
                                                                                <Insets top="4.0" />
@@ -483,26 +496,29 @@
                                                                        </VBox>
                                                                        <VBox prefHeight="188.0" prefWidth="303.0" spacing="5.0">
                                                                            <children>
-                                                                               <TextField fx:id="choix1" prefHeight="25.0" prefWidth="205.0" />
-                                                                               <TextField fx:id="choix2" />
-                                                                               <TextField fx:id="choix3" />
-                                                                               <TextField fx:id="choix4" />
+                                                                               <TextField fx:id="choix1" prefHeight="25.0" prefWidth="205.0" promptText="choix 1" />
+                                                                               <TextField fx:id="choix2" promptText="choix 2" />
+                                                                               <TextField fx:id="choix3" promptText="choix 3" />
+                                                                               <TextField fx:id="choix4" promptText="choix 4" />
                                                                            </children>
                                                                        </VBox>
                                                                    </children>
                                                                    <padding>
                                                                        <Insets left="5.0" />
                                                                    </padding>
+                                                         <VBox.margin>
+                                                            <Insets />
+                                                         </VBox.margin>
                                                                </HBox>
                                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                                                                    <children>
-                                                                       <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="creer" />
-                                                                       <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="confirmer" />
+                                                                       <Button fx:id="creerSnd" mnemonicParsing="false" onAction="#setCreeSondage" prefHeight="25.0" prefWidth="75.0" text="Creer" visible="false" />
+                                                                       <Button fx:id="confirmerSnd" mnemonicParsing="false" onAction="#confirmeParticipation" prefHeight="25.0" prefWidth="75.0" text="Confirmer" visible="false" />
                                                                    </children>
                                                                </HBox>
                                                            </children>
                                                            <padding>
-                                                               <Insets left="10.0" right="10.0" top="15.0" />
+                                                               <Insets left="10.0" right="10.0" />
                                                            </padding>
                                                        </VBox>
                                                    </children>
@@ -539,11 +555,11 @@
                                                </VBox>
                                                <VBox alignment="CENTER" prefHeight="250.0" prefWidth="180.0" spacing="20.0">
                                                    <children>
-                                                       <Button mnemonicParsing="false" prefWidth="100.0" text="Mes sondages" />
-                                                       <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Creer" />
-                                                       <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Afficher resultat" />
-                                                       <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Supprimer" />
-                                                       <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Participer" />
+                                                       <Button fx:id="mtSondage" mnemonicParsing="false" onAction="#MesSondages" prefHeight="25.0" prefWidth="118.0" text="Mes Sondages" />
+                                                       <Button mnemonicParsing="false" onAction="#afficherSondage" prefHeight="25.0" prefWidth="100.0" text="Afficher resultat" />
+                                                       <Button mnemonicParsing="false" onAction="#participerSondage" prefHeight="25.0" prefWidth="100.0" text="Participer" />
+                                                       <Button mnemonicParsing="false" onAction="#creeSnd" prefHeight="25.0" prefWidth="99.0" text="Creer" />
+                                                       <Button fx:id="supprimerSondage" mnemonicParsing="false" onAction="#SupprimerSondage" prefHeight="25.0" prefWidth="100.0" text="Supprimer" />
                                                    </children>
                                                    <HBox.margin>
                                                        <Insets />
