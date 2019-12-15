@@ -80,30 +80,30 @@
                                                 <Button layoutX="69.0" layoutY="167.0" mnemonicParsing="false" onAction="#ouvrirCourQ" text="Ouvrir" />
                                              </children>
                                           </Pane>
+                                          <Pane fx:id="etud" prefHeight="243.0" prefWidth="190.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <VBox alignment="TOP_CENTER" layoutX="3.0" layoutY="41.0" prefHeight="157.0" prefWidth="179.0" spacing="10.0">
+                                                   <children>
+                                                      <Button fx:id="frmApp" mnemonicParsing="false" onAction="#setFrmApp" prefWidth="100.0" text="Fomartions" />
+                                                      <Button mnemonicParsing="false" onAction="#sondage" prefHeight="25.0" prefWidth="100.0" text="Sondages" />
+                                                      <Button mnemonicParsing="false" onAction="#afficherBlogWiki" prefHeight="25.0" prefWidth="100.0" text="Blogs et Wikis" />
+                                                      <Button mnemonicParsing="false" prefWidth="100.0" text="Chat" />
+                                                   </children>
+                                                   <padding>
+                                                      <Insets top="10.0" />
+                                                   </padding>
+                                                </VBox>
+                                             </children>
+                                          </Pane>
                                           <Pane fx:id="prof" prefHeight="243.0" prefWidth="190.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
                                                 <VBox alignment="TOP_CENTER" layoutX="3.0" layoutY="41.0" prefHeight="157.0" prefWidth="179.0" spacing="10.0">
                                                    <children>
                                                       <Button fx:id="ressourceInst" mnemonicParsing="false" onAction="#RessourceInst" prefHeight="25.0" prefWidth="147.0" text="Mes Formations" />
                                                       <Button mnemonicParsing="false" onAction="#sondage" prefHeight="25.0" prefWidth="147.0" text="Sondages" />
-                                                      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Mes Blogs" />
-                                                      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Mes Wikis" />
+                                                      <Button fx:id="BlogWiki" mnemonicParsing="false" onAction="#afficherBlogWiki" prefHeight="25.0" prefWidth="147.0" text="Blogs et Wikis" />
+                                                      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Chat" />
                                                    </children>
-                                                </VBox>
-                                             </children>
-                                          </Pane>
-                                          <Pane fx:id="etud" prefHeight="243.0" prefWidth="190.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <children>
-                                                <VBox alignment="TOP_CENTER" layoutX="3.0" layoutY="41.0" prefHeight="157.0" prefWidth="179.0" spacing="10.0">
-                                                   <children>
-                                                      <Button fx:id="frmApp" mnemonicParsing="false" onAction="#setFrmApp" prefWidth="77.0" text="Fomartions" />
-                                                      <Button mnemonicParsing="false" onAction="#sondage" prefHeight="25.0" prefWidth="77.0" text="Sondages" />
-                                                      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Blogs" />
-                                                      <Button mnemonicParsing="false" prefWidth="77.0" text="Wikis" />
-                                                   </children>
-                                                   <padding>
-                                                      <Insets top="10.0" />
-                                                   </padding>
                                                 </VBox>
                                              </children>
                                           </Pane>
@@ -115,96 +115,6 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Pane fx:id="formationIns" layoutX="152.0" layoutY="85.0" prefHeight="494.0" prefWidth="580.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <children>
-                                    <VBox prefHeight="496.0" prefWidth="580.0" spacing="20.0">
-                                       <children>
-                                          <HBox prefHeight="108.4" prefWidth="519.0">
-                                             <children>
-                                                <VBox prefHeight="109.0" prefWidth="400.0" spacing="2.0">
-                                                   <children>
-                                                      <TextField fx:id="nomFormation" prefHeight="25.0" prefWidth="100.0" promptText="Ajouter formation" />
-                                                      <ListView fx:id="listFormation" prefHeight="108.0" prefWidth="400.0" />
-                                                   </children>
-                                                </VBox>
-                                                <VBox alignment="CENTER" prefHeight="109.0" prefWidth="179.0" spacing="10.0">
-                                                   <children>
-                                                      <Button fx:id="ajouterFormInst" disable="true" mnemonicParsing="false" onAction="#setAjouterFormInst" prefHeight="25.0" prefWidth="73.0" text="Ajouter" />
-                                                      <Button fx:id="supprimerFormInst" disable="true" mnemonicParsing="false" onAction="#setSupprimerFormInst" prefWidth="73.0" text="Supprimer" />
-                                                      <Button fx:id="afficherTout" disable="true" mnemonicParsing="false" onAction="#AfficherTout" prefWidth="73.0" text="Afficher" />
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </HBox>
-                                          <HBox prefHeight="108.4" prefWidth="519.0">
-                                             <children>
-                                                <VBox prefHeight="109.0" prefWidth="400.0" spacing="2.0">
-                                                   <children>
-                                                      <TextField fx:id="titreCour" promptText="Ajouter titre du cours" />
-                                                      <ListView fx:id="listCours" prefHeight="82.0" prefWidth="400.0" />
-                                                   </children>
-                                                </VBox>
-                                                <VBox alignment="CENTER" prefHeight="109.0" prefWidth="179.0" spacing="5.0">
-                                                   <children>
-                                                      <Button fx:id="addFile" disable="true" mnemonicParsing="false" onAction="#ajouterCour" prefHeight="25.0" prefWidth="73.0" text="Ajouter" />
-                                                      <Button fx:id="openFile" disable="true" mnemonicParsing="false" onAction="#ouvrirCour" prefWidth="73.0" text="Ouvrir" />
-                                                      <Button fx:id="supprimerCour" disable="true" mnemonicParsing="false" onAction="#setSupprimerCour" prefWidth="73.0" text="Supprimer" />
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </HBox>
-                                          <HBox prefHeight="109.0" prefWidth="519.0">
-                                             <children>
-                                                 <TableView fx:id="tableStuFor" prefHeight="118.0" prefWidth="400.0">
-                                                     <columns>
-                                                         <TableColumn fx:id="mat" prefWidth="115.0" text="Matricule" visible="false" />
-                                                         <TableColumn fx:id="nomC" prefWidth="133.0" text="Nom" />
-                                                         <TableColumn fx:id="preC" prefWidth="133.0" text="Prenom" />
-                                                         <TableColumn fx:id="specC" prefWidth="133.0" text="Specialite" />
-                                                     </columns>
-                                                 </TableView>
-                                                <VBox alignment="CENTER" prefHeight="109.0" prefWidth="179.0" spacing="10.0">
-                                                   <children>
-                                                      <Button fx:id="tle" disable="true" mnemonicParsing="false" onAction="#setAllStudents" text="Tout les etudiants" />
-                                                      <Button fx:id="ajouterEtudiant" disable="true" mnemonicParsing="false" onAction="#setAjouterEtudiant" prefWidth="73.0" text="Ajouter" />
-                                                      <Button fx:id="supprimerEtudiant" disable="true" mnemonicParsing="false" onAction="#setSupprimerApp" prefWidth="73.0" text="Supprimer" />
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </HBox>
-                                          <HBox prefHeight="108.4" prefWidth="519.0">
-                                             <children>
-                                                <VBox prefHeight="200.0" prefWidth="400.0" spacing="2.0">
-                                                   <children>
-                                                      <TextField fx:id="addQuiz" promptText="Ajouter titre du quiz" />
-                                                      <ListView fx:id="listQuiz" prefHeight="82.0" prefWidth="400.0" />
-                                                   </children>
-                                                </VBox>
-                                                <VBox alignment="CENTER" prefHeight="112.0" prefWidth="180.0" spacing="10.0">
-                                                   <children>
-                                                      <Button fx:id="ajouterQuiz" disable="true" mnemonicParsing="false" onAction="#setAjouterQuiz" prefWidth="73.0" text="Ajouter" />
-                                                      <Button fx:id="modifierQuiz" disable="true" mnemonicParsing="false" onAction="#setModifierQuiz" prefWidth="73.0" text="Modifier" />
-                                                      <Button fx:id="supprimerQuiz" disable="true" mnemonicParsing="false" onAction="#setSupprimerQuiz" prefWidth="73.0" text="Supprimer" />
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                     <Pane fx:id="allStudents" layoutY="250.0" prefHeight="120.0" prefWidth="400.0" style="-fx-background-color: white;">
-                                         <children>
-                                             <TableView fx:id="tableAllStu" prefHeight="120.0" prefWidth="400.0">
-                                                 <columns>
-                                                     <TableColumn fx:id="mat1" prefWidth="105.99993646144867" text="Matricule" visible="false" />
-                                                     <TableColumn fx:id="nomC1" prefWidth="133.0" text="Nom" />
-                                                     <TableColumn fx:id="prenomC1" prefWidth="133.0" text="Prenom" />
-                                                     <TableColumn fx:id="specC1" prefWidth="133.0" text="Specialite" />
-                                                 </columns>
-                                             </TableView>
-                                         </children>
-                                     </Pane>
-                                 </children>
-                              </Pane>
                               <Pane fx:id="profil" prefHeight="494.0" prefWidth="580.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
                                     <Label layoutX="62.0" layoutY="29.0" text="Your Profil :" textFill="WHITE">
@@ -454,6 +364,99 @@
                                     </VBox>
                                  </children>
                               </Pane>
+                              <Pane fx:id="formationIns" layoutX="152.0" layoutY="85.0" prefHeight="494.0" prefWidth="580.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <VBox prefHeight="496.0" prefWidth="580.0" spacing="20.0">
+                                       <children>
+                                          <HBox prefHeight="108.4" prefWidth="519.0">
+                                             <children>
+                                                <VBox prefHeight="109.0" prefWidth="400.0" spacing="2.0">
+                                                   <children>
+                                                      <TextField fx:id="nomFormation" prefHeight="25.0" prefWidth="100.0" promptText="Ajouter formation" />
+                                                      <ListView fx:id="listFormation" prefHeight="108.0" prefWidth="400.0" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="CENTER" prefHeight="109.0" prefWidth="179.0" spacing="10.0">
+                                                   <children>
+                                                      <Button fx:id="ajouterFormInst" disable="true" mnemonicParsing="false" onAction="#setAjouterFormInst" prefHeight="25.0" prefWidth="73.0" text="Ajouter" />
+                                                      <Button fx:id="supprimerFormInst" disable="true" mnemonicParsing="false" onAction="#setSupprimerFormInst" prefWidth="73.0" text="Supprimer" />
+                                                      <Button fx:id="afficherTout" disable="true" mnemonicParsing="false" onAction="#AfficherTout" prefWidth="73.0" text="Afficher" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="108.4" prefWidth="519.0">
+                                             <children>
+                                                <VBox prefHeight="109.0" prefWidth="400.0" spacing="2.0">
+                                                   <children>
+                                                      <TextField fx:id="titreCour" promptText="Ajouter titre du cours" />
+                                                      <ListView fx:id="listCours" prefHeight="82.0" prefWidth="400.0" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="CENTER" prefHeight="109.0" prefWidth="179.0" spacing="5.0">
+                                                   <children>
+                                                      <Button fx:id="addFile" disable="true" mnemonicParsing="false" onAction="#ajouterCour" prefHeight="25.0" prefWidth="73.0" text="Ajouter" />
+                                                      <Button fx:id="openFile" disable="true" mnemonicParsing="false" onAction="#ouvrirCour" prefWidth="73.0" text="Ouvrir" />
+                                                      <Button fx:id="supprimerCour" disable="true" mnemonicParsing="false" onAction="#setSupprimerCour" prefWidth="73.0" text="Supprimer" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="129.0" prefWidth="580.0">
+                                             <children>
+                                                 <TableView fx:id="tableStuFor" prefHeight="120.0" prefWidth="400.0">
+                                                     <columns>
+                                                         <TableColumn fx:id="mat" prefWidth="115.0" text="Matricule" visible="false" />
+                                                         <TableColumn fx:id="nomC" prefWidth="133.0" text="Nom" />
+                                                         <TableColumn fx:id="preC" prefWidth="133.0" text="Prenom" />
+                                                         <TableColumn fx:id="specC" prefWidth="133.0" text="Specialite" />
+                                                     </columns>
+                                                 </TableView>
+                                                <VBox alignment="CENTER" prefHeight="109.0" prefWidth="179.0" spacing="10.0">
+                                                   <children>
+                                                      <Button fx:id="tle" disable="true" mnemonicParsing="false" onAction="#setAllStudents" text="Tout les etudiants" />
+                                                      <Button fx:id="ajouterEtudiant" disable="true" mnemonicParsing="false" onAction="#setAjouterEtudiant" prefWidth="73.0" text="Ajouter" />
+                                                      <Button fx:id="supprimerEtudiant" disable="true" mnemonicParsing="false" onAction="#setSupprimerApp" prefWidth="73.0" text="Supprimer" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="108.4" prefWidth="519.0">
+                                             <children>
+                                                <VBox prefHeight="200.0" prefWidth="400.0" spacing="2.0">
+                                                   <children>
+                                                      <TextField fx:id="addQuiz" promptText="Ajouter titre du quiz" />
+                                                      <ListView fx:id="listQuiz" prefHeight="82.0" prefWidth="400.0" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="CENTER" prefHeight="112.0" prefWidth="180.0" spacing="10.0">
+                                                   <children>
+                                                      <Button fx:id="ajouterQuiz" disable="true" mnemonicParsing="false" onAction="#setAjouterQuiz" prefWidth="73.0" text="Ajouter" />
+                                                      <Button fx:id="modifierQuiz" disable="true" mnemonicParsing="false" onAction="#setModifierQuiz" prefWidth="73.0" text="Modifier" />
+                                                      <Button fx:id="supprimerQuiz" disable="true" mnemonicParsing="false" onAction="#setSupprimerQuiz" prefWidth="73.0" text="Supprimer" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                     <Pane fx:id="allStudents" layoutY="248.0" prefHeight="122.0" prefWidth="400.0" style="-fx-background-color: white;">
+                                         <children>
+                                             <TableView fx:id="tableAllStu" prefHeight="123.0" prefWidth="400.0">
+                                                 <columns>
+                                                     <TableColumn fx:id="mat1" prefWidth="105.99993646144867" text="Matricule" visible="false" />
+                                                     <TableColumn fx:id="nomC1" prefWidth="133.0" text="Nom" />
+                                                     <TableColumn fx:id="prenomC1" prefWidth="133.0" text="Prenom" />
+                                                     <TableColumn fx:id="specC1" prefWidth="133.0" text="Specialite" />
+                                                 </columns>
+                                             </TableView>
+                                         </children>
+                                     </Pane>
+                                 </children>
+                              </Pane>
                                <Pane fx:id="sondage" prefHeight="494.0" prefWidth="579.3333333333334" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                    <children>
                                        <AnchorPane layoutY="247.0" prefHeight="250.0" prefWidth="580.0">
@@ -569,6 +572,213 @@
                                        </HBox>
                                    </children>
                                </Pane>
+                              <Pane prefHeight="494.0" prefWidth="579.3333333333334" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <HBox prefHeight="496.0" prefWidth="580.0">
+                                       <children>
+                                          <VBox prefHeight="200.0" prefWidth="400.0" spacing="20.0">
+                                             <children>
+                                                <TextArea prefHeight="100.0" prefWidth="200.0" />
+                                                <TextArea prefHeight="343.0" prefWidth="380.0" />
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+                                             </padding>
+                                          </VBox>
+                                          <VBox prefHeight="200.0" prefWidth="180.0">
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="165.0" prefWidth="180.0">
+                                                   <children>
+                                                      <ImageView fitHeight="161.0" fitWidth="170.0">
+                                                         <image>
+                                                            <Image url="@1200px-Wikipedia-logo-v2.svg.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="CENTER" prefHeight="327.0" prefWidth="180.0" spacing="10.0">
+                                                   <children>
+                                                      <Button mnemonicParsing="false" prefWidth="50.0" text="Creer" />
+                                                      <Button mnemonicParsing="false" text="Editer" />
+                                                      <Label text="Edited by">
+                                                         <textFill>
+                                                            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                                                               <stops>
+                                                                  <Stop color="#34ff21" />
+                                                                  <Stop color="WHITE" offset="1.0" />
+                                                               </stops>
+                                                            </RadialGradient>
+                                                         </textFill>
+                                                         <font>
+                                                            <Font name="Pristina" size="22.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Yahia The King">
+                                                         <textFill>
+                                                            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                                                               <stops>
+                                                                  <Stop color="#34ff21" />
+                                                                  <Stop color="WHITE" offset="1.0" />
+                                                               </stops>
+                                                            </RadialGradient>
+                                                         </textFill>
+                                                         <font>
+                                                            <Font name="Pristina" size="27.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                                                   </padding>
+                                                </VBox>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                             <padding>
+                                                <Insets top="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="creerblog" prefHeight="494.0" prefWidth="579.3333333333334" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <ImageView fitHeight="496.0" fitWidth="580.0" layoutX="-1.0" layoutY="-3.0">
+                                       <image>
+                                          <Image url="@Stones_Rivers_Mountains_USA_Scenery_Yosemite_560119_1920x1080%20(1).jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <HBox prefHeight="494.0" prefWidth="580.0">
+                                       <children>
+                                          <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="350.0" spacing="10.0">
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                             <children>
+                                                <TextField alignment="TOP_CENTER">
+                                                   <font>
+                                                      <Font name="Pristina" size="20.0" />
+                                                   </font>
+                                                </TextField>
+                                                <Pane prefHeight="250.0" prefWidth="330.0" style="-fx-background-color: white;">
+                                                   <children>
+                                                      <VBox alignment="CENTER" prefHeight="250.0" prefWidth="330.0">
+                                                         <children>
+                                                            <ImageView fitHeight="230.0" fitWidth="310.0" pickOnBounds="true" preserveRatio="true" />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </Pane>
+                                                <Button mnemonicParsing="false" text="parcourir" />
+                                                <TextArea prefHeight="120.0" prefWidth="330.0" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="230.0" spacing="10.0">
+                                             <children>
+                                                <Pane prefHeight="210.0" prefWidth="210.0" style="-fx-background-color: white;">
+                                                   <children>
+                                                      <VBox alignment="CENTER" layoutY="-1.0" prefHeight="196.0" prefWidth="210.0">
+                                                         <children>
+                                                            <ImageView fitHeight="183.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true" />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </Pane>
+                                                <Button mnemonicParsing="false" text="parcourir" />
+                                                <TextArea prefHeight="150.0" prefWidth="210.0" />
+                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                                                   <children>
+                                                      <Button mnemonicParsing="false" text="Creer" />
+                                                      <Button mnemonicParsing="false" text="Retour" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="blgwk" prefHeight="494.0" prefWidth="579.3333333333334" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <HBox prefHeight="494.0" prefWidth="580.0">
+                                       <children>
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="400.0" spacing="10.0">
+                                             <children>
+                                                <Label text="Tout les blogs" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="Century" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <TableView fx:id="tableBlog" prefHeight="200.0" prefWidth="200.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="titreBlog" prefWidth="190.0" text="Titre blog" />
+                                                    <TableColumn fx:id="createurBlog" prefWidth="190.0" text="Createur" />
+                                                  </columns>
+                                                </TableView>
+                                                <Label text="Tout les wikis" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="Century" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <TableView fx:id="tableWiki" prefHeight="200.0" prefWidth="200.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="titreWiki" minWidth="190.0" prefWidth="75.0" text="Titre wiki" />
+                                                    <TableColumn fx:id="createurWiki" minWidth="190.0" prefWidth="75.0" text="Createur" />
+                                                  </columns>
+                                                </TableView>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </VBox>
+                                          <VBox prefHeight="200.0" prefWidth="180.0">
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="247.0" prefWidth="180.0" spacing="10.0">
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                   <children>
+                                                      <Button fx:id="mesBlogBtn" mnemonicParsing="false" onAction="#mesBlogs" text="Mes Blogs" />
+                                                      <Button fx:id="consulterBlog" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="Consulter" />
+                                                      <Button fx:id="partagerBlog" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="Partager" />
+                                                      <Button fx:id="supprimerBlog" mnemonicParsing="false" text="Supprimer" />
+                                                      <Button fx:id="creerBlog" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="Creer" />
+                                                      <Button fx:id="modifierBlog" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="Modifier" />
+                                                   </children>
+                                                   <padding>
+                                                      <Insets top="40.0" />
+                                                   </padding>
+                                                </VBox>
+                                                <VBox alignment="CENTER" prefHeight="247.0" prefWidth="100.0" spacing="10.0">
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                   <children>
+                                                      <Button fx:id="mesWikiBtn" mnemonicParsing="false" onAction="#mesWiki" text="Mes Wikis" />
+                                                      <Button fx:id="consulterWiki" mnemonicParsing="false" prefWidth="70.0" text="Consulter" />
+                                                      <Button fx:id="partagerWiki" mnemonicParsing="false" prefWidth="70.0" text="Partager" />
+                                                      <Button fx:id="supprimerWiki" mnemonicParsing="false" text="Supprimer" />
+                                                      <Button fx:id="creerWiki" mnemonicParsing="false" prefWidth="70.0" text="Creer" />
+                                                      <Button fx:id="modifierWiki" mnemonicParsing="false" prefWidth="70.0" text="Modifier" />
+                                                   </children>
+                                                   <padding>
+                                                      <Insets top="27.0" />
+                                                   </padding>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </Pane>
                            </children>
                         </AnchorPane>
                      </items>

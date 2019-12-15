@@ -49,7 +49,7 @@ import java.lang.String;
 public class AccuielController implements Initializable {
 
     @FXML
-    private Pane profil, admin, prof, formationIns, app, allStudents, quiz, courQ, etud, formationApp, sondage, resultat, creeSondage;
+    private Pane profil, admin, prof, formationIns, app, allStudents, quiz, courQ, etud, formationApp, sondage, resultat, creeSondage, blgwk;
     @FXML
     private PieChart statistics;
     @FXML
@@ -71,7 +71,9 @@ public class AccuielController implements Initializable {
     @FXML
     private TextField ques4, rep4, ch1q4, ch2q4, ch3q4, ch4q4;
     @FXML
-    private Button afficherFormApp, ouvrirCourApp, repondreQuizApp, frmApp;
+    private Button afficherFormApp, ouvrirCourApp, repondreQuizApp, frmApp, mesBlogBtn, partagerBlog, consulterBlog, supprimerBlog, creerBlog, modifierBlog;
+    @FXML
+    private Button mesWikiBtn, consulterWiki, supprimerWiki, creerWiki, modifierWiki;
     @FXML
     private CheckBox ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8, ch9, ch10, ch11, ch12, ch13, ch14, ch15, ch16;
     @FXML
@@ -100,7 +102,10 @@ public class AccuielController implements Initializable {
     private TableColumn<listTwoPar, String> titreSondage, createurSondage;
 
     private ArrayList<String> suivi = new ArrayList<>();
-    @FXML private Button supprimerSondage, mtSondage, confirmerSnd, creerSnd;
+    @FXML private Button supprimerSondage, mtSondage, confirmerSnd, creerSnd, BlogWiki;
+
+    @FXML private TableView<listTwoPar> tableBlog, tableWiki;
+    @FXML private TableColumn<listTwoPar, String> titreBlog, createurBlog, titreWiki, createurWiki;
 
 
     @Override
@@ -140,6 +145,12 @@ public class AccuielController implements Initializable {
 
         titreSondage.setCellValueFactory(new PropertyValueFactory<>("titre"));
         createurSondage.setCellValueFactory(new PropertyValueFactory<>("createur"));
+
+        titreBlog.setCellValueFactory(new PropertyValueFactory<>("titre"));
+        createurBlog.setCellValueFactory(new PropertyValueFactory<>("createur"));
+        titreWiki.setCellValueFactory(new PropertyValueFactory<>("titre"));
+        createurWiki.setCellValueFactory(new PropertyValueFactory<>("createur"));
+
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////
@@ -1029,4 +1040,104 @@ public class AccuielController implements Initializable {
             resultat.toFront();
         }
     }
+
+    @FXML public void afficherBlogWiki() {
+        blgwk.toFront();
+        tableBlog.getItems().clear();
+        tableWiki.getItems().clear();
+        ArrayList<listTwoPar> l = BlogBD.getBlogs();
+
+        for (int i = 0; i < l.size(); i++){
+            tableBlog.getItems().add(l.get(i));
+        }
+
+        ArrayList<listTwoPar> l1 = WikiBD.getWikis();
+
+        for (int i = 0; i < l1.size(); i++) {
+            tableWiki.getItems().add(l1.get(i));
+        }
+        if(Integer.parseInt(id.getText()) >=1 && Integer.parseInt(id.getText()) < 1000){
+            mesBlogBtn.setVisible(true);
+            mesWikiBtn.setVisible(true);
+        }
+        else{
+            mesBlogBtn.setVisible(false);
+            mesWikiBtn.setVisible(false);
+        }
+    }
+
+    @FXML public int mesBlogs(){
+
+        if(mesBlogBtn.getText().equals("Mes Blogs")){
+
+            tableBlog.getItems().clear();
+
+            ArrayList<listTwoPar> l = BlogBD.getMyBlogs(Integer.parseInt(id.getText()));
+            for (int i = 0; i < l.size(); i++) {
+                tableWiki.getItems().add(l.get(i));
+            }
+            supprimerBlog.setVisible(true);
+            partagerBlog.setVisible(true);
+            creerBlog.setVisible(true);
+            modifierBlog.setVisible(true);
+
+            mesBlogBtn.setText("Tous les Blogs");
+            return 1;
+        }
+
+        else{
+            tableBlog.getItems().clear();
+
+            ArrayList<listTwoPar> l = BlogBD.getBlogs();
+
+            for (int i = 0; i < l.size(); i++){
+                tableBlog.getItems().add(l.get(i));
+            }
+
+            supprimerBlog.setVisible(false);
+            partagerBlog.setVisible(false);
+            creerBlog.setVisible(false);
+            modifierBlog.setVisible(false);
+            mesBlogBtn.setText("Mes Blogs");
+            return 1;
+        }
+
+    }
+
+    @FXML public int mesWiki(){
+
+        if(mesWikiBtn.getText().equals("Mes Wikis")){
+
+            tableWiki.getItems().clear();
+
+            ArrayList<listTwoPar> l = WikiBD.getMyWikis(Integer.parseInt(id.getText()));
+            for (int i = 0; i < l.size(); i++) {
+                tableWiki.getItems().add(l.get(i));
+            }
+            supprimerWiki.setVisible(true);
+            creerWiki.setVisible(true);
+            modifierWiki.setVisible(true);
+            mesWikiBtn.setText("Tous les Wikis");
+            return 1;
+        }
+
+        else{
+            tableWiki.getItems().clear();
+
+            ArrayList<listTwoPar> l = WikiBD.getMyWikis(Integer.parseInt(id.getText()));
+
+            for (int i = 0; i < l.size(); i++){
+                tableWiki.getItems().add(l.get(i));
+            }
+            supprimerWiki.setVisible(false);
+            creerWiki.setVisible(false);
+            modifierWiki.setVisible(false);
+            mesWikiBtn.setText("Mes Wikis");
+            return 1;
+        }
+    }
+
+
+
+
 }

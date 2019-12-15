@@ -16,6 +16,7 @@ public class Main extends Application {
             Scene login =new Scene (loginRoot);
             primaryStage.setTitle("Social Learning");
             primaryStage.setScene(login);
+            primaryStage.setResizable(false);
             primaryStage.show();
         }catch(Exception e) {
             System.out.println(e.getMessage());

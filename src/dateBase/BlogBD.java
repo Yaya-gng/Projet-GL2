@@ -7,62 +7,110 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Model.Blog;
+import sample.listTwoPar;
 
 import java.sql.Date;
 
 public class BlogBD extends BD {
 
-	public static void CreerBlog(int id,String nomB, Date dateC, String contenu, Date dateExp, String photo) {
-		
-		try(
+	public static void CreerBlog(String nomB, String contenu, String image1, String image2, int numUser, String createur) {
+
+		try (
 				Connection con = connect();
-				
-				PreparedStatement pr = con.prepareStatement("insert into blog(nomB,dateC,contenu,dateExp,photo,numUser)values(?,?,?,?,?,?)");
-				){
-				
-			pr.setString(1,nomB);
-			pr.setDate(2,dateC);
-			pr.setString(3,contenu);
-			pr.setDate(4,dateExp);
-			pr.setString(5,photo);
-			pr.setInt(6,id);
+
+				PreparedStatement pr = con.prepareStatement("insert into blog(nomB,contenu,image1,image2,numUser,createur)values(?,?,?,?,?,?)");
+		) {
+
+			pr.setString(1, nomB);
+			pr.setString(2, contenu);
+			pr.setString(3, image1);
+			pr.setString(4, image2);
+			pr.setInt(5, numUser);
+			pr.setString(6, createur);
 			pr.execute();
-			
+
 			System.out.println("Creation du blog effecuté");
-			
-		}catch(SQLException e) {
+
+		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		
+
 	}
-	
-	public static ArrayList<Blog> partager(int numB) {
-		
-		ArrayList<Blog> bl = new ArrayList<>();
-		
-		try(
+
+	public static void partager(String titre) {
+
+		try (
 				Connection con = connect();
-				PreparedStatement pr = con.prepareStatement("Select * from blog where numB=?");
-				){
-				
-			pr.setInt(1,numB);
-			ResultSet r = pr.executeQuery();
-			
-			if(r.next()) {
-				bl.add(new Blog(r.getInt("numB"), r.getString("nomB"), r.getDate("dateC"), r.getString("contenu"), r.getDate("dateExp"), r.getString("photo")));
-				System.out.println("Partage effectué");
-				return bl;
-			}
-			else { System.out.println("Partage impossible");
-			return null;
-			}
-			
-			
-		}catch(SQLException e) {
+				PreparedStatement pr = con.prepareStatement("update blog set partager=true where titre=?");
+		) {
+
+			pr.setString(1, titre);
+			pr.execute();
+			System.out.println("Partage fait");
+
+		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		
-		
-		return null;
 	}
+
+
+	public static ArrayList<listTwoPar> getBlogs(){
+		ArrayList<listTwoPar> l = new ArrayList<>();
+		try (
+				Connection con = connect();
+				PreparedStatement pr = con.prepareStatement("select nomB,createur from blog");
+		) {
+			ResultSet r = pr.executeQuery();
+			while(r.next()){
+				l.add(new listTwoPar(r.getString("nomB"), r.getString("createur")));
+			}
+			return l;
+
+		}catch (SQLException e){
+			System.out.println(e.getMessage());
+		}
+			return null;
+
+		}
+
+    public static ArrayList<listTwoPar> getMyBlogs(int numUser){
+        ArrayList<listTwoPar> l = new ArrayList<>();
+        try (
+                Connection con = connect();
+                PreparedStatement pr = con.prepareStatement("select nomB,createur from blog where numUser=?");
+        ) {
+            pr.setInt(1,numUser);
+            ResultSet r = pr.executeQuery();
+            while(r.next()){
+                l.add(new listTwoPar(r.getString("nomB"), r.getString("createur")));
+            }
+            return l;
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+
+    }
+
+    public static void supprimerBlog(String nomB){
+
+        try (
+                Connection con = connect();
+                PreparedStatement pr = con.prepareStatement("delete from blog where nomB=?");
+        ) {
+            pr.setString(1,nomB);
+            pr.execute();
+
+            System.out.println("Suppression effectue");
+
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+	}
+
+
+
+
 }
