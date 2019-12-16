@@ -85,14 +85,15 @@ public class Quiz extends BD {
         }
     }
 
-    public static void setReponseApp(int idQuiz, int matricule, int note){
+    public static void setReponseApp(int idQuiz, int matricule, int note, String suivi){
         try(
                 Connection con = connect();
-                PreparedStatement pr = con.prepareStatement("insert into suivi(idQuiz,matricule,note) values(?,?,?)");
+                PreparedStatement pr = con.prepareStatement("insert into suivi(idQuiz,matricule,note,suiviRep) values(?,?,?,?)");
         ){
             pr.setInt(1,idQuiz);
             pr.setInt(2,matricule);
             pr.setInt(3,note);
+            pr.setString(4,suivi);
             pr.execute();
             System.out.println("Insertion de la note de l'étudiant faite");
 

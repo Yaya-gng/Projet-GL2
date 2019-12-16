@@ -2,6 +2,7 @@ package sample;
 import Model.*;
 import Model.Quizs;
 import dateBase.*;
+import dateBase.User;
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.collections.FXCollections;
@@ -31,6 +32,7 @@ import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.util.Callback;
 
+import javax.print.attribute.standard.JobKOctets;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -49,17 +51,18 @@ import java.lang.String;
 public class AccuielController implements Initializable {
 
     @FXML
-    private Pane profil, admin, prof, formationIns, app, allStudents, quiz, courQ, etud, formationApp, sondage, resultat, creeSondage, blgwk;
+    private Pane profil, admin, prof, formationIns, app, allStudents, quiz, courQ, etud, formationApp, sondage, resultat, creeSondage, blgwk, creerBLG, creerW, formationAdm;
     @FXML
     private PieChart statistics;
     @FXML
     private Parent avatar1;
     @FXML
-    private TextField t1, t2, t3, t4, t5, t6, gra, special, nve, sec, nomFormation, titreCour, addQuiz;
+    private TextField t1, t2,t4, t3, t5, t6, gra, special, nve, sec, nomFormation, titreCour, addQuiz;
+
     @FXML
     private Button modify, confirme, disco, ressourceInst, ajouterFormInst, supprimerFormInst, afficherTout, tle, ajouterEtudiant, supprimerEtudiant, supprimerCour, openFile, addFile, ajouterQuiz, supprimerQuiz;
     @FXML
-    private Label id, nom, prenom, grade, spec, niv, section, numF, id_quiz, id_form;
+    private Label id, nom, prenom, grade, spec, niv, section, numF, id_quiz, id_form, ttmblg, ttmwk;
     @FXML
     private Button modifierQuiz, retourF, confirmerQ, validerQ;
     @FXML
@@ -73,15 +76,15 @@ public class AccuielController implements Initializable {
     @FXML
     private Button afficherFormApp, ouvrirCourApp, repondreQuizApp, frmApp, mesBlogBtn, partagerBlog, consulterBlog, supprimerBlog, creerBlog, modifierBlog;
     @FXML
-    private Button mesWikiBtn, consulterWiki, supprimerWiki, creerWiki, modifierWiki;
+    private Button mesWikiBtn, consulterWiki, supprimerWiki, creerWiki, modifierWiki, parcourir1, parcourir2, creer1Blog, retourBlog, creerWiki1, editerWiki, supprimerFormaa, supprimerInstr,supprimerApp;
     @FXML
     private CheckBox ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8, ch9, ch10, ch11, ch12, ch13, ch14, ch15, ch16;
     @FXML
-    private Label note, sur20, nbPart;
+    private Label note, sur20, nbPart, editeur, ttSndg;
     @FXML
-    private TextField noteT;
+    private TextField noteT, nomBlog, nomWiki;
     @FXML
-    private ListView listFormation, listCours, listQuiz, listCoursQ, listCoursApp, listeFormApp, listQuizApp;
+    private ListView listFormation, listCours, listQuiz, listCoursQ, listCoursApp, listeFormApp, listQuizApp, listFor;
     @FXML
     private TableView<Cour> tableCours;
     @FXML
@@ -95,18 +98,22 @@ public class AccuielController implements Initializable {
     @FXML
     private CheckBox  choixBox1, choixBox3, choixBox2, choixBox4;
     @FXML
-    private TextArea contenuSondage, contenuRsltSnd;
+    private TextArea contenuSondage, contenuRsltSnd, contenuBlog, proposC, contenuW, problemW;
+    @FXML
+    private ImageView image1Blog, image2Blog, im;
     @FXML
     private TableView<listTwoPar> tableSondages;
     @FXML
     private TableColumn<listTwoPar, String> titreSondage, createurSondage;
 
     private ArrayList<String> suivi = new ArrayList<>();
+
     @FXML private Button supprimerSondage, mtSondage, confirmerSnd, creerSnd, BlogWiki;
 
     @FXML private TableView<listTwoPar> tableBlog, tableWiki;
     @FXML private TableColumn<listTwoPar, String> titreBlog, createurBlog, titreWiki, createurWiki;
-
+    @FXML private TableView<listTwoPar1> tableProf,tableApp;
+    @FXML private TableColumn<listTwoPar1, String>  nomProf, prenomProf, nomApp, prenomApp;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -114,12 +121,15 @@ public class AccuielController implements Initializable {
         id.setText(String.valueOf(Connecter.getIdConnected()));
         nom.setText(Connecter.getNameConnected());
         prenom.setText(Connecter.getLastNameConnected());
+        im.setImage(null);
+        Image i = new Image(Connecter.getImage());
+        im.setImage(i);
 
-/*
-        if(Integer.parseInt(l5.getText()) == 1 ) {
+
+        if(Integer.parseInt(id.getText()) == 1 ) {
             admin.toFront();
-
-        }*/
+            formationAdm.toFront();
+        }
 
         if (Integer.parseInt(id.getText()) > 1 && Integer.parseInt(id.getText()) < 1000) {
             prof.toFront();
@@ -150,6 +160,11 @@ public class AccuielController implements Initializable {
         createurBlog.setCellValueFactory(new PropertyValueFactory<>("createur"));
         titreWiki.setCellValueFactory(new PropertyValueFactory<>("titre"));
         createurWiki.setCellValueFactory(new PropertyValueFactory<>("createur"));
+
+        nomProf.setCellValueFactory(new PropertyValueFactory<>("Nom"));
+        prenomProf.setCellValueFactory(new PropertyValueFactory<>("Prenom"));
+        nomApp.setCellValueFactory(new PropertyValueFactory<>("Nom"));
+        prenomApp.setCellValueFactory(new PropertyValueFactory<>("Prenom"));
 
     }
 
@@ -240,17 +255,17 @@ public class AccuielController implements Initializable {
 
     @FXML
     void confirmeModification() {
-        if (Integer.parseInt(id.getText()) == 1)
-            ProfilAdminDB.modify(Integer.parseInt(t1.getText()), t2.getText(), t3.getText(), "t4.getDate()", t5.getText(), t6.getText());
+       /* if (Integer.parseInt(id.getText()) == 1)
+            ProfilAdminDB.modify(Integer.parseInt(t1.getText()), t2.getText(), t3.getText(),java.sql.Date.valueOf(t4.getText()), t5.getText(), t6.getText());
 
         else if (Integer.parseInt(id.getText()) > 1 && Integer.parseInt(id.getText()) < 2000) {
-            ProfilInstructorDB.modify(Integer.parseInt(t1.getText()), t2.getText(), t3.getText(), "t4.getDate()", t5.getText(), t6.getText(), gra.getText(), special.getText());
+            ProfilInstructorDB.modify(Integer.parseInt(t1.getText()), t2.getText(), t3.getText(), java.sql.Date.valueOf(t4.getText()), t5.getText(), t6.getText(), gra.getText(), special.getText());
             grade.setDisable(true);
             gra.setDisable(true);
             spec.setDisable(true);
             special.setDisable(true);
         } else {
-            ProfilApprenantDB.modify(Integer.parseInt(t1.getText()), t2.getText(), t3.getText(), "t4.getDate()", t5.getText(), 0, t6.getText(), special.getText(), nve.getText(), sec.getText());
+            ProfilApprenantDB.modify(Integer.parseInt(t1.getText()), t2.getText(), t3.getText(), java.sql.Date.valueOf(t4.getText()), t5.getText(), 0, t6.getText(), special.getText(), nve.getText(), sec.getText());
             ;
             spec.setDisable(true);
             special.setDisable(true);
@@ -271,7 +286,7 @@ public class AccuielController implements Initializable {
         t4.setDisable(true);
         t5.setDisable(true);
         t6.setDisable(true);
-        confirme.setDisable(true);
+        confirme.setDisable(true);*/
     }
 
     @FXML
@@ -328,7 +343,7 @@ public class AccuielController implements Initializable {
     public void AfficherTout(ActionEvent event) {
         tableStuFor.getItems().clear();
         listCours.getItems().clear();
-        listCours.getItems().clear();
+        listQuiz.getItems().clear();
 
 
         openFile.setDisable(false);
@@ -477,6 +492,7 @@ public class AccuielController implements Initializable {
                 id_quiz.setText(String.valueOf(Quiz.getIdQuiz(addQuiz.getText())));
                 prof.setDisable(true);
                 quiz.toFront();
+                addQuiz.clear();
 
             }
         }
@@ -543,7 +559,7 @@ public class AccuielController implements Initializable {
             noteT.setVisible(true);
             sur20.setVisible(true);
 
-            Quiz.setReponseApp(Integer.parseInt(id_quiz.getText()), Integer.parseInt(id.getText()),n);
+            Quiz.setReponseApp(Integer.parseInt(id_quiz.getText()), Integer.parseInt(id.getText()),n, suivi.toString());
             retourF.setDisable(false);
 
 
@@ -557,6 +573,7 @@ public class AccuielController implements Initializable {
             ch2.setSelected(false);
             ch3.setSelected(false);
             ch4.setSelected(false);
+            suivi.add("il a coché sur la premiere reponse de la premiere question,");
         }
     }
 
@@ -566,6 +583,7 @@ public class AccuielController implements Initializable {
             ch1.setSelected(false);
             ch3.setSelected(false);
             ch4.setSelected(false);
+            suivi.add("il a coché sur la 2m reponse de la 1ere question,");
         }
     }
 
@@ -575,6 +593,7 @@ public class AccuielController implements Initializable {
             ch2.setSelected(false);
             ch1.setSelected(false);
             ch4.setSelected(false);
+            suivi.add("il a coché sur la 3m reponse de la 1ere question,");
         }
     }
 
@@ -584,6 +603,7 @@ public class AccuielController implements Initializable {
             ch2.setSelected(false);
             ch3.setSelected(false);
             ch1.setSelected(false);
+            suivi.add("il a coché sur la 4m reponse de la 1ere question,");
         }
     }
 
@@ -594,6 +614,7 @@ public class AccuielController implements Initializable {
             ch7.setSelected(false);
             ch8.setSelected(false);
         }
+        suivi.add("il a coché sur la 1ere reponse de la 2ere question,");
     }
 
     @FXML
@@ -602,6 +623,7 @@ public class AccuielController implements Initializable {
             ch5.setSelected(false);
             ch7.setSelected(false);
             ch8.setSelected(false);
+            suivi.add("il a coché sur la 2m reponse de la 2m question,");
         }
     }
 
@@ -611,6 +633,7 @@ public class AccuielController implements Initializable {
             ch5.setSelected(false);
             ch6.setSelected(false);
             ch8.setSelected(false);
+            suivi.add("il a coché sur la 3m reponse de la 2m question,");
         }
     }
 
@@ -620,6 +643,7 @@ public class AccuielController implements Initializable {
             ch5.setSelected(false);
             ch6.setSelected(false);
             ch7.setSelected(false);
+            suivi.add("il a coché sur la 4m reponse de la 2m question,");
         }
     }
 
@@ -630,6 +654,7 @@ public class AccuielController implements Initializable {
             ch10.setSelected(false);
             ch11.setSelected(false);
             ch12.setSelected(false);
+            suivi.add("il a coché sur la 1ere reponse de la 3m question,");
         }
     }
     @FXML private void handleBox10(ActionEvent event) {
@@ -637,6 +662,7 @@ public class AccuielController implements Initializable {
             ch9.setSelected(false);
             ch11.setSelected(false);
             ch12.setSelected(false);
+            suivi.add("il a coché sur la 2m reponse de la 3m question,");
         }
     }
     @FXML private void handleBox11(ActionEvent event) {
@@ -644,11 +670,13 @@ public class AccuielController implements Initializable {
             ch9.setSelected(false);
             ch10.setSelected(false);
             ch12.setSelected(false);
+            suivi.add("il a coché sur la 3m reponse de la 3m question,");
         }
     }
     @FXML private void handleBox12(ActionEvent event){
         if(ch12.isSelected()){
             ch9.setSelected(false); ch10.setSelected(false); ch11.setSelected(false);
+            suivi.add("il a coché sur la 4m reponse de la 3m question,");
         }
     }
 
@@ -657,6 +685,7 @@ public class AccuielController implements Initializable {
             ch14.setSelected(false);
             ch15.setSelected(false);
             ch16.setSelected(false);
+            suivi.add("il a coché sur la 1ere reponse de la 4m question,");
         }
     }
     @FXML private void handleBox14(ActionEvent event) {
@@ -664,6 +693,7 @@ public class AccuielController implements Initializable {
             ch13.setSelected(false);
             ch15.setSelected(false);
             ch16.setSelected(false);
+            suivi.add("il a coché sur la 2m reponse de la 4m question,");
         }
     }
     @FXML private void handleBox15(ActionEvent event) {
@@ -671,11 +701,13 @@ public class AccuielController implements Initializable {
             ch13.setSelected(false);
             ch14.setSelected(false);
             ch16.setSelected(false);
+            suivi.add("il a coché sur la 3m reponse de la 4m question,");
         }
     }
     @FXML private void handleBox16(ActionEvent event){
         if(ch16.isSelected()){
             ch13.setSelected(false); ch14.setSelected(false); ch15.setSelected(false);
+            suivi.add("il a coché sur la 3m reponse de la 4m question,");
         }
     }
 
@@ -683,8 +715,8 @@ public class AccuielController implements Initializable {
 
     @FXML void retourToForm(ActionEvent event){
         prof.setDisable(false);
-        prof.toFront();
-        formationIns.toFront();
+        courQ.toBack();
+        quiz.toBack();
     }
 
     @FXML public void setSupprimerQuiz(ActionEvent event){
@@ -853,6 +885,7 @@ public class AccuielController implements Initializable {
             Object o = listCoursQ.getSelectionModel().getSelectedItem();
             if (o != null) {
                 String s = (String) o;
+                suivi.add("puis il a ouvert le cour "+s+", puis");
                 String path = Cours.getPath(s);
               File f = new File(path);
               Desktop.getDesktop().open(f);
@@ -990,6 +1023,7 @@ public class AccuielController implements Initializable {
                 tableSondages.getItems().add(s.get(i));
 
             supprimerSondage.setVisible(true);
+            ttSndg.setText("Mes Sondages");
             mtSondage.setText("Tous les Sondages");
             System.out.println("Voici vos Sondages");
             return 1;
@@ -1001,6 +1035,7 @@ public class AccuielController implements Initializable {
                 tableSondages.getItems().add(s.get(i));
 
             supprimerSondage.setVisible(false);
+            ttSndg.setText("Tous les Sondages");
             mtSondage.setText("Mes Sondages");
             System.out.println("Vois tous les sondages");
             return 1;
@@ -1062,6 +1097,8 @@ public class AccuielController implements Initializable {
         }
         else{
             mesBlogBtn.setVisible(false);
+            creerBlog.setVisible(false);
+            creerWiki.setVisible(false);
             mesWikiBtn.setVisible(false);
         }
     }
@@ -1074,14 +1111,14 @@ public class AccuielController implements Initializable {
 
             ArrayList<listTwoPar> l = BlogBD.getMyBlogs(Integer.parseInt(id.getText()));
             for (int i = 0; i < l.size(); i++) {
-                tableWiki.getItems().add(l.get(i));
+                tableBlog.getItems().add(l.get(i));
             }
             supprimerBlog.setVisible(true);
             partagerBlog.setVisible(true);
-            creerBlog.setVisible(true);
             modifierBlog.setVisible(true);
 
             mesBlogBtn.setText("Tous les Blogs");
+            ttmblg.setText("Mes Blogs");
             return 1;
         }
 
@@ -1096,18 +1133,232 @@ public class AccuielController implements Initializable {
 
             supprimerBlog.setVisible(false);
             partagerBlog.setVisible(false);
-            creerBlog.setVisible(false);
             modifierBlog.setVisible(false);
+            ttmblg.setText("Tous les Blogs");
             mesBlogBtn.setText("Mes Blogs");
             return 1;
         }
 
     }
 
+    @FXML public void PartagerBlog(){
+        Object o = tableBlog.getSelectionModel().getSelectedItem();
+        if(o != null){
+            listTwoPar l = (listTwoPar)o;
+
+            BlogBD.partager(l.getTitre());
+            System.out.println("Blog partagé");
+
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setTitle("Informaton Dialog");
+            a.setHeaderText("Look, an information Dialog");
+            a.setContentText("Blog partagé");
+            a.showAndWait();
+        }
+
+    }
+
+    @FXML public void SupprimerBlog(){
+        Object o = tableBlog.getSelectionModel().getSelectedItem();
+        if(o != null) {
+            listTwoPar l = (listTwoPar) o;
+
+            BlogBD.supprimerBlog(l.getTitre());
+            System.out.println("Blog supprimé");
+
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setTitle("Informaton Dialog");
+            a.setHeaderText("Look, an information Dialog");
+            a.setContentText("Blog supprimé");
+            a.showAndWait();
+            tableBlog.getItems().remove(o);
+
+        }
+    }
+
+    @FXML public void CrBlog(){
+            creerBLG.toFront();
+            nomBlog.clear();
+            contenuBlog.clear();
+            proposC.clear();
+
+            nomBlog.setEditable(true);
+            contenuBlog.setEditable(true);
+            proposC.setEditable(true);
+            parcourir1.setVisible(true);
+            parcourir2.setVisible(true);
+            creer1Blog.setVisible(true);
+            image2Blog.setImage(null);
+            image1Blog.setImage(null);
+            creer1Blog.setText("Creer");
+    }
+    @FXML public void setParcourir1(){
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Open File");
+        fc.setInitialDirectory(new File(System.getProperty("user.home")));
+        fc.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files ", "*.jpg")
+               // new FileChooser.ExtensionFilter("Image Files", "*.jpeg"),
+                //new FileChooser.ExtensionFilter("Image Files", "*.png")
+                );
+
+        image1Blog.setImage(null);
+        File f = fc.showOpenDialog(stage);
+        String imagePath = f.toURI().toString();
+        System.out.println(imagePath);
+
+        Image image = new Image(imagePath);
+            image1Blog.setImage(image);
+    }
+
+    @FXML public void setParcourir2(){
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Open File");
+        fc.setInitialDirectory(new File(System.getProperty("user.home")));
+        fc.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files ", "*.jpg")
+                // new FileChooser.ExtensionFilter("Image Files", "*.jpeg"),
+                //new FileChooser.ExtensionFilter("Image Files", "*.png")
+        );
+            image2Blog.setImage(null);
+        File f = fc.showOpenDialog(stage);
+        String imagePath = f.toURI().toString();
+        System.out.println(imagePath);
+        Image image = new Image(imagePath);
+        image2Blog.setImage(image);
+    }
+
+    @FXML public int CreeBlog(){
+        if(creer1Blog.getText().equals("Creer")){
+        if(nomBlog.getText().isEmpty()==false && contenuBlog.getText().isEmpty()==false && proposC.getText().isEmpty()==false && image1Blog.getImage().isError()==false && image2Blog.getImage().isError()==false){
+            String path1 = image1Blog.getImage().getUrl();
+            System.out.println(path1);
+            String path2 = image2Blog.getImage().getUrl();
+
+            BlogBD.CreerBlog(nomBlog.getText(), contenuBlog.getText(), path1, path2, Integer.parseInt(id.getText()), nom.getText(), proposC.getText());
+            System.out.println("Creation faite");
+
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setTitle("Informaton Dialog");
+            a.setHeaderText("Look, an information Dialog");
+            a.setContentText("Blog créé");
+            a.showAndWait();
+
+            blgwk.toFront();
+            nomBlog.clear();
+            contenuBlog.clear();
+            proposC.clear();
+            if(ttmblg.getText().equals("Mes Blogs")) {
+                tableBlog.getItems().clear();
+                ArrayList<listTwoPar> l = BlogBD.getMyBlogs(Integer.parseInt(id.getText()));
+                for (int i = 0; i < l.size(); i++) {
+                    tableBlog.getItems().add(l.get(i));
+                }
+            }
+        }
+        return 1;
+        }
+        else{
+            if(nomBlog.getText().isEmpty()==false && contenuBlog.getText().isEmpty()==false && proposC.getText().isEmpty()==false && image1Blog.getImage().isError()==false && image2Blog.getImage().isError()==false){
+                String path1 = image1Blog.getImage().getUrl();
+                String path2 = image2Blog.getImage().getUrl();
+
+                BlogBD.modifierBlog(nomBlog.getText(), contenuBlog.getText(), path1, path2, Integer.parseInt(id.getText()), proposC.getText());
+
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setTitle("Informaton Dialog");
+                a.setHeaderText("Look, an information Dialog");
+                a.setContentText("Blog modifié");
+                a.showAndWait();
+                blgwk.toFront();
+                nomBlog.clear();
+                contenuBlog.clear();
+                proposC.clear();
+
+                if(ttmblg.getText().equals("Mes Blogs")) {
+                    tableBlog.getItems().clear();
+                    ArrayList<listTwoPar> l = BlogBD.getMyBlogs(Integer.parseInt(id.getText()));
+                    for (int i = 0; i < l.size(); i++) {
+                        tableBlog.getItems().add(l.get(i));
+                    }
+                }
+            }
+                return 1;
+        }
+
+
+    }
+
+    @FXML public void setModifierBlog(){
+        Object o = tableBlog.getSelectionModel().getSelectedItem();
+        if(o != null){
+            listTwoPar l = (listTwoPar)o;
+            creerBLG.toFront();
+            nomBlog.setEditable(false);
+            contenuBlog.setEditable(true);
+            proposC.setEditable(true);
+            parcourir1.setVisible(true);
+            parcourir2.setVisible(true);
+            creer1Blog.setVisible(true);
+            image1Blog.setImage(null);
+            image2Blog.setImage(null);
+
+            ArrayList <Blog> b = BlogBD.consulterBlog(l.getTitre());
+            nomBlog.setText(b.get(0).getNomB());
+            contenuBlog.setText(b.get(0).getContenu());
+            proposC.setText(b.get(0).getProposC());
+
+            Image im = new Image(b.get(0).getImage1());
+            Image im1 = new Image(b.get(0).getImage2());
+            image1Blog.setImage(im);
+            image2Blog.setImage(im1);
+
+            creer1Blog.setText("Modifier");
+
+        }
+    }
+
+    @FXML public void setRetourBlog(){
+        nomBlog.clear();
+        contenuBlog.clear();
+        proposC.clear();
+
+        blgwk.toFront();
+
+    }
+
+    @FXML public void setConsulterBlog(){
+        Object o = tableBlog.getSelectionModel().getSelectedItem();
+        if(o != null){
+            listTwoPar l = (listTwoPar)o;
+            creerBLG.toFront();
+
+            nomBlog.setEditable(false);
+            contenuBlog.setEditable(false);
+            proposC.setEditable(false);
+
+            parcourir1.setVisible(false);
+            parcourir2.setVisible(false);
+            creer1Blog.setVisible(false);
+            image1Blog.setImage(null);
+            image2Blog.setImage(null);
+
+
+            ArrayList<Blog> b = BlogBD.consulterBlog(l.getTitre());
+            nomBlog.setText(b.get(0).getNomB());
+            contenuBlog.setText(b.get(0).getContenu());
+            proposC.setText(b.get(0).getProposC());
+            Image im = new Image(b.get(0).getImage1());
+            Image im1 = new Image(b.get(0).getImage2());
+            image1Blog.setImage(im);
+            image2Blog.setImage(im1);
+
+        }
+
+    }
+
     @FXML public int mesWiki(){
-
         if(mesWikiBtn.getText().equals("Mes Wikis")){
-
             tableWiki.getItems().clear();
 
             ArrayList<listTwoPar> l = WikiBD.getMyWikis(Integer.parseInt(id.getText()));
@@ -1115,29 +1366,196 @@ public class AccuielController implements Initializable {
                 tableWiki.getItems().add(l.get(i));
             }
             supprimerWiki.setVisible(true);
-            creerWiki.setVisible(true);
-            modifierWiki.setVisible(true);
+            if(Integer.parseInt(id.getText())>1 && Integer.parseInt(id.getText())<1000) creerWiki.setVisible(true);
+            ttmwk.setText("Mes Wikis");
             mesWikiBtn.setText("Tous les Wikis");
             return 1;
         }
 
         else{
             tableWiki.getItems().clear();
-
-            ArrayList<listTwoPar> l = WikiBD.getMyWikis(Integer.parseInt(id.getText()));
+            ArrayList<listTwoPar> l = WikiBD.getWikis();
 
             for (int i = 0; i < l.size(); i++){
                 tableWiki.getItems().add(l.get(i));
             }
             supprimerWiki.setVisible(false);
-            creerWiki.setVisible(false);
-            modifierWiki.setVisible(false);
+            if(Integer.parseInt(id.getText())>1 && Integer.parseInt(id.getText())<1000) creerWiki.setVisible(true);
+            ttmwk.setText("Tous les Wikis");
             mesWikiBtn.setText("Mes Wikis");
             return 1;
         }
     }
 
 
+        @FXML public void setConsulterWiki(){
+            Object o = tableWiki.getSelectionModel().getSelectedItem();
+            if(o != null){
+                listTwoPar l = (listTwoPar)o;
+                editerWiki.setVisible(true);
+                ArrayList<Wiki> w = WikiBD.consulterWiki(l.getTitre());
+                nomWiki.setEditable(false);
+                problemW.setEditable(false);
+                creerWiki1.setVisible(false);
+                creerW.toFront();
+
+                nomWiki.setText(w.get(0).getNomW());
+                problemW.setText(w.get(0).getProblem());
+                contenuW.setText(w.get(0).getContenu());
+                editeur.setText(w.get(0).getEditeur());
+
+
+            }
+
+        }
+
+        @FXML public void setEditerWiki() {
+
+           WikiBD.editierWiki(nomWiki.getText(), contenuW.getText(), nom.getText());
+
+           editeur.setText(WikiBD.getEditeur(nomWiki.getText()));
+
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setTitle("Informaton Dialog");
+            a.setHeaderText("Look, an information Dialog");
+            a.setContentText("Vous avez editez le wiki");
+            a.showAndWait();
+
+           blgwk.toFront();
+
+            }
+
+
+
+        @FXML public void CrWiki() {
+                creerW.toFront();
+                nomWiki.clear();
+                problemW.clear();
+                contenuW.clear();
+
+                nomWiki.setEditable(true);
+                problemW.setEditable(true);
+                contenuW.setEditable(true);
+                creerWiki1.setVisible(true);
+                editerWiki.setVisible(false);
+        }
+
+        @FXML public void setCreeWiki(){
+        if(nomWiki.getText().isEmpty()==false && problemW.getText().isEmpty()==false && contenuW.getText().isEmpty()==false){
+            WikiBD.creerWiki(nomWiki.getText(), problemW.getText(), contenuW.getText(), Integer.parseInt(id.getText()), nom.getText());
+
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setTitle("Informaton Dialog");
+            a.setHeaderText("Look, an information Dialog");
+            a.setContentText("Wiki créé");
+            a.showAndWait();
+
+            nomWiki.clear();
+            problemW.clear();
+            contenuW.clear();
+            blgwk.toFront();
+
+            tableWiki.getItems().clear();
+            ArrayList<listTwoPar> l = WikiBD.getWikis();
+            for(int i=0; i<l.size(); i++)
+                tableWiki.getItems().add(l.get(i));
+        }
+        }
+
+        @FXML public void setSupprimerWiki(){
+            Object o = tableWiki.getSelectionModel().getSelectedItem();
+            if(o != null){
+                listTwoPar l = (listTwoPar)o;
+
+                WikiBD.supprimerWiki(l.getTitre());
+                tableWiki.getItems().remove(o);
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setTitle("Informaton Dialog");
+                a.setHeaderText("Look, an information Dialog");
+                a.setContentText("Wiki créé");
+                a.showAndWait();
+
+                tableWiki.getItems().clear();
+                ArrayList<listTwoPar> w = WikiBD.getWikis();
+                for(int i=0; i<w.size(); i++)
+                    tableWiki.getItems().add(w.get(i));
+            }
+
+        }
+
+        @FXML public void retourWiki(){
+            nomWiki.clear();
+            problemW.clear();
+            contenuW.clear();
+            blgwk.toFront();
+        }
+
+        @FXML public void afficherRessouce(){
+            ArrayList<String> s = Formations.getAll();
+            listFor.getItems().clear();
+
+            for(int i=0; i<s.size(); i++)
+                listFor.getItems().add(s.get(i));
+
+        }
+
+        @FXML public void afficherToutAdd() {
+            Object o = listFor.getSelectionModel().getSelectedItem();
+            if (o != null) {
+                String s = (String) o;
+                tableApp.getItems().clear();
+                tableProf.getItems().clear();
+                ArrayList<listTwoPar1> p = User.afficherP(Formations.getNumF(s));
+
+                for (int i = 0; i < p.size(); i++)
+                    tableApp.getItems().add(p.get(i));
+
+                ArrayList<listTwoPar1> p1 = User.afficherIns(Formations.getNumF(s));
+                for (int i = 0; i < p1.size(); i++)
+                    tableProf.getItems().add(p1.get(i));
+                supprimerFormaa.setDisable(false);
+                supprimerInstr.setDisable(false);
+                supprimerApp.setDisable(false);
+
+            }
+        }
+
+            @FXML public void supprimerFor(){
+                Object o = listFor.getSelectionModel().getSelectedItem();
+                if(o != null) {
+                    String h = (String) o;
+                    Formations.supprimerFormation(Formations.getNumF(h));
+
+                    tableApp.getItems().clear();
+                    tableProf.getItems().clear();
+                    ArrayList<String> s = Formations.getAll();
+                    listFor.getItems().clear();
+
+                    for(int i=0; i<s.size(); i++)
+                        listFor.getItems().add(s.get(i));
+                }
+
+            }
+
+
+        @FXML public void suppIns(){
+                Object o = tableProf.getSelectionModel().getSelectedItem();
+                if(o != null){
+                    listTwoPar1 s = (listTwoPar1) o;
+                    Formations.suppInt(s.getNom());
+                    tableProf.getItems().remove(o);
+                }
+        }
+
+       @FXML public void suppApp(){
+        Object o = tableApp.getSelectionModel().getSelectedItem();
+        if(o != null){
+            listTwoPar1 s = (listTwoPar1)o;
+            Formations.suppApp(s.getNom());
+            tableApp.getItems().remove(o);
+
+        }
+    }
 
 
 }

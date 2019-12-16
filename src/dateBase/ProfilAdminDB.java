@@ -41,12 +41,13 @@ public class ProfilAdminDB extends BD{
 
 				){
 			    
-			  pr1.setInt(1, id);
-			  pr1.setString(2,nom);
-			  pr1.setString(3,prenom);
-			  pr1.setString(4,string);
-			  pr1.setString(5,adresse);
-			  pr1.setString(6,password);
+
+			  pr1.setString(1,nom);
+			  pr1.setString(2,prenom);
+			  pr1.setString(3,string);
+			  pr1.setString(4,adresse);
+			  pr1.setString(5,password);
+			  pr1.setInt(6, id);
 			  
 			  pr1.execute();
 			  System.out.println("Modification effectue avec succee");

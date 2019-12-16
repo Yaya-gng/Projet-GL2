@@ -54,6 +54,21 @@ public class Connecter extends BD {
 		return null;
 	}
 
+	public static String getImage(){
+		try(Connection con = connect();
+
+			PreparedStatement pr = con.prepareStatement("Select photo from Connecter");
+		){
+			ResultSet r = pr.executeQuery();
+			if(r.next())
+				return r.getString("photo");
+
+
+		}catch(SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
 
 
 }

@@ -5,13 +5,14 @@ import java.sql.Date;
 public class Instructeur extends User implements GestionResInsApp {
 
 	private int id;
-	private String grade,specialite;
+	private String grade,specialite, photo;
 	
-	public Instructeur(int id,String nom, String prenom, Date date, String adresse,int tel,String password , String g, String sp) {
+	public Instructeur(int id,String nom, String prenom, Date date, String adresse,int tel,String password , String g, String sp, String photo) {
 		super(nom, prenom, date, adresse,tel,password);
 		this.id = id;
 		grade = g;
 		specialite = sp;
+		this.photo = photo;
 		
 		
 	}
@@ -50,5 +51,13 @@ public class Instructeur extends User implements GestionResInsApp {
 	public void gererDroitA(Apprenant a) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 }

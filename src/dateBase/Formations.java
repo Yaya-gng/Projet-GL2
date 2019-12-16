@@ -150,4 +150,51 @@ public static void gererDroitAcces(ArrayList<Integer> app, int numF){
 		}
 	}
 
+	public static ArrayList<String> getAll(){
+		ArrayList<String> s = new ArrayList<>();
+		try(
+				Connection con = connect();
+
+				PreparedStatement ps = con.prepareStatement("Select nomF from formation");
+		){
+			ResultSet r = ps.executeQuery();
+
+			while(r.next()) s.add(r.getString("nomF"));
+			return s;
+		}catch(SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return s;
+	}
+
+	public static void suppInt(String nom){
+		try(
+				Connection con = connect();
+
+				PreparedStatement pr = con.prepareStatement("delete from appranant where nom=?");
+		){
+					pr.setString(1,nom);
+					pr.execute();
+
+		}catch(SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public static void suppApp(String nom){
+		try(
+				Connection con = connect();
+				PreparedStatement pr1 = con.prepareStatement("delete from accee where matricule=(select matricule from apprenant where nom=?)");
+				PreparedStatement pr = con.prepareStatement("delete from apprenant where nom=?");
+		){
+			pr1.setString(1,nom);
+			pr1.execute();
+			pr.setString(1,nom);
+			pr.execute();
+
+		}catch(SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
 }

@@ -107,6 +107,14 @@
                                                 </VBox>
                                              </children>
                                           </Pane>
+                                          <Pane fx:id="admin" prefHeight="243.0" prefWidth="200.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <Button layoutX="47.0" layoutY="35.0" mnemonicParsing="false" onAction="#afficherRessouce" prefWidth="95.0" text="Ressourses" />
+                                                <Button layoutX="47.0" layoutY="75.0" mnemonicParsing="false" onAction="#sondage" prefWidth="95.0" text="Sondages" />
+                                                <Button layoutX="47.0" layoutY="115.0" mnemonicParsing="false" onAction="#afficherBlogWiki" prefHeight="25.0" prefWidth="95.0" text="Blogs et Wikis" />
+                                                <Button layoutX="47.0" layoutY="154.0" mnemonicParsing="false" prefWidth="95.0" text="Chat" />
+                                             </children>
+                                          </Pane>
                                        </children>
                                     </AnchorPane>
                                 </items>
@@ -115,37 +123,6 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Pane fx:id="profil" prefHeight="494.0" prefWidth="580.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <children>
-                                    <Label layoutX="62.0" layoutY="29.0" text="Your Profil :" textFill="WHITE">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="29.0" layoutY="78.0" text="Matricule :" textFill="WHITE" />
-                                    <Label layoutX="28.0" layoutY="123.0" text="Name :" textFill="WHITE" />
-                                    <Label layoutX="26.0" layoutY="166.0" text="Last Name :" textFill="WHITE" />
-                                    <Label layoutX="25.0" layoutY="208.0" text="Date of birth :" textFill="WHITE" />
-                                    <Label layoutX="22.0" layoutY="253.0" text="Address :" textFill="WHITE" />
-                                    <Label layoutX="29.0" layoutY="294.0" text="Password :" textFill="WHITE" />
-                                    <Label fx:id="grade" layoutX="292.0" layoutY="78.0" text="Grade :" textFill="WHITE" />
-                                    <Label fx:id="spec" layoutX="292.0" layoutY="123.0" text="Specialite :" textFill="WHITE" />
-                                    <Label fx:id="niv" layoutX="292.0" layoutY="166.0" text="Level :" textFill="WHITE" />
-                                    <Label fx:id="section" layoutX="292.0" layoutY="208.0" text="Section" textFill="WHITE" />
-                                    <TextField fx:id="t1" disable="true" layoutX="111.0" layoutY="74.0" />
-                                    <TextField fx:id="t2" disable="true" layoutX="111.0" layoutY="119.0" />
-                                    <TextField fx:id="t3" disable="true" layoutX="111.0" layoutY="162.0" />
-                                    <TextField fx:id="t4" disable="true" layoutX="111.0" layoutY="204.0" />
-                                    <TextField fx:id="t5" disable="true" layoutX="111.0" layoutY="249.0" />
-                                    <TextField fx:id="t6" disable="true" layoutX="111.0" layoutY="290.0" />
-                                    <TextField fx:id="gra" disable="true" layoutX="347.0" layoutY="74.0" />
-                                    <TextField fx:id="special" disable="true" layoutX="347.0" layoutY="119.0" />
-                                    <TextField fx:id="nve" disable="true" layoutX="347.0" layoutY="162.0" />
-                                    <TextField fx:id="sec" disable="true" layoutX="347.0" layoutY="204.0" />
-                                    <Button fx:id="modify" layoutX="185.0" layoutY="388.0" mnemonicParsing="false" onAction="#modifierProfil" prefHeight="25.0" prefWidth="73.0" text="Modify" />
-                                    <Button fx:id="confirme" disable="true" layoutX="382.0" layoutY="388.0" mnemonicParsing="false" onAction="#confirmeModification" prefHeight="25.0" prefWidth="77.0" text="Confirme" />
-                                 </children>
-                              </Pane>
                               <Pane fx:id="formationApp" prefHeight="494.0" prefWidth="579.3333333333334" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
                                     <HBox layoutX="-1.0" prefHeight="494.0" prefWidth="580.0">
@@ -364,6 +341,244 @@
                                     </VBox>
                                  </children>
                               </Pane>
+                              <Pane fx:id="creerBLG" prefHeight="494.0" prefWidth="579.3333333333334" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <ImageView fitHeight="496.0" fitWidth="580.0" layoutX="-1.0" layoutY="-3.0">
+                                       <image>
+                                          <Image url="@Stones_Rivers_Mountains_USA_Scenery_Yosemite_560119_1920x1080%20(1).jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <HBox prefHeight="494.0" prefWidth="580.0">
+                                       <children>
+                                          <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="350.0" spacing="10.0">
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                             <children>
+                                                <TextField fx:id="nomBlog" alignment="TOP_CENTER">
+                                                   <font>
+                                                      <Font name="Pristina" size="20.0" />
+                                                   </font>
+                                                </TextField>
+                                                <Pane prefHeight="250.0" prefWidth="330.0" style="-fx-background-color: white;">
+                                                   <children>
+                                                      <VBox alignment="CENTER" prefHeight="250.0" prefWidth="330.0">
+                                                         <children>
+                                                            <ImageView fx:id="image1Blog" fitHeight="230.0" fitWidth="310.0" pickOnBounds="true" preserveRatio="true" />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </Pane>
+                                                <Button fx:id="parcourir1" mnemonicParsing="false" onAction="#setParcourir1" text="Parcourir" />
+                                                <TextArea fx:id="contenuBlog" prefHeight="120.0" prefWidth="330.0" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="230.0" spacing="10.0">
+                                             <children>
+                                                <Pane prefHeight="210.0" prefWidth="210.0" style="-fx-background-color: white;">
+                                                   <children>
+                                                      <VBox alignment="CENTER" layoutY="-1.0" prefHeight="196.0" prefWidth="210.0">
+                                                         <children>
+                                                            <ImageView fx:id="image2Blog" fitHeight="183.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true" />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </Pane>
+                                                <Button fx:id="parcourir2" mnemonicParsing="false" onAction="#setParcourir2" text="Parcourir" />
+                                                <TextArea fx:id="proposC" prefHeight="150.0" prefWidth="210.0" />
+                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                                                   <children>
+                                                      <Button fx:id="creer1Blog" mnemonicParsing="false" onAction="#CreeBlog" text="Creer" />
+                                                      <Button fx:id="retourBlog" mnemonicParsing="false" onAction="#setRetourBlog" text="Retour" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="blgwk" prefHeight="494.0" prefWidth="579.3333333333334" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <HBox prefHeight="494.0" prefWidth="580.0">
+                                       <children>
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="400.0" spacing="10.0">
+                                             <children>
+                                                <Label fx:id="ttmblg" text="Tout les blogs" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="Century" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <TableView fx:id="tableBlog" prefHeight="200.0" prefWidth="200.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="titreBlog" prefWidth="190.0" text="Titre blog" />
+                                                    <TableColumn fx:id="createurBlog" prefWidth="190.0" text="Createur" />
+                                                  </columns>
+                                                </TableView>
+                                                <Label fx:id="ttmwk" text="Tout les wikis" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="Century" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <TableView fx:id="tableWiki" prefHeight="200.0" prefWidth="200.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="titreWiki" minWidth="190.0" prefWidth="75.0" text="Titre wiki" />
+                                                    <TableColumn fx:id="createurWiki" minWidth="190.0" prefWidth="75.0" text="Createur" />
+                                                  </columns>
+                                                </TableView>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                          </VBox>
+                                          <VBox prefHeight="200.0" prefWidth="180.0">
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="247.0" prefWidth="180.0" spacing="10.0">
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                   <children>
+                                                      <Button fx:id="mesBlogBtn" mnemonicParsing="false" onAction="#mesBlogs" text="Mes Blogs" />
+                                                      <Button fx:id="consulterBlog" mnemonicParsing="false" onAction="#setConsulterBlog" prefHeight="25.0" prefWidth="71.0" text="Consulter" />
+                                                      <Button fx:id="partagerBlog" mnemonicParsing="false" onAction="#PartagerBlog" prefHeight="25.0" prefWidth="71.0" text="Partager" visible="false" />
+                                                      <Button fx:id="supprimerBlog" mnemonicParsing="false" onAction="#SupprimerBlog" text="Supprimer" visible="false" />
+                                                      <Button fx:id="creerBlog" mnemonicParsing="false" onAction="#CrBlog" prefHeight="25.0" prefWidth="71.0" text="Creer" />
+                                                      <Button fx:id="modifierBlog" mnemonicParsing="false" onAction="#setModifierBlog" prefHeight="25.0" prefWidth="71.0" text="Modifier" visible="false" />
+                                                   </children>
+                                                   <padding>
+                                                      <Insets top="40.0" />
+                                                   </padding>
+                                                </VBox>
+                                                <VBox alignment="CENTER" prefHeight="247.0" prefWidth="100.0" spacing="10.0">
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                   <children>
+                                                      <Button fx:id="mesWikiBtn" mnemonicParsing="false" onAction="#mesWiki" text="Mes Wikis" />
+                                                      <Button fx:id="consulterWiki" mnemonicParsing="false" onAction="#setConsulterWiki" prefWidth="70.0" text="Consulter" />
+                                                      <Button fx:id="supprimerWiki" mnemonicParsing="false" onAction="#setSupprimerWiki" text="Supprimer" visible="false" />
+                                                      <Button fx:id="creerWiki" mnemonicParsing="false" onAction="#CrWiki" prefWidth="70.0" text="Creer" />
+                                                   </children>
+                                                   <padding>
+                                                      <Insets top="27.0" />
+                                                   </padding>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="creerW" prefHeight="494.0" prefWidth="579.3333333333334" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <HBox prefHeight="496.0" prefWidth="580.0">
+                                       <children>
+                                          <VBox prefHeight="200.0" prefWidth="400.0" spacing="20.0">
+                                             <children>
+                                                <TextField fx:id="nomWiki" promptText="Nom du Wiki" />
+                                                <TextArea fx:id="problemW" prefHeight="100.0" prefWidth="200.0" promptText="Problematique" />
+                                                <TextArea fx:id="contenuW" prefHeight="343.0" prefWidth="380.0" promptText="Contenu du Wiki" />
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+                                             </padding>
+                                          </VBox>
+                                          <VBox prefHeight="200.0" prefWidth="180.0">
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="165.0" prefWidth="180.0">
+                                                   <children>
+                                                      <ImageView fitHeight="161.0" fitWidth="170.0">
+                                                         <image>
+                                                            <Image url="@1200px-Wikipedia-logo-v2.svg.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="CENTER" prefHeight="327.0" prefWidth="180.0" spacing="10.0">
+                                                   <children>
+                                                      <Button fx:id="creerWiki1" mnemonicParsing="false" onAction="#setCreeWiki" prefWidth="50.0" text="Creer" />
+                                                      <Button fx:id="editerWiki" mnemonicParsing="false" onAction="#setEditerWiki" text="Editer" />
+                                                      <Label text="Edited by">
+                                                         <textFill>
+                                                            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                                                               <stops>
+                                                                  <Stop color="#34ff21" />
+                                                                  <Stop color="WHITE" offset="1.0" />
+                                                               </stops>
+                                                            </RadialGradient>
+                                                         </textFill>
+                                                         <font>
+                                                            <Font name="Pristina" size="22.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="editeur" prefHeight="44.0" prefWidth="146.0">
+                                                         <textFill>
+                                                            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                                                               <stops>
+                                                                  <Stop color="#34ff21" />
+                                                                  <Stop color="WHITE" offset="1.0" />
+                                                               </stops>
+                                                            </RadialGradient>
+                                                         </textFill>
+                                                         <font>
+                                                            <Font name="Pristina" size="27.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Button mnemonicParsing="false" onAction="#retourWiki" text="Retour" />
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                                                   </padding>
+                                                </VBox>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                             <padding>
+                                                <Insets top="20.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="profil" prefHeight="494.0" prefWidth="580.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label layoutX="62.0" layoutY="29.0" text="Your Profil :" textFill="WHITE">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="29.0" layoutY="78.0" text="Matricule :" textFill="WHITE" />
+                                    <Label layoutX="28.0" layoutY="123.0" text="Name :" textFill="WHITE" />
+                                    <Label layoutX="26.0" layoutY="166.0" text="Last Name :" textFill="WHITE" />
+                                    <Label layoutX="25.0" layoutY="208.0" text="Date of birth :" textFill="WHITE" />
+                                    <Label layoutX="22.0" layoutY="253.0" text="Address :" textFill="WHITE" />
+                                    <Label layoutX="29.0" layoutY="294.0" text="Password :" textFill="WHITE" />
+                                    <Label fx:id="grade" layoutX="292.0" layoutY="78.0" text="Grade :" textFill="WHITE" />
+                                    <Label fx:id="spec" layoutX="292.0" layoutY="123.0" text="Specialite :" textFill="WHITE" />
+                                    <Label fx:id="niv" layoutX="292.0" layoutY="166.0" text="Level :" textFill="WHITE" />
+                                    <Label fx:id="section" layoutX="292.0" layoutY="208.0" text="Section" textFill="WHITE" />
+                                    <TextField fx:id="t1" disable="true" layoutX="111.0" layoutY="74.0" />
+                                    <TextField fx:id="t2" disable="true" layoutX="111.0" layoutY="119.0" />
+                                    <TextField fx:id="t3" disable="true" layoutX="111.0" layoutY="162.0" />
+                                    <TextField fx:id="t4" disable="true" layoutX="111.0" layoutY="204.0" />
+                                    <TextField fx:id="t5" disable="true" layoutX="111.0" layoutY="249.0" />
+                                    <TextField fx:id="t6" disable="true" layoutX="111.0" layoutY="290.0" />
+                                    <TextField fx:id="gra" disable="true" layoutX="347.0" layoutY="74.0" />
+                                    <TextField fx:id="special" disable="true" layoutX="347.0" layoutY="119.0" />
+                                    <TextField fx:id="nve" disable="true" layoutX="347.0" layoutY="162.0" />
+                                    <TextField fx:id="sec" disable="true" layoutX="347.0" layoutY="204.0" />
+                                    <Button fx:id="modify" layoutX="185.0" layoutY="388.0" mnemonicParsing="false" onAction="#modifierProfil" prefHeight="25.0" prefWidth="73.0" text="Modify" />
+                                    <Button fx:id="confirme" disable="true" layoutX="382.0" layoutY="388.0" mnemonicParsing="false" onAction="#confirmeModification" prefHeight="25.0" prefWidth="77.0" text="Confirme" />
+                                 </children>
+                              </Pane>
                               <Pane fx:id="formationIns" layoutX="152.0" layoutY="85.0" prefHeight="494.0" prefWidth="580.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
                                     <VBox prefHeight="496.0" prefWidth="580.0" spacing="20.0">
@@ -457,6 +672,60 @@
                                      </Pane>
                                  </children>
                               </Pane>
+                              <Pane fx:id="formationAdm" prefHeight="494.0" prefWidth="579.0" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <HBox layoutX="1.0" layoutY="23.0" prefHeight="130.0" prefWidth="579.0">
+                                       <children>
+                                          <ListView fx:id="listFor" prefHeight="200.0" prefWidth="427.0" />
+                                          <VBox alignment="TOP_CENTER" prefHeight="130.0" prefWidth="152.0" spacing="15.0">
+                                             <children>
+                                                <Button mnemonicParsing="false" onAction="#afficherToutAdd" prefHeight="25.0" prefWidth="73.0" text="Afficher" />
+                                                <Button fx:id="supprimerFormaa" disable="true" mnemonicParsing="false" onAction="#supprimerFor" text="Supprimer" />
+                                             </children>
+                                             <padding>
+                                                <Insets top="25.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox layoutY="182.0" prefHeight="130.0" prefWidth="579.0">
+                                       <children>
+                                          <TableView fx:id="tableProf" prefHeight="130.0" prefWidth="427.0">
+                                            <columns>
+                                              <TableColumn fx:id="nomProf" prefWidth="205.0" text="Nom" />
+                                              <TableColumn fx:id="prenomProf" minWidth="0.0" prefWidth="220.0" text="Prenom" />
+                                            </columns>
+                                          </TableView>
+                                          <VBox alignment="TOP_CENTER" prefHeight="130.0" prefWidth="154.0" spacing="15.0">
+                                             <children>
+                                                <Button fx:id="supprimerInstr" disable="true" mnemonicParsing="false" onAction="#suppIns" text="Supprimer" />
+                                             </children>
+                                             <padding>
+                                                <Insets top="25.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox layoutX="1.0" layoutY="336.0" prefHeight="130.0" prefWidth="579.0">
+                                       <children>
+                                          <TableView fx:id="tableApp" prefHeight="130.0" prefWidth="427.0">
+                                            <columns>
+                                              <TableColumn fx:id="nomApp" prefWidth="211.0" text="Nom" />
+                                              <TableColumn fx:id="prenomApp" prefWidth="213.0" text="Prenom" />
+                                            </columns>
+                                          </TableView>
+                                          <VBox alignment="TOP_CENTER" prefHeight="130.0" prefWidth="153.0" spacing="15.0">
+                                             <children>
+                                                <Button fx:id="supprimerApp" disable="true" mnemonicParsing="false" onAction="#suppApp" text="Supprimer" />
+                                             </children>
+                                             <padding>
+                                                <Insets top="25.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </Pane>
                                <Pane fx:id="sondage" prefHeight="494.0" prefWidth="579.3333333333334" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                    <children>
                                        <AnchorPane layoutY="247.0" prefHeight="250.0" prefWidth="580.0">
@@ -532,7 +801,7 @@
                                            <children>
                                                <VBox alignment="TOP_CENTER" prefHeight="250.0" prefWidth="400.0">
                                                    <children>
-                                                       <Label prefHeight="43.0" prefWidth="214.0" text="Tout Les sondages">
+                                                       <Label fx:id="ttSndg" prefHeight="43.0" prefWidth="214.0" text="Tout Les sondages">
                                                            <font>
                                                                <Font name="Century" size="25.0" />
                                                            </font>
@@ -572,213 +841,6 @@
                                        </HBox>
                                    </children>
                                </Pane>
-                              <Pane prefHeight="494.0" prefWidth="579.3333333333334" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <children>
-                                    <HBox prefHeight="496.0" prefWidth="580.0">
-                                       <children>
-                                          <VBox prefHeight="200.0" prefWidth="400.0" spacing="20.0">
-                                             <children>
-                                                <TextArea prefHeight="100.0" prefWidth="200.0" />
-                                                <TextArea prefHeight="343.0" prefWidth="380.0" />
-                                             </children>
-                                             <padding>
-                                                <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
-                                             </padding>
-                                          </VBox>
-                                          <VBox prefHeight="200.0" prefWidth="180.0">
-                                             <children>
-                                                <VBox alignment="CENTER" prefHeight="165.0" prefWidth="180.0">
-                                                   <children>
-                                                      <ImageView fitHeight="161.0" fitWidth="170.0">
-                                                         <image>
-                                                            <Image url="@1200px-Wikipedia-logo-v2.svg.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </VBox>
-                                                <VBox alignment="CENTER" prefHeight="327.0" prefWidth="180.0" spacing="10.0">
-                                                   <children>
-                                                      <Button mnemonicParsing="false" prefWidth="50.0" text="Creer" />
-                                                      <Button mnemonicParsing="false" text="Editer" />
-                                                      <Label text="Edited by">
-                                                         <textFill>
-                                                            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                                                               <stops>
-                                                                  <Stop color="#34ff21" />
-                                                                  <Stop color="WHITE" offset="1.0" />
-                                                               </stops>
-                                                            </RadialGradient>
-                                                         </textFill>
-                                                         <font>
-                                                            <Font name="Pristina" size="22.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label text="Yahia The King">
-                                                         <textFill>
-                                                            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                                                               <stops>
-                                                                  <Stop color="#34ff21" />
-                                                                  <Stop color="WHITE" offset="1.0" />
-                                                               </stops>
-                                                            </RadialGradient>
-                                                         </textFill>
-                                                         <font>
-                                                            <Font name="Pristina" size="27.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                   <padding>
-                                                      <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
-                                                   </padding>
-                                                </VBox>
-                                             </children>
-                                             <HBox.margin>
-                                                <Insets />
-                                             </HBox.margin>
-                                             <padding>
-                                                <Insets top="20.0" />
-                                             </padding>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </Pane>
-                              <Pane fx:id="creerblog" prefHeight="494.0" prefWidth="579.3333333333334" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <children>
-                                    <ImageView fitHeight="496.0" fitWidth="580.0" layoutX="-1.0" layoutY="-3.0">
-                                       <image>
-                                          <Image url="@Stones_Rivers_Mountains_USA_Scenery_Yosemite_560119_1920x1080%20(1).jpg" />
-                                       </image>
-                                    </ImageView>
-                                    <HBox prefHeight="494.0" prefWidth="580.0">
-                                       <children>
-                                          <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="350.0" spacing="10.0">
-                                             <padding>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                             </padding>
-                                             <children>
-                                                <TextField alignment="TOP_CENTER">
-                                                   <font>
-                                                      <Font name="Pristina" size="20.0" />
-                                                   </font>
-                                                </TextField>
-                                                <Pane prefHeight="250.0" prefWidth="330.0" style="-fx-background-color: white;">
-                                                   <children>
-                                                      <VBox alignment="CENTER" prefHeight="250.0" prefWidth="330.0">
-                                                         <children>
-                                                            <ImageView fitHeight="230.0" fitWidth="310.0" pickOnBounds="true" preserveRatio="true" />
-                                                         </children>
-                                                      </VBox>
-                                                   </children>
-                                                </Pane>
-                                                <Button mnemonicParsing="false" text="parcourir" />
-                                                <TextArea prefHeight="120.0" prefWidth="330.0" />
-                                             </children>
-                                          </VBox>
-                                          <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="230.0" spacing="10.0">
-                                             <children>
-                                                <Pane prefHeight="210.0" prefWidth="210.0" style="-fx-background-color: white;">
-                                                   <children>
-                                                      <VBox alignment="CENTER" layoutY="-1.0" prefHeight="196.0" prefWidth="210.0">
-                                                         <children>
-                                                            <ImageView fitHeight="183.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true" />
-                                                         </children>
-                                                      </VBox>
-                                                   </children>
-                                                </Pane>
-                                                <Button mnemonicParsing="false" text="parcourir" />
-                                                <TextArea prefHeight="150.0" prefWidth="210.0" />
-                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
-                                                   <children>
-                                                      <Button mnemonicParsing="false" text="Creer" />
-                                                      <Button mnemonicParsing="false" text="Retour" />
-                                                   </children>
-                                                </HBox>
-                                             </children>
-                                             <opaqueInsets>
-                                                <Insets />
-                                             </opaqueInsets>
-                                             <padding>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                             </padding>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </Pane>
-                              <Pane fx:id="blgwk" prefHeight="494.0" prefWidth="579.3333333333334" style="-fx-background-color: #2E3238;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <children>
-                                    <HBox prefHeight="494.0" prefWidth="580.0">
-                                       <children>
-                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="400.0" spacing="10.0">
-                                             <children>
-                                                <Label text="Tout les blogs" textFill="WHITE">
-                                                   <font>
-                                                      <Font name="Century" size="20.0" />
-                                                   </font>
-                                                </Label>
-                                                <TableView fx:id="tableBlog" prefHeight="200.0" prefWidth="200.0">
-                                                  <columns>
-                                                    <TableColumn fx:id="titreBlog" prefWidth="190.0" text="Titre blog" />
-                                                    <TableColumn fx:id="createurBlog" prefWidth="190.0" text="Createur" />
-                                                  </columns>
-                                                </TableView>
-                                                <Label text="Tout les wikis" textFill="WHITE">
-                                                   <font>
-                                                      <Font name="Century" size="20.0" />
-                                                   </font>
-                                                </Label>
-                                                <TableView fx:id="tableWiki" prefHeight="200.0" prefWidth="200.0">
-                                                  <columns>
-                                                    <TableColumn fx:id="titreWiki" minWidth="190.0" prefWidth="75.0" text="Titre wiki" />
-                                                    <TableColumn fx:id="createurWiki" minWidth="190.0" prefWidth="75.0" text="Createur" />
-                                                  </columns>
-                                                </TableView>
-                                             </children>
-                                             <padding>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                             </padding>
-                                          </VBox>
-                                          <VBox prefHeight="200.0" prefWidth="180.0">
-                                             <children>
-                                                <VBox alignment="CENTER" prefHeight="247.0" prefWidth="180.0" spacing="10.0">
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                   <children>
-                                                      <Button fx:id="mesBlogBtn" mnemonicParsing="false" onAction="#mesBlogs" text="Mes Blogs" />
-                                                      <Button fx:id="consulterBlog" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="Consulter" />
-                                                      <Button fx:id="partagerBlog" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="Partager" />
-                                                      <Button fx:id="supprimerBlog" mnemonicParsing="false" text="Supprimer" />
-                                                      <Button fx:id="creerBlog" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="Creer" />
-                                                      <Button fx:id="modifierBlog" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" text="Modifier" />
-                                                   </children>
-                                                   <padding>
-                                                      <Insets top="40.0" />
-                                                   </padding>
-                                                </VBox>
-                                                <VBox alignment="CENTER" prefHeight="247.0" prefWidth="100.0" spacing="10.0">
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                   <children>
-                                                      <Button fx:id="mesWikiBtn" mnemonicParsing="false" onAction="#mesWiki" text="Mes Wikis" />
-                                                      <Button fx:id="consulterWiki" mnemonicParsing="false" prefWidth="70.0" text="Consulter" />
-                                                      <Button fx:id="partagerWiki" mnemonicParsing="false" prefWidth="70.0" text="Partager" />
-                                                      <Button fx:id="supprimerWiki" mnemonicParsing="false" text="Supprimer" />
-                                                      <Button fx:id="creerWiki" mnemonicParsing="false" prefWidth="70.0" text="Creer" />
-                                                      <Button fx:id="modifierWiki" mnemonicParsing="false" prefWidth="70.0" text="Modifier" />
-                                                   </children>
-                                                   <padding>
-                                                      <Insets top="27.0" />
-                                                   </padding>
-                                                </VBox>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </Pane>
                            </children>
                         </AnchorPane>
                      </items>

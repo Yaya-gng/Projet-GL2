@@ -12,21 +12,26 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Inscription implements Initializable {
 	
 
-	@FXML RadioButton r1,r2;
-	@FXML TextField t1,t2,t3,t4,grade,spec, level;
-	@FXML Spinner<Integer> section;
-	@FXML Button conf,ret;
-	@FXML DatePicker d;
-	@FXML PasswordField p;
-	@FXML Label lb;
+	@FXML private RadioButton r1,r2;
+	@FXML private TextField t1,t2,t3,t4,grade,spec, level;
+	@FXML private Spinner<Integer> section;
+	@FXML private Button conf,ret, parcourir;
+	@FXML private DatePicker d;
+	@FXML private PasswordField p;
+	@FXML private Label lb;
+	@FXML private ImageView image;
+
 	SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,10,1);
 
 
@@ -77,13 +82,14 @@ public class Inscription implements Initializable {
 						lb.setText("Un ou plusieurs champs sont irremplis");
 					}
 			else {			
-		ProfilInstructorDB.Inscrire(Integer.parseInt(t1.getText()),t2.getText(), t3.getText(), java.sql.Date.valueOf(d.getValue()), t4.getText(), grade.getText(), spec.getText(),p.getText());
+		ProfilInstructorDB.Inscrire(Integer.parseInt(t1.getText()),t2.getText(), t3.getText(), java.sql.Date.valueOf(d.getValue()), t4.getText(), grade.getText(), spec.getText(),p.getText(), image.getImage().getUrl());
 		t2.clear();
 		t3.clear();
 		t4.clear();
 		spec.clear();
 		grade.clear();
 		p.clear();
+		image.setImage(null);
 			}
 		
 		}
@@ -96,7 +102,7 @@ public class Inscription implements Initializable {
 				lb.setText("Un ou plusieurs champs sont irremplis");
 			}
 			else {
-			ProfilApprenantDB.Inscrire(Integer.parseInt(t1.getText()),t2.getText() ,t3.getText(), java.sql.Date.valueOf(d.getValue()),t4.getText(),spec.getText(), level.getText(),section.getValue(), p.getText());
+			ProfilApprenantDB.Inscrire(Integer.parseInt(t1.getText()),t2.getText() ,t3.getText(), java.sql.Date.valueOf(d.getValue()),t4.getText(),spec.getText(), Integer.parseInt(level.getText()),section.getValue(), p.getText(), image.getImage().getUrl());
 			t1.clear();
 			t2.clear();
 			t3.clear();
@@ -124,7 +130,27 @@ public class Inscription implements Initializable {
 		}
 		
 	}
+		private Stage stage;
 
+	@FXML public void setParcourir(){
+
+		FileChooser fc = new FileChooser();
+		fc.setTitle("Open File");
+		fc.setInitialDirectory(new File(System.getProperty("user.home")));
+		fc.getExtensionFilters().addAll(
+				new FileChooser.ExtensionFilter("Image Files ", "*.jpg")
+				// new FileChooser.ExtensionFilter("Image Files", "*.jpeg"),
+				//new FileChooser.ExtensionFilter("Image Files", "*.png")
+		);
+
+		image.setImage(null);
+		File f = fc.showOpenDialog(stage);
+		String imagePath = f.toURI().toString();
+		System.out.println(imagePath);
+
+		Image im = new Image(imagePath);
+		image.setImage(im);
+	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {

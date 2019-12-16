@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -48,16 +49,21 @@
             <TextField fx:id="spec" layoutX="525.0" layoutY="240.0" />
             <Label layoutX="437.0" layoutY="196.0" text="Grade" AnchorPane.leftAnchor="437.0" />
             <TextField fx:id="level" layoutX="525.0" layoutY="283.0" />
-            <Label layoutX="400.0" layoutY="89.0" text="Add your photo" />
+            <Label layoutX="399.0" layoutY="61.0" text="Add your photo" />
             <DatePicker fx:id="d" layoutX="175.0" layoutY="330.0" prefHeight="25.0" prefWidth="149.0" />
             <fx:define>
             <ToggleGroup fx:id="toggleGroup" />
             </fx:define>
-            <RadioButton fx:id="r1" layoutX="168.0" layoutY="136.0" mnemonicParsing="false" onAction="#r1" text="Instructor" toggleGroup="$toggleGroup" />
+            <RadioButton fx:id="r1" layoutX="168.0" layoutY="136.0" mnemonicParsing="false" onAction="#r1" text="Instructor">
+               <toggleGroup>
+                  <ToggleGroup fx:id="toggleGroup" />
+               </toggleGroup></RadioButton>
             <RadioButton fx:id="r2" layoutX="294.0" layoutY="136.0" mnemonicParsing="false" onAction="#r2" text="Learner" toggleGroup="$toggleGroup" />
             <Button fx:id="ret" layoutX="525.0" layoutY="591.0" mnemonicParsing="false" onAction="#Return" text="Return" />
             <Label fx:id="lb" layoutX="192.0" layoutY="491.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="369.0" text="" visible="false" />
             <TextField fx:id="grade" layoutX="525.0" layoutY="192.0" />
+            <ImageView fx:id="image" fitHeight="146.0" fitWidth="203.0" layoutX="497.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="parcourir" layoutX="410.0" layoutY="96.0" mnemonicParsing="false" onAction="#setParcourir" text="Parcourir" />
            
          </children>
       </AnchorPane>

@@ -5,9 +5,9 @@ import java.sql.Date;
 public class Apprenant extends User implements GestionResInsApp{
 
 	private int matricule,section,niveau;
-	private String filiere,specialite;
+	private String filiere,specialite, photo;
 	
-	public Apprenant(int matricule,String nom, String prenom, Date date, String adresse,String password ,int s,int niv,String sp) {
+	public Apprenant(int matricule,String nom, String prenom, Date date, String adresse,String password ,int s,int niv,String sp, String photo) {
 		super(nom, prenom, date, adresse,0,password);
 		
 		this.matricule = matricule;
@@ -15,6 +15,7 @@ public class Apprenant extends User implements GestionResInsApp{
 		niveau = niv;
 		
 		specialite = sp;
+		this.photo = photo;
 	
 	}
 	
@@ -75,4 +76,11 @@ public class Apprenant extends User implements GestionResInsApp{
 		
 	}
 
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
 }

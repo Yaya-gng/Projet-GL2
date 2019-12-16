@@ -4,11 +4,12 @@ import java.sql.Date;
 
 public class Blog {
 
-	private String nomB,contenu, image1, image2,createur;
-	private int numUser;
+	private String nomB,contenu, image1, image2,createur, proposC;
+	private int numB,numUser;
 	private boolean partager;
 
-	public Blog( String nomB, String contenu, String image1, String image2, int numUser, String createur, boolean partager) {
+	public Blog( int numB,String nomB, String contenu, String image1, String image2, int numUser, String createur, String proposC, boolean partager) {
+		this.setNumB(numB);
 		this.setNomB(nomB);
 		this.setContenu(contenu);
 		this.setImage1(image1);
@@ -16,6 +17,7 @@ public class Blog {
 		this.setNumUser(numUser);
 		this.setCreateur(createur);
 		this.setPartager(partager);
+		this.setProposC(proposC);
 		
 	}
 
@@ -70,5 +72,21 @@ public class Blog {
 
 	public void setPartager(boolean partager) {
 		this.partager = partager;
+	}
+
+	public String getProposC() {
+		return proposC;
+	}
+
+	public void setProposC(String proposC) {
+		this.proposC = proposC;
+	}
+
+	public int getNumB() {
+		return numB;
+	}
+
+	public void setNumB(int numB) {
+		this.numB = numB;
 	}
 }

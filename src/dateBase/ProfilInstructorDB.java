@@ -22,7 +22,7 @@ public static ArrayList<Instructeur> display(int id) {
 			   pr.setInt(1,id);
 			   ResultSet r = pr.executeQuery();
 			while(r.next()) {
-				instr.add(new Instructeur(r.getInt("id"),r.getString("nom"),r.getString("prenom"), r.getDate("dateNaiss"), r.getString("adresse"),id, r.getString("grade"), r.getString("specialite"), r.getString("password")));
+				instr.add(new Instructeur(r.getInt("id"),r.getString("nom"),r.getString("prenom"), r.getDate("dateNaiss"), r.getString("adresse"),id, r.getString("grade"), r.getString("specialite"), r.getString("password"), r.getString("photo")));
 				
 				System.out.println("Affichage reussie");
 				return instr;
@@ -48,7 +48,8 @@ public static ArrayList<Instructeur> display(int id) {
 			  pr1.setString(4,adresse);
 			  pr1.setString(5,grade);
 			  pr1.setString(6,specialite);
-			  pr1.setString(8,password);
+			  pr1.setString(7,password);
+			  pr1.setInt(8,id);
 			  
 			  pr1.execute();
 			  System.out.println("Modification effectuée avec succée");
@@ -61,12 +62,12 @@ public static ArrayList<Instructeur> display(int id) {
 	}
 	
 	
-public static void Inscrire(int id, String nom, String prenom, Date date, String adresse, String grade,String sp,String password) {
+public static void Inscrire(int id, String nom, String prenom, Date date, String adresse, String grade,String sp,String password, String photo) {
 		
 		try(Connection con = connect();
-		PreparedStatement pr = con.prepareStatement("Insert into instructeur(id,nom,prenom,dateNaiss,adresse,grade,specialite,password)values(?,?,?,?,?,?,?,?)");)
+		PreparedStatement pr = con.prepareStatement("Insert into instructeur(id,nom,prenom,dateNaiss,adresse,grade,specialite,password, photo)values(?,?,?,?,?,?,?,?,?)");)
 		{
-		    pr.setInt(1,id);
+			pr.setInt(1,id);
 		pr.setString(2,nom);
 		pr.setString(3,prenom);
 		pr.setDate(4,date);
@@ -74,15 +75,17 @@ public static void Inscrire(int id, String nom, String prenom, Date date, String
 		pr.setString(6,grade);
 		pr.setString(7,sp);
 		pr.setString(8,password);
-		
+		pr.setString(9,photo);
 		pr.execute();
+
 		System.out.println("Inscription d'un instructeur");
-		PreparedStatement pr1 = con.prepareStatement("Insert into user(numUser,nom,prenom,password,instructeur)values(?,?,?,?,?)");
+		PreparedStatement pr1 = con.prepareStatement("Insert into user(numUser,nom,prenom,password,instructeur,photo)values(?,?,?,?,?,?)");
 		pr1.setInt(1,id);
 		pr1.setString(2,nom);
 		pr1.setString(3,prenom);
 		pr1.setString(4, password);
 		pr1.setBoolean(5, true);
+		pr1.setString(6,photo);
 		pr1.execute();
 		
 		System.out.println("Instruceur ajouté dans la table user");

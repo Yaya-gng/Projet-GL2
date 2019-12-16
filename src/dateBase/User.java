@@ -1,9 +1,10 @@
 package dateBase;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import sample.listTwoPar;
+import sample.listTwoPar1;
+
+import java.sql.*;
+import java.util.ArrayList;
 
 public class User extends BD {
 	
@@ -26,10 +27,11 @@ public class User extends BD {
 					{
 					
 					pc.execute();
-					PreparedStatement p = con.prepareStatement( "Insert into Connecter(id,nom,prenom) values(?,?,?)");
+					PreparedStatement p = con.prepareStatement( "Insert into Connecter(id,nom,prenom, photo) values(?,?,?,?)");
 					p.setInt(1, re.getInt("numUser"));
 					p.setString(2,re.getString("nom"));
 					p.setString(3,re.getString("prenom"));
+					p.setString(4,re.getString("photo"));
 					p.execute();
 					  return 0;
 					}
@@ -37,10 +39,11 @@ public class User extends BD {
 					{
 					
 					pc.execute();
-						PreparedStatement p = con.prepareStatement( "Insert into Connecter(id,nom,prenom) values(?,?,?)");
+						PreparedStatement p = con.prepareStatement( "Insert into Connecter(id,nom,prenom, photo) values(?,?,?,?)");
 						p.setInt(1, re.getInt("numUser"));
 						p.setString(2,re.getString("nom"));
 						p.setString(3,re.getString("prenom"));
+                        p.setString(4,re.getString("photo"));
 					p.execute();
 					  return 1;	
 					}
@@ -48,10 +51,11 @@ public class User extends BD {
 					{
 					
 					pc.execute();
-						PreparedStatement p = con.prepareStatement( "Insert into Connecter(id,nom,prenom) values(?,?,?)");
+						PreparedStatement p = con.prepareStatement( "Insert into Connecter(id,nom,prenom,photo) values(?,?,?,?)");
 						p.setInt(1, re.getInt("numUser"));
 						p.setString(2,re.getString("nom"));
 						p.setString(3,re.getString("prenom"));
+                        p.setString(4,re.getString("photo"));
 					p.execute();
 					return 2;	
 					}
@@ -66,6 +70,45 @@ public class User extends BD {
 			System.out.println(e.getMessage());
 		}
 		return 0;
+	}
+
+
+	public static ArrayList<listTwoPar1> afficherP(int numF){
+		ArrayList<listTwoPar1> s = new ArrayList<>();
+		try(
+				Connection con = connect();
+
+				PreparedStatement pr = con.prepareStatement("Select nom, prenom from Apprenant where matricule in(select matricule from accee where numF=?)");
+		){
+			pr.setInt(1,numF);
+			ResultSet r = pr.executeQuery();
+
+			while (r.next()) s.add(new listTwoPar1(r.getString("nom"),r.getString("prenom")));
+
+			return s;
+		}catch(SQLException e) {
+			System.out.println(e.getMessage());
+		}
+			return s;
+	}
+
+	public static ArrayList<listTwoPar1> afficherIns(int numF){
+		ArrayList<listTwoPar1> s = new ArrayList<>();
+		try(
+				Connection con = connect();
+
+				PreparedStatement pr = con.prepareStatement("Select nom, prenom from instructeur where id in(select id from formation where numF=?)");
+		){
+			pr.setInt(1,numF);
+			ResultSet r = pr.executeQuery();
+
+			while (r.next()) s.add(new listTwoPar1(r.getString("nom"),r.getString("prenom")));
+
+			return s;
+		}catch(SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return s;
 	}
 	
 }
