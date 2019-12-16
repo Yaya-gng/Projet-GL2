@@ -51,20 +51,20 @@ import java.lang.String;
 public class AccuielController implements Initializable {
 
     @FXML
-    private Pane profil, admin, prof, formationIns, app, allStudents, quiz, courQ, etud, formationApp, sondage, resultat, creeSondage, blgwk, creerBLG, creerW, formationAdm;
+    private Pane profil, admin, prof, formationIns, app, allStudents, quiz, courQ, etud, formationApp, sondage, resultat, creeSondage, blgwk, creerBLG, creerW, formationAdm, accueil, chat, psuivi;
     @FXML
     private PieChart statistics;
     @FXML
     private Parent avatar1;
     @FXML
-    private TextField t1, t2,t4, t3, t5, t6, gra, special, nve, sec, nomFormation, titreCour, addQuiz;
+    private TextField t1, t2, t4, t3, t5, t6, gra, special, nve, sec, nomFormation, titreCour, addQuiz, message;
 
     @FXML
     private Button modify, confirme, disco, ressourceInst, ajouterFormInst, supprimerFormInst, afficherTout, tle, ajouterEtudiant, supprimerEtudiant, supprimerCour, openFile, addFile, ajouterQuiz, supprimerQuiz;
     @FXML
     private Label id, nom, prenom, grade, spec, niv, section, numF, id_quiz, id_form, ttmblg, ttmwk;
     @FXML
-    private Button modifierQuiz, retourF, confirmerQ, validerQ;
+    private Button modifierQuiz, retourF, confirmerQ, validerQ, afficherSuivi;
     @FXML
     private TextField ques1, rep1, ch1q1, ch2q1, ch3q1, ch4q1;
     @FXML
@@ -76,15 +76,15 @@ public class AccuielController implements Initializable {
     @FXML
     private Button afficherFormApp, ouvrirCourApp, repondreQuizApp, frmApp, mesBlogBtn, partagerBlog, consulterBlog, supprimerBlog, creerBlog, modifierBlog;
     @FXML
-    private Button mesWikiBtn, consulterWiki, supprimerWiki, creerWiki, modifierWiki, parcourir1, parcourir2, creer1Blog, retourBlog, creerWiki1, editerWiki, supprimerFormaa, supprimerInstr,supprimerApp;
+    private Button mesWikiBtn, consulterWiki, supprimerWiki, creerWiki, modifierWiki, parcourir1, parcourir2, creer1Blog, retourBlog, creerWiki1, editerWiki, supprimerFormaa, supprimerInstr, supprimerApp;
     @FXML
     private CheckBox ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8, ch9, ch10, ch11, ch12, ch13, ch14, ch15, ch16;
     @FXML
-    private Label note, sur20, nbPart, editeur, ttSndg;
+    private Label note, sur20, nbPart, editeur, ttSndg, noms, prenoms, notes;
     @FXML
     private TextField noteT, nomBlog, nomWiki;
     @FXML
-    private ListView listFormation, listCours, listQuiz, listCoursQ, listCoursApp, listeFormApp, listQuizApp, listFor;
+    private ListView listFormation, listCours, listQuiz, listCoursQ, listCoursApp, listeFormApp, listQuizApp, listFor, listChat;
     @FXML
     private TableView<Cour> tableCours;
     @FXML
@@ -94,11 +94,11 @@ public class AccuielController implements Initializable {
     @FXML
     private TableColumn<AllApprenant, String> nomC, preC, specC, mat, nomC1, prenomC1, specC1, mat1;
     @FXML
-    private TextField titreSnd,choix1,choix2,choix3,choix4;
+    private TextField titreSnd, choix1, choix2, choix3, choix4;
     @FXML
-    private CheckBox  choixBox1, choixBox3, choixBox2, choixBox4;
+    private CheckBox choixBox1, choixBox3, choixBox2, choixBox4;
     @FXML
-    private TextArea contenuSondage, contenuRsltSnd, contenuBlog, proposC, contenuW, problemW;
+    private TextArea contenuSondage, contenuRsltSnd, contenuBlog, proposC, contenuW, problemW, messages, sss;
     @FXML
     private ImageView image1Blog, image2Blog, im;
     @FXML
@@ -108,12 +108,17 @@ public class AccuielController implements Initializable {
 
     private ArrayList<String> suivi = new ArrayList<>();
 
-    @FXML private Button supprimerSondage, mtSondage, confirmerSnd, creerSnd, BlogWiki;
+    @FXML
+    private Button supprimerSondage, mtSondage, confirmerSnd, creerSnd, BlogWiki;
 
-    @FXML private TableView<listTwoPar> tableBlog, tableWiki;
-    @FXML private TableColumn<listTwoPar, String> titreBlog, createurBlog, titreWiki, createurWiki;
-    @FXML private TableView<listTwoPar1> tableProf,tableApp;
-    @FXML private TableColumn<listTwoPar1, String>  nomProf, prenomProf, nomApp, prenomApp;
+    @FXML
+    private TableView<listTwoPar> tableBlog, tableWiki;
+    @FXML
+    private TableColumn<listTwoPar, String> titreBlog, createurBlog, titreWiki, createurWiki;
+    @FXML
+    private TableView<listTwoPar1> tableProf, tableApp;
+    @FXML
+    private TableColumn<listTwoPar1, String> nomProf, prenomProf, nomApp, prenomApp;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -126,21 +131,21 @@ public class AccuielController implements Initializable {
         im.setImage(i);
 
 
-        if(Integer.parseInt(id.getText()) == 1 ) {
+        if (Integer.parseInt(id.getText()) == 1) {
             admin.toFront();
-            formationAdm.toFront();
+            accueil.toFront();
         }
 
         if (Integer.parseInt(id.getText()) > 1 && Integer.parseInt(id.getText()) < 1000) {
             prof.toFront();
-            formationIns.toFront();
+            accueil.toFront();
             allStudents.toBack();
 
         }
 
         if (Integer.parseInt(id.getText()) > 1000 && Integer.parseInt(id.getText()) < 1000000) {
             etud.toFront();
-            formationApp.toFront();
+            accueil.toFront();
         }
 
         nomC.setCellValueFactory(new PropertyValueFactory<>("nom"));
@@ -255,17 +260,17 @@ public class AccuielController implements Initializable {
 
     @FXML
     void confirmeModification() {
-       /* if (Integer.parseInt(id.getText()) == 1)
-            ProfilAdminDB.modify(Integer.parseInt(t1.getText()), t2.getText(), t3.getText(),java.sql.Date.valueOf(t4.getText()), t5.getText(), t6.getText());
+        if (Integer.parseInt(id.getText()) == 1)
+            ProfilAdminDB.modify(Integer.parseInt(t1.getText()), t2.getText(), t3.getText(), t5.getText(), t6.getText());
 
         else if (Integer.parseInt(id.getText()) > 1 && Integer.parseInt(id.getText()) < 2000) {
-            ProfilInstructorDB.modify(Integer.parseInt(t1.getText()), t2.getText(), t3.getText(), java.sql.Date.valueOf(t4.getText()), t5.getText(), t6.getText(), gra.getText(), special.getText());
+            ProfilInstructorDB.modify(Integer.parseInt(t1.getText()), t2.getText(), t3.getText(), t5.getText(), t6.getText(), gra.getText(), special.getText());
             grade.setDisable(true);
             gra.setDisable(true);
             spec.setDisable(true);
             special.setDisable(true);
         } else {
-            ProfilApprenantDB.modify(Integer.parseInt(t1.getText()), t2.getText(), t3.getText(), java.sql.Date.valueOf(t4.getText()), t5.getText(), 0, t6.getText(), special.getText(), nve.getText(), sec.getText());
+            ProfilApprenantDB.modify(Integer.parseInt(t1.getText()), t2.getText(), t3.getText(), t5.getText(), t6.getText(), special.getText(), nve.getText(), sec.getText());
             ;
             spec.setDisable(true);
             special.setDisable(true);
@@ -286,7 +291,7 @@ public class AccuielController implements Initializable {
         t4.setDisable(true);
         t5.setDisable(true);
         t6.setDisable(true);
-        confirme.setDisable(true);*/
+        confirme.setDisable(true);
     }
 
     @FXML
@@ -349,6 +354,7 @@ public class AccuielController implements Initializable {
         openFile.setDisable(false);
         addFile.setDisable(false);
         supprimerCour.setDisable(false);
+        afficherSuivi.setDisable(false);
 
         tle.setDisable(false);
         ajouterEtudiant.setDisable(false);
@@ -536,30 +542,30 @@ public class AccuielController implements Initializable {
         }
 
         if (Integer.parseInt(id.getText()) > 1000 && Integer.parseInt(id.getText()) < 1000000) {
-            int n=0;
-            if(ch1.isSelected() && rep1.getText().equals(ch1q1.getText())) n+=5;
-            if(ch2.isSelected() && rep1.getText().equals(ch2q1.getText())) n+=5;
-            if(ch3.isSelected() && rep1.getText().equals(ch3q1.getText())) n+=5;
-            if(ch4.isSelected() && rep1.getText().equals(ch4q1.getText())) n+=5;
-            if(ch5.isSelected() && rep2.getText().equals(ch1q2.getText())) n+=5;
-            if(ch6.isSelected() && rep2.getText().equals(ch2q2.getText())) n+=5;
-            if(ch7.isSelected() && rep2.getText().equals(ch3q2.getText())) n+=5;
-            if(ch8.isSelected() && rep2.getText().equals(ch4q2.getText())) n+=5;
-            if(ch9.isSelected() && rep3.getText().equals(ch1q3.getText())) n+=5;
-            if(ch10.isSelected() && rep3.getText().equals(ch2q3.getText())) n+=5;
-            if(ch11.isSelected() && rep3.getText().equals(ch3q3.getText())) n+=5;
-            if(ch12.isSelected() && rep3.getText().equals(ch4q3.getText())) n+=5;
-            if(ch13.isSelected() && rep4.getText().equals(ch1q4.getText())) n+=5;
-            if(ch14.isSelected() && rep4.getText().equals(ch2q4.getText())) n+=5;
-            if(ch15.isSelected() && rep4.getText().equals(ch3q4.getText())) n+=5;
-            if(ch16.isSelected() && rep4.getText().equals(ch4q4.getText())) n+=5;
+            int n = 0;
+            if (ch1.isSelected() && rep1.getText().equals(ch1q1.getText())) n += 5;
+            if (ch2.isSelected() && rep1.getText().equals(ch2q1.getText())) n += 5;
+            if (ch3.isSelected() && rep1.getText().equals(ch3q1.getText())) n += 5;
+            if (ch4.isSelected() && rep1.getText().equals(ch4q1.getText())) n += 5;
+            if (ch5.isSelected() && rep2.getText().equals(ch1q2.getText())) n += 5;
+            if (ch6.isSelected() && rep2.getText().equals(ch2q2.getText())) n += 5;
+            if (ch7.isSelected() && rep2.getText().equals(ch3q2.getText())) n += 5;
+            if (ch8.isSelected() && rep2.getText().equals(ch4q2.getText())) n += 5;
+            if (ch9.isSelected() && rep3.getText().equals(ch1q3.getText())) n += 5;
+            if (ch10.isSelected() && rep3.getText().equals(ch2q3.getText())) n += 5;
+            if (ch11.isSelected() && rep3.getText().equals(ch3q3.getText())) n += 5;
+            if (ch12.isSelected() && rep3.getText().equals(ch4q3.getText())) n += 5;
+            if (ch13.isSelected() && rep4.getText().equals(ch1q4.getText())) n += 5;
+            if (ch14.isSelected() && rep4.getText().equals(ch2q4.getText())) n += 5;
+            if (ch15.isSelected() && rep4.getText().equals(ch3q4.getText())) n += 5;
+            if (ch16.isSelected() && rep4.getText().equals(ch4q4.getText())) n += 5;
             System.out.println(n);
             noteT.setText(String.valueOf(n));
             note.setVisible(true);
             noteT.setVisible(true);
             sur20.setVisible(true);
 
-            Quiz.setReponseApp(Integer.parseInt(id_quiz.getText()), Integer.parseInt(id.getText()),n, suivi.toString());
+            Quiz.setReponseApp(Integer.parseInt(id_quiz.getText()), Integer.parseInt(id.getText()), n, suivi.toString());
             retourF.setDisable(false);
 
 
@@ -613,8 +619,9 @@ public class AccuielController implements Initializable {
             ch6.setSelected(false);
             ch7.setSelected(false);
             ch8.setSelected(false);
+            suivi.add("il a coché sur la 1ere reponse de la 2ere question,");
         }
-        suivi.add("il a coché sur la 1ere reponse de la 2ere question,");
+
     }
 
     @FXML
@@ -648,8 +655,8 @@ public class AccuielController implements Initializable {
     }
 
 
-
-    @FXML private void handleBox9(ActionEvent event) {
+    @FXML
+    private void handleBox9(ActionEvent event) {
         if (ch9.isSelected()) {
             ch10.setSelected(false);
             ch11.setSelected(false);
@@ -657,7 +664,9 @@ public class AccuielController implements Initializable {
             suivi.add("il a coché sur la 1ere reponse de la 3m question,");
         }
     }
-    @FXML private void handleBox10(ActionEvent event) {
+
+    @FXML
+    private void handleBox10(ActionEvent event) {
         if (ch10.isSelected()) {
             ch9.setSelected(false);
             ch11.setSelected(false);
@@ -665,7 +674,9 @@ public class AccuielController implements Initializable {
             suivi.add("il a coché sur la 2m reponse de la 3m question,");
         }
     }
-    @FXML private void handleBox11(ActionEvent event) {
+
+    @FXML
+    private void handleBox11(ActionEvent event) {
         if (ch11.isSelected()) {
             ch9.setSelected(false);
             ch10.setSelected(false);
@@ -673,14 +684,19 @@ public class AccuielController implements Initializable {
             suivi.add("il a coché sur la 3m reponse de la 3m question,");
         }
     }
-    @FXML private void handleBox12(ActionEvent event){
-        if(ch12.isSelected()){
-            ch9.setSelected(false); ch10.setSelected(false); ch11.setSelected(false);
+
+    @FXML
+    private void handleBox12(ActionEvent event) {
+        if (ch12.isSelected()) {
+            ch9.setSelected(false);
+            ch10.setSelected(false);
+            ch11.setSelected(false);
             suivi.add("il a coché sur la 4m reponse de la 3m question,");
         }
     }
 
-    @FXML private void handleBox13(ActionEvent event) {
+    @FXML
+    private void handleBox13(ActionEvent event) {
         if (ch13.isSelected()) {
             ch14.setSelected(false);
             ch15.setSelected(false);
@@ -688,7 +704,9 @@ public class AccuielController implements Initializable {
             suivi.add("il a coché sur la 1ere reponse de la 4m question,");
         }
     }
-    @FXML private void handleBox14(ActionEvent event) {
+
+    @FXML
+    private void handleBox14(ActionEvent event) {
         if (ch14.isSelected()) {
             ch13.setSelected(false);
             ch15.setSelected(false);
@@ -696,7 +714,9 @@ public class AccuielController implements Initializable {
             suivi.add("il a coché sur la 2m reponse de la 4m question,");
         }
     }
-    @FXML private void handleBox15(ActionEvent event) {
+
+    @FXML
+    private void handleBox15(ActionEvent event) {
         if (ch15.isSelected()) {
             ch13.setSelected(false);
             ch14.setSelected(false);
@@ -704,25 +724,30 @@ public class AccuielController implements Initializable {
             suivi.add("il a coché sur la 3m reponse de la 4m question,");
         }
     }
-    @FXML private void handleBox16(ActionEvent event){
-        if(ch16.isSelected()){
-            ch13.setSelected(false); ch14.setSelected(false); ch15.setSelected(false);
-            suivi.add("il a coché sur la 3m reponse de la 4m question,");
+
+    @FXML
+    private void handleBox16(ActionEvent event) {
+        if (ch16.isSelected()) {
+            ch13.setSelected(false);
+            ch14.setSelected(false);
+            ch15.setSelected(false);
+            suivi.add("il a coché sur la 4m reponse de la 4m question,");
         }
     }
 
 
-
-    @FXML void retourToForm(ActionEvent event){
+    @FXML
+    void retourToForm(ActionEvent event) {
         prof.setDisable(false);
         courQ.toBack();
         quiz.toBack();
     }
 
-    @FXML public void setSupprimerQuiz(ActionEvent event){
+    @FXML
+    public void setSupprimerQuiz(ActionEvent event) {
         Object o = listQuiz.getSelectionModel().getSelectedItem();
-        if(o != null){
-            String s1 = (String)o;
+        if (o != null) {
+            String s1 = (String) o;
             id_quiz.setText(String.valueOf(Quiz.getIdQuiz(s1)));
             Quiz.supprimerQuiz(Integer.parseInt(id_quiz.getText()));
             listQuiz.getItems().remove(o);
@@ -731,45 +756,47 @@ public class AccuielController implements Initializable {
         }
     }
 
-    @FXML public void setModifierQuiz(ActionEvent event){
+    @FXML
+    public void setModifierQuiz(ActionEvent event) {
         Object o = listQuiz.getSelectionModel().getSelectedItem();
-        if(o != null){
-                    prof.setDisable(true);
-                    retourF.setDisable(false);
-                String s = (String)o;
-                id_quiz.setText(String.valueOf(Quiz.getIdQuiz(s)));
+        if (o != null) {
+            prof.setDisable(true);
+            retourF.setDisable(false);
+            String s = (String) o;
+            id_quiz.setText(String.valueOf(Quiz.getIdQuiz(s)));
 
-                ArrayList<Questions> q = Question.getQestQuiz(Integer.parseInt(id_quiz.getText()));
-                quiz.toFront();
-                ques1.setText(q.get(0).getQ());
-                rep1.setText(q.get(0).getR());
-                ch1q1.setText(q.get(0).getC1());
-                ch2q1.setText(q.get(0).getC2());
-                ch3q1.setText(q.get(0).getC3());
-                ch4q1.setText(q.get(0).getC4());
+            ArrayList<Questions> q = Question.getQestQuiz(Integer.parseInt(id_quiz.getText()));
+            quiz.toFront();
+            ques1.setText(q.get(0).getQ());
+            rep1.setText(q.get(0).getR());
+            ch1q1.setText(q.get(0).getC1());
+            ch2q1.setText(q.get(0).getC2());
+            ch3q1.setText(q.get(0).getC3());
+            ch4q1.setText(q.get(0).getC4());
             ques2.setText(q.get(1).getQ());
             rep2.setText(q.get(1).getR());
             ch1q2.setText(q.get(1).getC1());
             ch2q2.setText(q.get(1).getC2());
             ch3q2.setText(q.get(1).getC3());
             ch4q2.setText(q.get(1).getC4());
-                                ques3.setText(q.get(2).getQ());
-                                rep3.setText(q.get(2).getR());
-                                ch1q3.setText(q.get(2).getC1());
-                                ch2q3.setText(q.get(2).getC2());
-                                ch3q3.setText(q.get(2).getC3());
-                                ch4q3.setText(q.get(2).getC4());
-                                    ques4.setText(q.get(3).getQ());
-                                    rep4.setText(q.get(3).getR());
-                                    ch1q4.setText(q.get(3).getC1());
-                                    ch2q4.setText(q.get(3).getC2());
-                                    ch3q4.setText(q.get(3).getC3());
-                                    ch4q4.setText(q.get(3).getC4());
+            ques3.setText(q.get(2).getQ());
+            rep3.setText(q.get(2).getR());
+            ch1q3.setText(q.get(2).getC1());
+            ch2q3.setText(q.get(2).getC2());
+            ch3q3.setText(q.get(2).getC3());
+            ch4q3.setText(q.get(2).getC4());
+            ques4.setText(q.get(3).getQ());
+            rep4.setText(q.get(3).getR());
+            ch1q4.setText(q.get(3).getC1());
+            ch2q4.setText(q.get(3).getC2());
+            ch3q4.setText(q.get(3).getC3());
+            ch4q4.setText(q.get(3).getC4());
         }
 
     }
 
-    @FXML public void setFrmApp(ActionEvent event){
+    @FXML
+    public void setFrmApp(ActionEvent event) {
         formationApp.toFront();
         listeFormApp.getItems().clear();
         listCoursApp.getItems().clear();
@@ -780,22 +807,24 @@ public class AccuielController implements Initializable {
 
     }
 
-    @FXML public void setAfficherFormApp(ActionEvent event){
+    @FXML
+    public void setAfficherFormApp(ActionEvent event) {
+        formationApp.toFront();
         Object o = listeFormApp.getSelectionModel().getSelectedItem();
-        if(o != null){
+        if (o != null) {
             listCoursApp.getItems().clear();
             listQuizApp.getItems().clear();
-            String s = (String)o;
+            String s = (String) o;
             id_form.setText(String.valueOf(Formations.getNumF(s)));
-            System.out.println(s+" " +id_form.getText());
+            System.out.println(s + " " + id_form.getText());
             ArrayList<String> c = Cours.afficherCours(Integer.parseInt(id_form.getText()));
-            for(int i=0; i<c.size(); i++){
+            for (int i = 0; i < c.size(); i++) {
                 listCoursApp.getItems().add(c.get(i));
             }
             ouvrirCourApp.setDisable(false);
 
             ArrayList<String> q = Quiz.getQuiz(Integer.parseInt(id_form.getText()));
-            for(int i=0; i<q.size(); i++){
+            for (int i = 0; i < q.size(); i++) {
                 listQuizApp.getItems().add(q.get(i));
             }
             repondreQuizApp.setDisable(false);
@@ -803,7 +832,8 @@ public class AccuielController implements Initializable {
 
     }
 
-    @FXML public void setOuvrirCourApp(ActionEvent event){
+    @FXML
+    public void setOuvrirCourApp(ActionEvent event) {
         try {
             Object o = listCoursApp.getSelectionModel().getSelectedItem();
             if (o != null) {
@@ -812,46 +842,71 @@ public class AccuielController implements Initializable {
                 File f = new File(path);
                 Desktop.getDesktop().open(f);
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println(e.getMessage());
 
         }
 
     }
 
-    @FXML public void setRepondreQuizApp(ActionEvent event){
+    @FXML
+    public void setRepondreQuizApp(ActionEvent event) {
         Object o = listQuizApp.getSelectionModel().getSelectedItem();
-        if(o != null){
-            String s = (String)o;
+        if (o != null) {
+            String s = (String) o;
             id_quiz.setText(String.valueOf(Quiz.getIdQuiz(s)));
             quiz.toFront();
             courQ.toFront();
             confirmerQ.setText("Valider");
             ArrayList<Questions> q = Question.getQestQuiz(Integer.parseInt(id_quiz.getText()));
-            ques1.setText(q.get(0).getQ()); ques1.setEditable(false);
-            rep1.setText(q.get(0).getR());  rep1.setVisible(false);
-            ch1q1.setText(q.get(0).getC1()); ch1q1.setEditable(false);
-            ch2q1.setText(q.get(0).getC2());   ch2q1.setEditable(false);
-            ch3q1.setText(q.get(0).getC3());   ch3q1.setEditable(false);
-            ch4q1.setText(q.get(0).getC4());   ch4q1.setEditable(false);
-            ques2.setText(q.get(1).getQ());  ques2.setEditable(false);
-            rep2.setText(q.get(1).getR());   rep2.setVisible(false);
-            ch1q2.setText(q.get(1).getC1());  ch1q2.setEditable(false);
-            ch2q2.setText(q.get(1).getC2());  ch2q2.setEditable(false);
-            ch3q2.setText(q.get(1).getC3());  ch3q2.setEditable(false);
-            ch4q2.setText(q.get(1).getC4());  ch4q2.setEditable(false);
-            ques3.setText(q.get(2).getQ());   ques3.setEditable(false);
-            rep3.setText(q.get(2).getR());   rep3.setVisible(false);
-            ch1q3.setText(q.get(2).getC1());  ch1q3.setEditable(false);
-            ch2q3.setText(q.get(2).getC2());   ch2q3.setEditable(false);
-            ch3q3.setText(q.get(2).getC3()); ch3q3.setEditable(false);
-            ch4q3.setText(q.get(2).getC4());   ch4q3.setEditable(false);
-            ques4.setText(q.get(3).getQ());  ques4.setEditable(false);
-            rep4.setText(q.get(3).getR());   rep4.setVisible(false);
-            ch1q4.setText(q.get(3).getC1());  ch1q4.setEditable(false);
-            ch2q4.setText(q.get(3).getC2());   ch2q4.setEditable(false);
-            ch3q4.setText(q.get(3).getC3()); ch3q4.setEditable(false);
-            ch4q4.setText(q.get(3).getC4());   ch4q4.setEditable(false);
+            ques1.setText(q.get(0).getQ());
+            ques1.setEditable(false);
+            rep1.setText(q.get(0).getR());
+            rep1.setVisible(false);
+            ch1q1.setText(q.get(0).getC1());
+            ch1q1.setEditable(false);
+            ch2q1.setText(q.get(0).getC2());
+            ch2q1.setEditable(false);
+            ch3q1.setText(q.get(0).getC3());
+            ch3q1.setEditable(false);
+            ch4q1.setText(q.get(0).getC4());
+            ch4q1.setEditable(false);
+            ques2.setText(q.get(1).getQ());
+            ques2.setEditable(false);
+            rep2.setText(q.get(1).getR());
+            rep2.setVisible(false);
+            ch1q2.setText(q.get(1).getC1());
+            ch1q2.setEditable(false);
+            ch2q2.setText(q.get(1).getC2());
+            ch2q2.setEditable(false);
+            ch3q2.setText(q.get(1).getC3());
+            ch3q2.setEditable(false);
+            ch4q2.setText(q.get(1).getC4());
+            ch4q2.setEditable(false);
+            ques3.setText(q.get(2).getQ());
+            ques3.setEditable(false);
+            rep3.setText(q.get(2).getR());
+            rep3.setVisible(false);
+            ch1q3.setText(q.get(2).getC1());
+            ch1q3.setEditable(false);
+            ch2q3.setText(q.get(2).getC2());
+            ch2q3.setEditable(false);
+            ch3q3.setText(q.get(2).getC3());
+            ch3q3.setEditable(false);
+            ch4q3.setText(q.get(2).getC4());
+            ch4q3.setEditable(false);
+            ques4.setText(q.get(3).getQ());
+            ques4.setEditable(false);
+            rep4.setText(q.get(3).getR());
+            rep4.setVisible(false);
+            ch1q4.setText(q.get(3).getC1());
+            ch1q4.setEditable(false);
+            ch2q4.setText(q.get(3).getC2());
+            ch2q4.setEditable(false);
+            ch3q4.setText(q.get(3).getC3());
+            ch3q4.setEditable(false);
+            ch4q4.setText(q.get(3).getC4());
+            ch4q4.setEditable(false);
 
             ch1.setVisible(true);
             ch2.setVisible(true);
@@ -872,7 +927,7 @@ public class AccuielController implements Initializable {
 
             ArrayList<String> c = Cours.afficherCours(Integer.parseInt(id_form.getText()));
             listCoursQ.getItems().clear();
-            for(int i=0;i<c.size(); i++){
+            for (int i = 0; i < c.size(); i++) {
                 listCoursQ.getItems().add(c.get(i));
             }
 
@@ -880,57 +935,73 @@ public class AccuielController implements Initializable {
     }
 
 
-    @FXML public void ouvrirCourQ(ActionEvent event){
+    @FXML
+    public void ouvrirCourQ(ActionEvent event) {
         try {
             Object o = listCoursQ.getSelectionModel().getSelectedItem();
             if (o != null) {
                 String s = (String) o;
-                suivi.add("puis il a ouvert le cour "+s+", puis");
+                suivi.add("puis il a ouvert le cour, puis");
                 String path = Cours.getPath(s);
-              File f = new File(path);
-              Desktop.getDesktop().open(f);
+                File f = new File(path);
+                Desktop.getDesktop().open(f);
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println(e.getMessage());
 
         }
     }
 
-    @FXML public void sondage(ActionEvent event){
+    @FXML
+    public void sondage(ActionEvent event) {
         sondage.toFront();
         creeSondage.setVisible(false);
         resultat.setVisible(false);
         ArrayList<listTwoPar> s = SondageBD.afficherSondage();
 
-        for(int i=0; i<s.size(); i++)
+        for (int i = 0; i < s.size(); i++)
             tableSondages.getItems().add(s.get(i));
 
     }
 
-    @FXML public void creeSnd(){
+    @FXML
+    public void creeSnd() {
         titreSnd.setEditable(true);
         contenuSondage.setEditable(true);
-        choix1.setEditable(true);choix2.setEditable(true);choix3.setEditable(true);choix4.setEditable(true);
-        choixBox1.setVisible(false);choixBox2.setVisible(false);choixBox3.setVisible(false);choixBox4.setVisible(false);
+        choix1.setEditable(true);
+        choix2.setEditable(true);
+        choix3.setEditable(true);
+        choix4.setEditable(true);
+        choixBox1.setVisible(false);
+        choixBox2.setVisible(false);
+        choixBox3.setVisible(false);
+        choixBox4.setVisible(false);
         titreSnd.clear();
         contenuSondage.clear();
-        choix1.clear();choix2.clear();choix3.clear();choix4.clear();
+        choix1.clear();
+        choix2.clear();
+        choix3.clear();
+        choix4.clear();
         creeSondage.setVisible(true);
         creerSnd.setVisible(true);
         creerSnd.toFront();
     }
 
-    @FXML public void setCreeSondage(){
-        if (titreSnd.getText().isEmpty()==false && contenuSondage.getText().isEmpty()==false && choix1.getText().isEmpty()== false && choix2.getText().isEmpty()== false && choix3.getText().isEmpty()== false && choix4.getText().isEmpty() == false) {
+    @FXML
+    public void setCreeSondage() {
+        if (titreSnd.getText().isEmpty() == false && contenuSondage.getText().isEmpty() == false && choix1.getText().isEmpty() == false && choix2.getText().isEmpty() == false && choix3.getText().isEmpty() == false && choix4.getText().isEmpty() == false) {
 
             SondageBD.creerSondage(titreSnd.getText(), contenuSondage.getText(), choix1.getText(), choix2.getText(), choix3.getText(), choix4.getText(), Integer.parseInt(id.getText()), nom.getText());
             titreSnd.clear();
             contenuSondage.clear();
-            choix1.clear(); choix2.clear(); choix3.clear(); choix4.clear();
+            choix1.clear();
+            choix2.clear();
+            choix3.clear();
+            choix4.clear();
             tableSondages.getItems().clear();
             ArrayList<listTwoPar> s = SondageBD.afficherSondage();
 
-            for(int i=0; i<s.size(); i++)
+            for (int i = 0; i < s.size(); i++)
                 tableSondages.getItems().add(s.get(i));
         }
 
@@ -939,79 +1010,111 @@ public class AccuielController implements Initializable {
         resultat.setVisible(false);
     }
 
-    @FXML public void participerSondage(){
+    @FXML
+    public void participerSondage() {
         Object o = tableSondages.getSelectionModel().getSelectedItem();
-        if(o != null){
+        if (o != null) {
             confirmerSnd.setVisible(true);
             creeSondage.setVisible(true);
             creeSondage.toFront();
             creerSnd.setVisible(false);
             titreSnd.clear();
             contenuSondage.clear();
-            choix1.clear();choix2.clear();choix3.clear();choix4.clear();
-            listTwoPar l = (listTwoPar)o;
+            choix1.clear();
+            choix2.clear();
+            choix3.clear();
+            choix4.clear();
+            listTwoPar l = (listTwoPar) o;
             ArrayList<Sondage> sd = SondageBD.consulterSondage(l.getTitre());
             System.out.println(l.getTitre());
             sondage.setVisible(true);
             titreSnd.setEditable(false);
             contenuSondage.setEditable(false);
-            choix1.setEditable(false);choix2.setEditable(false);choix3.setEditable(false);choix4.setEditable(false);
+            choix1.setEditable(false);
+            choix2.setEditable(false);
+            choix3.setEditable(false);
+            choix4.setEditable(false);
 
             titreSnd.setText(sd.get(0).getTitre());
             contenuSondage.setText(sd.get(0).getContenu());
-            choix1.setText(sd.get(0).getChoix1());choix2.setText(sd.get(0).getChoix2());choix3.setText(sd.get(0).getChoix3());choix4.setText(sd.get(0).getChoix4());
-            choixBox1.setVisible(true);choixBox2.setVisible(true);choixBox3.setVisible(true);choixBox4.setVisible(true);
+            choix1.setText(sd.get(0).getChoix1());
+            choix2.setText(sd.get(0).getChoix2());
+            choix3.setText(sd.get(0).getChoix3());
+            choix4.setText(sd.get(0).getChoix4());
+            choixBox1.setVisible(true);
+            choixBox2.setVisible(true);
+            choixBox3.setVisible(true);
+            choixBox4.setVisible(true);
         }
 
     }
 
-    @FXML public void box1(){
-        if(choixBox1.isSelected()){
+    @FXML
+    public void box1() {
+        if (choixBox1.isSelected()) {
             choixBox2.setSelected(false);
             choixBox3.setSelected(false);
             choixBox4.setSelected(false);
         }
     }
 
-    @FXML public void box2(){
-        if(choixBox2.isSelected()){
+    @FXML
+    public void box2() {
+        if (choixBox2.isSelected()) {
             choixBox1.setSelected(false);
             choixBox3.setSelected(false);
             choixBox4.setSelected(false);
         }
 
-    }@FXML public void box3(){
-        if(choixBox3.isSelected()){
+    }
+
+    @FXML
+    public void box3() {
+        if (choixBox3.isSelected()) {
             choixBox2.setSelected(false);
             choixBox1.setSelected(false);
             choixBox4.setSelected(false);
         }
 
-    }@FXML public void box4(){
-        if(choixBox4.isSelected()){
+    }
+
+    @FXML
+    public void box4() {
+        if (choixBox4.isSelected()) {
             choixBox2.setSelected(false);
             choixBox3.setSelected(false);
             choixBox1.setSelected(false);
         }
     }
 
-    @FXML public void confirmeParticipation(){
+    @FXML
+    public void confirmeParticipation() {
         String s = titreSnd.getText();
-        if(choixBox1.isSelected()) SondageBD.participer1(s);
-        if(choixBox2.isSelected()) SondageBD.participer2(s);
-        if(choixBox3.isSelected()) SondageBD.participer3(s);
-        if(choixBox4.isSelected()) SondageBD.participer4(s);
+        if (choixBox1.isSelected()) SondageBD.participer1(s);
+        if (choixBox2.isSelected()) SondageBD.participer2(s);
+        if (choixBox3.isSelected()) SondageBD.participer3(s);
+        if (choixBox4.isSelected()) SondageBD.participer4(s);
         titreSnd.clear();
         contenuSondage.clear();
-        choix1.clear();choix2.clear();choix3.clear();choix4.clear();
+        choix1.clear();
+        choix2.clear();
+        choix3.clear();
+        choix4.clear();
 
-        choixBox1.setVisible(false);choixBox2.setVisible(false);choixBox3.setVisible(false);choixBox4.setVisible(false);
+        choixBox1.setVisible(false);
+        choixBox2.setVisible(false);
+        choixBox3.setVisible(false);
+        choixBox4.setVisible(false);
         creeSondage.setVisible(false);
         confirmerSnd.setVisible(false);
-        choixBox1.setSelected(false);choixBox2.setSelected(false);choixBox3.setSelected(false);choixBox4.setSelected(false);
+        choixBox1.setSelected(false);
+        choixBox2.setSelected(false);
+        choixBox3.setSelected(false);
+        choixBox4.setSelected(false);
     }
 
-    @FXML public int MesSondages() {
+    @FXML
+    public int MesSondages() {
         resultat.toBack();
         resultat.setVisible(false);
         creerSnd.setVisible(false);
@@ -1027,8 +1130,7 @@ public class AccuielController implements Initializable {
             mtSondage.setText("Tous les Sondages");
             System.out.println("Voici vos Sondages");
             return 1;
-        }
-        else {
+        } else {
             ArrayList<listTwoPar> s = SondageBD.afficherSondage();
             tableSondages.getItems().clear();
             for (int i = 0; i < s.size(); i++)
@@ -1044,9 +1146,10 @@ public class AccuielController implements Initializable {
 
     }
 
-    @FXML public void SupprimerSondage(){
+    @FXML
+    public void SupprimerSondage() {
         Object o = tableSondages.getSelectionModel().getSelectedItem();
-        if(o != null){
+        if (o != null) {
             listTwoPar s = (listTwoPar) o;
             tableSondages.getItems().remove(o);
             SondageBD.supprimerSondage(s.getTitre());
@@ -1055,16 +1158,17 @@ public class AccuielController implements Initializable {
         }
     }
 
-    @FXML public void afficherSondage(){
+    @FXML
+    public void afficherSondage() {
         Object o = tableSondages.getSelectionModel().getSelectedItem();
-        if(o != null){
+        if (o != null) {
             listTwoPar s = (listTwoPar) o;
             ArrayList<Sondage> l = SondageBD.consulterSondage(s.getTitre());
 
-            ObservableList<PieChart.Data> pieChertData = FXCollections.observableArrayList(new PieChart.Data(l.get(0).getChoix1(),l.get(0).getNb1()),
-                     new PieChart.Data(l.get(0).getChoix2(),l.get(0).getNb2()),
-                     new PieChart.Data(l.get(0).getChoix3(),l.get(0).getNb3()),
-                     new PieChart.Data(l.get(0).getChoix4(),l.get(0).getNb4()));
+            ObservableList<PieChart.Data> pieChertData = FXCollections.observableArrayList(new PieChart.Data(l.get(0).getChoix1(), l.get(0).getNb1()),
+                    new PieChart.Data(l.get(0).getChoix2(), l.get(0).getNb2()),
+                    new PieChart.Data(l.get(0).getChoix3(), l.get(0).getNb3()),
+                    new PieChart.Data(l.get(0).getChoix4(), l.get(0).getNb4()));
 
             statistics.setData(pieChertData);
             contenuRsltSnd.clear();
@@ -1076,13 +1180,14 @@ public class AccuielController implements Initializable {
         }
     }
 
-    @FXML public void afficherBlogWiki() {
+    @FXML
+    public void afficherBlogWiki() {
         blgwk.toFront();
         tableBlog.getItems().clear();
         tableWiki.getItems().clear();
         ArrayList<listTwoPar> l = BlogBD.getBlogs();
 
-        for (int i = 0; i < l.size(); i++){
+        for (int i = 0; i < l.size(); i++) {
             tableBlog.getItems().add(l.get(i));
         }
 
@@ -1091,11 +1196,10 @@ public class AccuielController implements Initializable {
         for (int i = 0; i < l1.size(); i++) {
             tableWiki.getItems().add(l1.get(i));
         }
-        if(Integer.parseInt(id.getText()) >=1 && Integer.parseInt(id.getText()) < 1000){
+        if (Integer.parseInt(id.getText()) >= 1 && Integer.parseInt(id.getText()) < 1000) {
             mesBlogBtn.setVisible(true);
             mesWikiBtn.setVisible(true);
-        }
-        else{
+        } else {
             mesBlogBtn.setVisible(false);
             creerBlog.setVisible(false);
             creerWiki.setVisible(false);
@@ -1103,9 +1207,10 @@ public class AccuielController implements Initializable {
         }
     }
 
-    @FXML public int mesBlogs(){
+    @FXML
+    public int mesBlogs() {
 
-        if(mesBlogBtn.getText().equals("Mes Blogs")){
+        if (mesBlogBtn.getText().equals("Mes Blogs")) {
 
             tableBlog.getItems().clear();
 
@@ -1120,14 +1225,12 @@ public class AccuielController implements Initializable {
             mesBlogBtn.setText("Tous les Blogs");
             ttmblg.setText("Mes Blogs");
             return 1;
-        }
-
-        else{
+        } else {
             tableBlog.getItems().clear();
 
             ArrayList<listTwoPar> l = BlogBD.getBlogs();
 
-            for (int i = 0; i < l.size(); i++){
+            for (int i = 0; i < l.size(); i++) {
                 tableBlog.getItems().add(l.get(i));
             }
 
@@ -1141,10 +1244,11 @@ public class AccuielController implements Initializable {
 
     }
 
-    @FXML public void PartagerBlog(){
+    @FXML
+    public void PartagerBlog() {
         Object o = tableBlog.getSelectionModel().getSelectedItem();
-        if(o != null){
-            listTwoPar l = (listTwoPar)o;
+        if (o != null) {
+            listTwoPar l = (listTwoPar) o;
 
             BlogBD.partager(l.getTitre());
             System.out.println("Blog partagé");
@@ -1158,9 +1262,10 @@ public class AccuielController implements Initializable {
 
     }
 
-    @FXML public void SupprimerBlog(){
+    @FXML
+    public void SupprimerBlog() {
         Object o = tableBlog.getSelectionModel().getSelectedItem();
-        if(o != null) {
+        if (o != null) {
             listTwoPar l = (listTwoPar) o;
 
             BlogBD.supprimerBlog(l.getTitre());
@@ -1176,42 +1281,26 @@ public class AccuielController implements Initializable {
         }
     }
 
-    @FXML public void CrBlog(){
-            creerBLG.toFront();
-            nomBlog.clear();
-            contenuBlog.clear();
-            proposC.clear();
+    @FXML
+    public void CrBlog() {
+        creerBLG.toFront();
+        nomBlog.clear();
+        contenuBlog.clear();
+        proposC.clear();
 
-            nomBlog.setEditable(true);
-            contenuBlog.setEditable(true);
-            proposC.setEditable(true);
-            parcourir1.setVisible(true);
-            parcourir2.setVisible(true);
-            creer1Blog.setVisible(true);
-            image2Blog.setImage(null);
-            image1Blog.setImage(null);
-            creer1Blog.setText("Creer");
-    }
-    @FXML public void setParcourir1(){
-        FileChooser fc = new FileChooser();
-        fc.setTitle("Open File");
-        fc.setInitialDirectory(new File(System.getProperty("user.home")));
-        fc.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image Files ", "*.jpg")
-               // new FileChooser.ExtensionFilter("Image Files", "*.jpeg"),
-                //new FileChooser.ExtensionFilter("Image Files", "*.png")
-                );
-
+        nomBlog.setEditable(true);
+        contenuBlog.setEditable(true);
+        proposC.setEditable(true);
+        parcourir1.setVisible(true);
+        parcourir2.setVisible(true);
+        creer1Blog.setVisible(true);
+        image2Blog.setImage(null);
         image1Blog.setImage(null);
-        File f = fc.showOpenDialog(stage);
-        String imagePath = f.toURI().toString();
-        System.out.println(imagePath);
-
-        Image image = new Image(imagePath);
-            image1Blog.setImage(image);
+        creer1Blog.setText("Creer");
     }
 
-    @FXML public void setParcourir2(){
+    @FXML
+    public void setParcourir1() {
         FileChooser fc = new FileChooser();
         fc.setTitle("Open File");
         fc.setInitialDirectory(new File(System.getProperty("user.home")));
@@ -1220,7 +1309,27 @@ public class AccuielController implements Initializable {
                 // new FileChooser.ExtensionFilter("Image Files", "*.jpeg"),
                 //new FileChooser.ExtensionFilter("Image Files", "*.png")
         );
-            image2Blog.setImage(null);
+
+        image1Blog.setImage(null);
+        File f = fc.showOpenDialog(stage);
+        String imagePath = f.toURI().toString();
+        System.out.println(imagePath);
+
+        Image image = new Image(imagePath);
+        image1Blog.setImage(image);
+    }
+
+    @FXML
+    public void setParcourir2() {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Open File");
+        fc.setInitialDirectory(new File(System.getProperty("user.home")));
+        fc.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files ", "*.jpg")
+                // new FileChooser.ExtensionFilter("Image Files", "*.jpeg"),
+                //new FileChooser.ExtensionFilter("Image Files", "*.png")
+        );
+        image2Blog.setImage(null);
         File f = fc.showOpenDialog(stage);
         String imagePath = f.toURI().toString();
         System.out.println(imagePath);
@@ -1228,38 +1337,38 @@ public class AccuielController implements Initializable {
         image2Blog.setImage(image);
     }
 
-    @FXML public int CreeBlog(){
-        if(creer1Blog.getText().equals("Creer")){
-        if(nomBlog.getText().isEmpty()==false && contenuBlog.getText().isEmpty()==false && proposC.getText().isEmpty()==false && image1Blog.getImage().isError()==false && image2Blog.getImage().isError()==false){
-            String path1 = image1Blog.getImage().getUrl();
-            System.out.println(path1);
-            String path2 = image2Blog.getImage().getUrl();
+    @FXML
+    public int CreeBlog() {
+        if (creer1Blog.getText().equals("Creer")) {
+            if (nomBlog.getText().isEmpty() == false && contenuBlog.getText().isEmpty() == false && proposC.getText().isEmpty() == false && image1Blog.getImage().isError() == false && image2Blog.getImage().isError() == false) {
+                String path1 = image1Blog.getImage().getUrl();
+                System.out.println(path1);
+                String path2 = image2Blog.getImage().getUrl();
 
-            BlogBD.CreerBlog(nomBlog.getText(), contenuBlog.getText(), path1, path2, Integer.parseInt(id.getText()), nom.getText(), proposC.getText());
-            System.out.println("Creation faite");
+                BlogBD.CreerBlog(nomBlog.getText(), contenuBlog.getText(), path1, path2, Integer.parseInt(id.getText()), nom.getText(), proposC.getText());
+                System.out.println("Creation faite");
 
-            Alert a = new Alert(Alert.AlertType.INFORMATION);
-            a.setTitle("Informaton Dialog");
-            a.setHeaderText("Look, an information Dialog");
-            a.setContentText("Blog créé");
-            a.showAndWait();
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setTitle("Informaton Dialog");
+                a.setHeaderText("Look, an information Dialog");
+                a.setContentText("Blog créé");
+                a.showAndWait();
 
-            blgwk.toFront();
-            nomBlog.clear();
-            contenuBlog.clear();
-            proposC.clear();
-            if(ttmblg.getText().equals("Mes Blogs")) {
-                tableBlog.getItems().clear();
-                ArrayList<listTwoPar> l = BlogBD.getMyBlogs(Integer.parseInt(id.getText()));
-                for (int i = 0; i < l.size(); i++) {
-                    tableBlog.getItems().add(l.get(i));
+                blgwk.toFront();
+                nomBlog.clear();
+                contenuBlog.clear();
+                proposC.clear();
+                if (ttmblg.getText().equals("Mes Blogs")) {
+                    tableBlog.getItems().clear();
+                    ArrayList<listTwoPar> l = BlogBD.getMyBlogs(Integer.parseInt(id.getText()));
+                    for (int i = 0; i < l.size(); i++) {
+                        tableBlog.getItems().add(l.get(i));
+                    }
                 }
             }
-        }
-        return 1;
-        }
-        else{
-            if(nomBlog.getText().isEmpty()==false && contenuBlog.getText().isEmpty()==false && proposC.getText().isEmpty()==false && image1Blog.getImage().isError()==false && image2Blog.getImage().isError()==false){
+            return 1;
+        } else {
+            if (nomBlog.getText().isEmpty() == false && contenuBlog.getText().isEmpty() == false && proposC.getText().isEmpty() == false && image1Blog.getImage().isError() == false && image2Blog.getImage().isError() == false) {
                 String path1 = image1Blog.getImage().getUrl();
                 String path2 = image2Blog.getImage().getUrl();
 
@@ -1275,7 +1384,7 @@ public class AccuielController implements Initializable {
                 contenuBlog.clear();
                 proposC.clear();
 
-                if(ttmblg.getText().equals("Mes Blogs")) {
+                if (ttmblg.getText().equals("Mes Blogs")) {
                     tableBlog.getItems().clear();
                     ArrayList<listTwoPar> l = BlogBD.getMyBlogs(Integer.parseInt(id.getText()));
                     for (int i = 0; i < l.size(); i++) {
@@ -1283,16 +1392,17 @@ public class AccuielController implements Initializable {
                     }
                 }
             }
-                return 1;
+            return 1;
         }
 
 
     }
 
-    @FXML public void setModifierBlog(){
+    @FXML
+    public void setModifierBlog() {
         Object o = tableBlog.getSelectionModel().getSelectedItem();
-        if(o != null){
-            listTwoPar l = (listTwoPar)o;
+        if (o != null) {
+            listTwoPar l = (listTwoPar) o;
             creerBLG.toFront();
             nomBlog.setEditable(false);
             contenuBlog.setEditable(true);
@@ -1303,7 +1413,7 @@ public class AccuielController implements Initializable {
             image1Blog.setImage(null);
             image2Blog.setImage(null);
 
-            ArrayList <Blog> b = BlogBD.consulterBlog(l.getTitre());
+            ArrayList<Blog> b = BlogBD.consulterBlog(l.getTitre());
             nomBlog.setText(b.get(0).getNomB());
             contenuBlog.setText(b.get(0).getContenu());
             proposC.setText(b.get(0).getProposC());
@@ -1318,7 +1428,8 @@ public class AccuielController implements Initializable {
         }
     }
 
-    @FXML public void setRetourBlog(){
+    @FXML
+    public void setRetourBlog() {
         nomBlog.clear();
         contenuBlog.clear();
         proposC.clear();
@@ -1327,10 +1438,11 @@ public class AccuielController implements Initializable {
 
     }
 
-    @FXML public void setConsulterBlog(){
+    @FXML
+    public void setConsulterBlog() {
         Object o = tableBlog.getSelectionModel().getSelectedItem();
-        if(o != null){
-            listTwoPar l = (listTwoPar)o;
+        if (o != null) {
+            listTwoPar l = (listTwoPar) o;
             creerBLG.toFront();
 
             nomBlog.setEditable(false);
@@ -1357,8 +1469,9 @@ public class AccuielController implements Initializable {
 
     }
 
-    @FXML public int mesWiki(){
-        if(mesWikiBtn.getText().equals("Mes Wikis")){
+    @FXML
+    public int mesWiki() {
+        if (mesWikiBtn.getText().equals("Mes Wikis")) {
             tableWiki.getItems().clear();
 
             ArrayList<listTwoPar> l = WikiBD.getMyWikis(Integer.parseInt(id.getText()));
@@ -1366,21 +1479,19 @@ public class AccuielController implements Initializable {
                 tableWiki.getItems().add(l.get(i));
             }
             supprimerWiki.setVisible(true);
-            if(Integer.parseInt(id.getText())>1 && Integer.parseInt(id.getText())<1000) creerWiki.setVisible(true);
+            if (Integer.parseInt(id.getText()) > 1 && Integer.parseInt(id.getText()) < 1000) creerWiki.setVisible(true);
             ttmwk.setText("Mes Wikis");
             mesWikiBtn.setText("Tous les Wikis");
             return 1;
-        }
-
-        else{
+        } else {
             tableWiki.getItems().clear();
             ArrayList<listTwoPar> l = WikiBD.getWikis();
 
-            for (int i = 0; i < l.size(); i++){
+            for (int i = 0; i < l.size(); i++) {
                 tableWiki.getItems().add(l.get(i));
             }
             supprimerWiki.setVisible(false);
-            if(Integer.parseInt(id.getText())>1 && Integer.parseInt(id.getText())<1000) creerWiki.setVisible(true);
+            if (Integer.parseInt(id.getText()) > 1 && Integer.parseInt(id.getText()) < 1000) creerWiki.setVisible(true);
             ttmwk.setText("Tous les Wikis");
             mesWikiBtn.setText("Mes Wikis");
             return 1;
@@ -1388,60 +1499,63 @@ public class AccuielController implements Initializable {
     }
 
 
-        @FXML public void setConsulterWiki(){
-            Object o = tableWiki.getSelectionModel().getSelectedItem();
-            if(o != null){
-                listTwoPar l = (listTwoPar)o;
-                editerWiki.setVisible(true);
-                ArrayList<Wiki> w = WikiBD.consulterWiki(l.getTitre());
-                nomWiki.setEditable(false);
-                problemW.setEditable(false);
-                creerWiki1.setVisible(false);
-                creerW.toFront();
+    @FXML
+    public void setConsulterWiki() {
+        Object o = tableWiki.getSelectionModel().getSelectedItem();
+        if (o != null) {
+            listTwoPar l = (listTwoPar) o;
+            editerWiki.setVisible(true);
+            ArrayList<Wiki> w = WikiBD.consulterWiki(l.getTitre());
+            nomWiki.setEditable(false);
+            problemW.setEditable(false);
+            creerWiki1.setVisible(false);
+            creerW.toFront();
 
-                nomWiki.setText(w.get(0).getNomW());
-                problemW.setText(w.get(0).getProblem());
-                contenuW.setText(w.get(0).getContenu());
-                editeur.setText(w.get(0).getEditeur());
+            nomWiki.setText(w.get(0).getNomW());
+            problemW.setText(w.get(0).getProblem());
+            contenuW.setText(w.get(0).getContenu());
+            editeur.setText(w.get(0).getEditeur());
 
-
-            }
 
         }
 
-        @FXML public void setEditerWiki() {
+    }
 
-           WikiBD.editierWiki(nomWiki.getText(), contenuW.getText(), nom.getText());
+    @FXML
+    public void setEditerWiki() {
 
-           editeur.setText(WikiBD.getEditeur(nomWiki.getText()));
+        WikiBD.editierWiki(nomWiki.getText(), contenuW.getText(), nom.getText());
 
-            Alert a = new Alert(Alert.AlertType.INFORMATION);
-            a.setTitle("Informaton Dialog");
-            a.setHeaderText("Look, an information Dialog");
-            a.setContentText("Vous avez editez le wiki");
-            a.showAndWait();
+        editeur.setText(WikiBD.getEditeur(nomWiki.getText()));
 
-           blgwk.toFront();
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setTitle("Informaton Dialog");
+        a.setHeaderText("Look, an information Dialog");
+        a.setContentText("Vous avez editez le wiki");
+        a.showAndWait();
 
-            }
+        blgwk.toFront();
+
+    }
 
 
+    @FXML
+    public void CrWiki() {
+        creerW.toFront();
+        nomWiki.clear();
+        problemW.clear();
+        contenuW.clear();
 
-        @FXML public void CrWiki() {
-                creerW.toFront();
-                nomWiki.clear();
-                problemW.clear();
-                contenuW.clear();
+        nomWiki.setEditable(true);
+        problemW.setEditable(true);
+        contenuW.setEditable(true);
+        creerWiki1.setVisible(true);
+        editerWiki.setVisible(false);
+    }
 
-                nomWiki.setEditable(true);
-                problemW.setEditable(true);
-                contenuW.setEditable(true);
-                creerWiki1.setVisible(true);
-                editerWiki.setVisible(false);
-        }
-
-        @FXML public void setCreeWiki(){
-        if(nomWiki.getText().isEmpty()==false && problemW.getText().isEmpty()==false && contenuW.getText().isEmpty()==false){
+    @FXML
+    public void setCreeWiki() {
+        if (nomWiki.getText().isEmpty() == false && problemW.getText().isEmpty() == false && contenuW.getText().isEmpty() == false) {
             WikiBD.creerWiki(nomWiki.getText(), problemW.getText(), contenuW.getText(), Integer.parseInt(id.getText()), nom.getText());
 
             Alert a = new Alert(Alert.AlertType.INFORMATION);
@@ -1457,105 +1571,168 @@ public class AccuielController implements Initializable {
 
             tableWiki.getItems().clear();
             ArrayList<listTwoPar> l = WikiBD.getWikis();
-            for(int i=0; i<l.size(); i++)
+            for (int i = 0; i < l.size(); i++)
                 tableWiki.getItems().add(l.get(i));
         }
+    }
+
+    @FXML
+    public void setSupprimerWiki() {
+        Object o = tableWiki.getSelectionModel().getSelectedItem();
+        if (o != null) {
+            listTwoPar l = (listTwoPar) o;
+
+            WikiBD.supprimerWiki(l.getTitre());
+            tableWiki.getItems().remove(o);
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setTitle("Informaton Dialog");
+            a.setHeaderText("Look, an information Dialog");
+            a.setContentText("Wiki créé");
+            a.showAndWait();
+
+            tableWiki.getItems().clear();
+            ArrayList<listTwoPar> w = WikiBD.getWikis();
+            for (int i = 0; i < w.size(); i++)
+                tableWiki.getItems().add(w.get(i));
         }
 
-        @FXML public void setSupprimerWiki(){
-            Object o = tableWiki.getSelectionModel().getSelectedItem();
-            if(o != null){
-                listTwoPar l = (listTwoPar)o;
+    }
 
-                WikiBD.supprimerWiki(l.getTitre());
-                tableWiki.getItems().remove(o);
-                Alert a = new Alert(Alert.AlertType.INFORMATION);
-                a.setTitle("Informaton Dialog");
-                a.setHeaderText("Look, an information Dialog");
-                a.setContentText("Wiki créé");
-                a.showAndWait();
+    @FXML
+    public void retourWiki() {
+        nomWiki.clear();
+        problemW.clear();
+        contenuW.clear();
+        blgwk.toFront();
+    }
 
-                tableWiki.getItems().clear();
-                ArrayList<listTwoPar> w = WikiBD.getWikis();
-                for(int i=0; i<w.size(); i++)
-                    tableWiki.getItems().add(w.get(i));
-            }
+    @FXML
+    public void afficherRessouce() {
+        formationAdm.toFront();
+        ArrayList<String> s = Formations.getAll();
+        listFor.getItems().clear();
+
+        for (int i = 0; i < s.size(); i++)
+            listFor.getItems().add(s.get(i));
+
+    }
+
+    @FXML
+    public void afficherToutAdd() {
+        Object o = listFor.getSelectionModel().getSelectedItem();
+        if (o != null) {
+            String s = (String) o;
+            tableApp.getItems().clear();
+            tableProf.getItems().clear();
+            ArrayList<listTwoPar1> p = User.afficherP(Formations.getNumF(s));
+
+            for (int i = 0; i < p.size(); i++)
+                tableApp.getItems().add(p.get(i));
+
+            ArrayList<listTwoPar1> p1 = User.afficherIns(Formations.getNumF(s));
+            for (int i = 0; i < p1.size(); i++)
+                tableProf.getItems().add(p1.get(i));
+            supprimerFormaa.setDisable(false);
+            supprimerInstr.setDisable(false);
+            supprimerApp.setDisable(false);
 
         }
+    }
 
-        @FXML public void retourWiki(){
-            nomWiki.clear();
-            problemW.clear();
-            contenuW.clear();
-            blgwk.toFront();
-        }
+    @FXML
+    public void supprimerFor() {
+        Object o = listFor.getSelectionModel().getSelectedItem();
+        if (o != null) {
+            String h = (String) o;
+            Formations.supprimerFormation(Formations.getNumF(h));
 
-        @FXML public void afficherRessouce(){
+            tableApp.getItems().clear();
+            tableProf.getItems().clear();
             ArrayList<String> s = Formations.getAll();
             listFor.getItems().clear();
 
-            for(int i=0; i<s.size(); i++)
+            for (int i = 0; i < s.size(); i++)
                 listFor.getItems().add(s.get(i));
-
         }
 
-        @FXML public void afficherToutAdd() {
-            Object o = listFor.getSelectionModel().getSelectedItem();
-            if (o != null) {
-                String s = (String) o;
-                tableApp.getItems().clear();
-                tableProf.getItems().clear();
-                ArrayList<listTwoPar1> p = User.afficherP(Formations.getNumF(s));
+    }
 
-                for (int i = 0; i < p.size(); i++)
-                    tableApp.getItems().add(p.get(i));
 
-                ArrayList<listTwoPar1> p1 = User.afficherIns(Formations.getNumF(s));
-                for (int i = 0; i < p1.size(); i++)
-                    tableProf.getItems().add(p1.get(i));
-                supprimerFormaa.setDisable(false);
-                supprimerInstr.setDisable(false);
-                supprimerApp.setDisable(false);
-
-            }
+    @FXML
+    public void suppIns() {
+        Object o = tableProf.getSelectionModel().getSelectedItem();
+        if (o != null) {
+            listTwoPar1 s = (listTwoPar1) o;
+            Formations.suppInt(s.getNom());
+            tableProf.getItems().remove(o);
         }
+    }
 
-            @FXML public void supprimerFor(){
-                Object o = listFor.getSelectionModel().getSelectedItem();
-                if(o != null) {
-                    String h = (String) o;
-                    Formations.supprimerFormation(Formations.getNumF(h));
-
-                    tableApp.getItems().clear();
-                    tableProf.getItems().clear();
-                    ArrayList<String> s = Formations.getAll();
-                    listFor.getItems().clear();
-
-                    for(int i=0; i<s.size(); i++)
-                        listFor.getItems().add(s.get(i));
-                }
-
-            }
-
-
-        @FXML public void suppIns(){
-                Object o = tableProf.getSelectionModel().getSelectedItem();
-                if(o != null){
-                    listTwoPar1 s = (listTwoPar1) o;
-                    Formations.suppInt(s.getNom());
-                    tableProf.getItems().remove(o);
-                }
-        }
-
-       @FXML public void suppApp(){
+    @FXML
+    public void suppApp() {
         Object o = tableApp.getSelectionModel().getSelectedItem();
-        if(o != null){
-            listTwoPar1 s = (listTwoPar1)o;
+        if (o != null) {
+            listTwoPar1 s = (listTwoPar1) o;
             Formations.suppApp(s.getNom());
             tableApp.getItems().remove(o);
 
         }
     }
 
+    @FXML
+    public void afficherChat() {
+
+        chat.toFront();
+        ArrayList<String> s = ChatBD.getApp();
+        listChat.getItems().clear();
+
+        for (int i = 0; i < s.size(); i++)
+            listChat.getItems().add(s.get(i));
+    }
+
+    @FXML
+    public void send() {
+        Object o = listChat.getSelectionModel().getSelectedItem();
+        if (o != null) {
+            String s = (String) o;
+            ChatBD.envoyerMessage(Integer.parseInt(id.getText()), ChatBD.getNumUser(s), message.getText());
+
+            message.clear();
+
+        }
+    }
+
+    @FXML
+    public void afficherMSG() {
+        Object o = listChat.getSelectionModel().getSelectedItem();
+        if (o != null) {
+            String s = (String) o;
+            messages.clear();
+            messages.setText(ChatBD.getMessages(Integer.parseInt(id.getText()), ChatBD.getNumUser(s)));
+        }
+    }
+
+    @FXML
+    public void AfficherSuivi() {
+        Object o = tableStuFor.getSelectionModel().getSelectedItem();
+        Object o1 = listQuiz.getSelectionModel().getSelectedItem();
+        if (o != null) {
+            AllApprenant s = (AllApprenant) o;
+            String z = (String) o1;
+            id_quiz.setText(String.valueOf(Quiz.getIdQuiz(z)));
+
+            psuivi.toFront();
+            noms.setText(s.getNom());
+            prenoms.setText(s.getPrenom());
+
+            ArrayList<listTwoPar> p = Quiz.getSuivi(Integer.parseInt(id.getText()), Integer.parseInt(id_quiz.getText()));
+            sss.setEditable(false);
+            System.out.println(p.get(0).getTitre());
+            sss.setText(p.get(0).getTitre());
+            notes.setText(p.get(0).getCreateur());
+
+        }
+
+    }
 
 }

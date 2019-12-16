@@ -36,23 +36,23 @@ public static ArrayList<Apprenant> display(int matricule) {
 }
 
 
-public static void modify(int matricule,String nom, String prenom, Date date, String adresse, String password,String specialite, String niveau, String section) {
+public static void modify(int matricule, String nom, String prenom, String adresse, String password, String specialite, String niveau, String section) {
 	
 	try( Connection con = connect();
-			PreparedStatement pr1 = con.prepareStatement("Update apprenant set nom=?,prenom=?, dateNaiss=?, adresse=?,section=?, niveau=?, specliate=?, password=? where matricule=? ");
+			PreparedStatement pr1 = con.prepareStatement("Update apprenant set nom=?,prenom=?, adresse=?,section=?, niveau=?, specliate=?, password=? where matricule=? ");
 
 			){
 
 		  pr1.setString(1,nom);
 		  pr1.setString(2,prenom);
-		  pr1.setDate(3,date);
-		  pr1.setString(4,adresse);
-		  pr1.setString(5,section);
-		  pr1.setString(6,niveau);
-		  pr1.setString(7,specialite);
-		  pr1.setString(8,password);
+		  ;
+		  pr1.setString(3,adresse);
+		  pr1.setString(4,section);
+		  pr1.setString(5,niveau);
+		  pr1.setString(6,specialite);
+		  pr1.setString(7,password);
 
-		  pr1.setInt(9,matricule);
+		  pr1.setInt(8,matricule);
 		  
 		  pr1.execute();
 		  System.out.println("Modification effectuée avec succée");

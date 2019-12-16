@@ -35,21 +35,21 @@ public static ArrayList<Instructeur> display(int id) {
 		return null;
 	}
 
-	public static void modify(int id, String nom, String prenom, String dateN, String adresse, String grade, String specialite, String password) {
+	public static void modify(int id, String nom, String prenom, String adresse, String grade, String specialite, String password) {
 		
 		try( Connection con = connect();
-				PreparedStatement pr1 = con.prepareStatement("Update instructeur set nom=?,prenom=?, dateNaiss=?, adresse=?, grade=?, specialite=?, password=? where id=? ");
+				PreparedStatement pr1 = con.prepareStatement("Update instructeur set nom=?,prenom=?, adresse=?, grade=?, specialite=?, password=? where id=? ");
 
 				){
 			    
 			  pr1.setString(1, nom);
 			  pr1.setString(2,prenom);
-			  pr1.setString(3,dateN);
-			  pr1.setString(4,adresse);
-			  pr1.setString(5,grade);
-			  pr1.setString(6,specialite);
-			  pr1.setString(7,password);
-			  pr1.setInt(8,id);
+
+			  pr1.setString(3,adresse);
+			  pr1.setString(4,grade);
+			  pr1.setString(5,specialite);
+			  pr1.setString(6,password);
+			  pr1.setInt(7,id);
 			  
 			  pr1.execute();
 			  System.out.println("Modification effectuée avec succée");

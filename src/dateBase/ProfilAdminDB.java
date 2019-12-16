@@ -34,20 +34,20 @@ public class ProfilAdminDB extends BD{
 		return null;
 	}
 
-	public static void modify(int id,String nom, String prenom, String string, String adresse,String password) {
+	public static void modify(int id,String nom, String prenom, String adresse,String password) {
 		
 		try( Connection con = connect();
-				PreparedStatement pr1 = con.prepareStatement("Update admin set nom=?,prenom=?, dateNaiss=?, adresse=?, password=? where id=? ");
+				PreparedStatement pr1 = con.prepareStatement("Update admin set nom=?,prenom=?, adresse=?, password=? where id=? ");
 
 				){
 			    
 
 			  pr1.setString(1,nom);
 			  pr1.setString(2,prenom);
-			  pr1.setString(3,string);
-			  pr1.setString(4,adresse);
-			  pr1.setString(5,password);
-			  pr1.setInt(6, id);
+
+			  pr1.setString(3,adresse);
+			  pr1.setString(4,password);
+			  pr1.setInt(5, id);
 			  
 			  pr1.execute();
 			  System.out.println("Modification effectue avec succee");
